@@ -954,6 +954,9 @@
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="JyC-xM-2Uc" kind="presentation" id="jhC-9q-zoN"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ei8-JK-kyY"/>
@@ -1521,6 +1524,9 @@
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="6AF-KD-OC5" kind="presentation" id="C7c-Ul-RYI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fZu-YZ-jWY"/>
