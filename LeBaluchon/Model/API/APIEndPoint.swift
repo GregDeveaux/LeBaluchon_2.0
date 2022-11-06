@@ -15,7 +15,7 @@ extension API {
         case translation(sourceLang: String, text: String, targetLang: String)
         case flag(codeIsoCountry: String)
         case coordinates(city: String)
-        case city(lattitude: String, longitude: String)
+        case city(latitude: String, longitude: String)
 
         var url: URL {
             var components = URLComponents()
@@ -64,12 +64,12 @@ extension API {
                         URLQueryItem(name: "format", value: "json")
                     ]
 
-                case .city(let lattitude, let longitude):
+                case .city(let latitude, let longitude):
                     components.host = "nominatim.openstreetmap.org"
                     components.path = "/reverse"
                     components.queryItems = [
                         URLQueryItem(name: "format", value: "json"),
-                        URLQueryItem(name: "lat", value: lattitude),
+                        URLQueryItem(name: "lat", value: latitude),
                         URLQueryItem(name: "lon", value: longitude),
                         URLQueryItem(name: "zoom", value: "13"),
                         URLQueryItem(name: "addressdetails", value: "1")

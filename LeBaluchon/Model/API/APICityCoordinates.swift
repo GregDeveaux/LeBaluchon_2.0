@@ -11,31 +11,37 @@ extension API {
 
     enum City {
         struct Coordinates: Decodable {
-            var lattitude: String
+            var latitude: String
             var longitude: String
 
             enum CodingKeys: String, CodingKey {
-                case lattitude = "lat"
+                case latitude = "lat"
                 case longitude = "lon"
             }
         }
 
-        struct Adress: Decodable {
-            var town: String
-            var county: String
-            var state: String
-            var postcode: String
-            var country: String
-            var countryCode: String
+        struct Country: Decodable {
+            var address: Address
+            var latitude: String
+            var longitude: String
 
             enum CodingKeys: String, CodingKey {
-                case town
-                case county
-                case state
-                case postcode
-                case country
-                case countryCode = "country_code"
+                case address
+                case latitude = "lat"
+                case longitude = "lon"
+            }
+
+            struct Address: Decodable {
+                var country: String
+                var countryCode: String
+
+                enum CodingKeys: String, CodingKey {
+                    case country
+                    case countryCode = "country_code"
+                }
             }
         }
+        
+
     }
 }

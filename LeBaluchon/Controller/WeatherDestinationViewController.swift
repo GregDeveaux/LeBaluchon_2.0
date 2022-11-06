@@ -2,7 +2,7 @@
 //  WeatherDestinationViewController.swift
 //  LeBaluchon
 //
-//  Created by Greg-Mini on 12/10/2022.
+//  Created by Greg Deveaux on 12/10/2022.
 //
 
 import UIKit

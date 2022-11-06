@@ -1,27 +1,27 @@
 {
-    "place_id": 298067479,
+    "place_id": 297949589,
     "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
     "osm_type": "relation",
-    "osm_id": 273622,
-    "lat": "47.5876861",
-    "lon": "1.3337639",
-    "display_name": "Blois, Loir-et-Cher, Centre-Val de Loire, France métropolitaine, 41000, France",
+    "osm_id": 74090,
+    "lat": "47.3215806",
+    "lon": "5.0414701",
+    "display_name": "Dijon, Côte-d'Or, Bourgogne-Franche-Comté, France métropolitaine, 21000, France",
     "address": {
-        "town": "Blois",
-        "municipality": "Blois",
-        "county": "Loir-et-Cher",
-        "ISO3166-2-lvl6": "FR-41",
-        "state": "Centre-Val de Loire",
-        "ISO3166-2-lvl4": "FR-CVL",
+        "city": "Dijon",
+        "municipality": "Dijon",
+        "county": "Côte-d'Or",
+        "ISO3166-2-lvl6": "FR-21",
+        "state": "Bourgogne-Franche-Comté",
+        "ISO3166-2-lvl4": "FR-BFC",
         "region": "France métropolitaine",
-        "postcode": "41000",
+        "postcode": "21000",
         "country": "France",
         "country_code": "fr"
     },
     "boundingbox": [
-        "47.5416092",
-        "47.6209277",
-        "1.2540918",
-        "1.3556756"
+        "47.2862467",
+        "47.377486",
+        "4.9624434",
+        "5.1020598"
     ]
 }

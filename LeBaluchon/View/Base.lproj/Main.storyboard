@@ -670,8 +670,8 @@
                                             <color key="baseBackgroundColor" red="0.32577253719999999" green="0.53156947030000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="TappedLetsGoButton:" destination="6AF-KD-OC5" eventType="touchUpInside" id="h52-PU-TMC"/>
-                                            <segue destination="KLr-hv-eaY" kind="presentation" identifier="goToTheDestination" id="kWb-jq-vWl"/>
+                                            <action selector="validateButton:" destination="6AF-KD-OC5" eventType="touchUpInside" id="nmm-bT-aMe"/>
+                                            <segue destination="JyC-xM-2Uc" kind="presentation" identifier="goMapKitController" id="AJy-GK-04h"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -879,114 +879,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gOf-uV-n66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="392.75362318840581" y="989.73214285714278"/>
-        </scene>
-        <!--Destination-->
-        <scene sceneID="WOK-O0-43b">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="KLr-hv-eaY" customClass="WelcomeViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jKZ-Q6-sko" customClass="GradientView" customModule="LeBaluchon" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="A7l-Tw-NDA">
-                                <rect key="frame" x="30" y="48" width="354" height="551.5"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LpM-oA-uYb">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="96.5"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Hi" translatesAutoresizingMaskIntoConstraints="NO" id="lt7-1L-ylH">
-                                                <rect key="frame" x="0.0" y="0.0" width="60" height="96.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="lt7-1L-ylH" secondAttribute="height" multiplier="49:79" id="Ril-2Z-bnT"/>
-                                                    <constraint firstAttribute="width" constant="60" id="v7g-uA-6jm"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bot, what's up!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZA-Gk-jd5">
-                                                <rect key="frame" x="77" y="33.5" width="277" height="30"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHC-ef-Ujy">
-                                        <rect key="frame" x="0.0" y="96.5" width="354" height="455"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" fixedFrame="YES" image="paper-texture-background" translatesAutoresizingMaskIntoConstraints="NO" id="AIM-jY-eCf">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="455"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Lettering" translatesAutoresizingMaskIntoConstraints="NO" id="xY6-8L-mZM">
-                                                <rect key="frame" x="30" y="-15" width="324" height="470"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NEW YORK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6t-LF-0Wh">
-                                                <rect key="frame" x="63" y="230" width="259" height="54"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="45"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.79581616300366298" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="xY6-8L-mZM" secondAttribute="trailing" constant="30" id="458-mq-tJI"/>
-                                            <constraint firstItem="xY6-8L-mZM" firstAttribute="top" secondItem="vHC-ef-Ujy" secondAttribute="top" constant="-5" id="5uX-4b-h7X"/>
-                                            <constraint firstAttribute="trailing" secondItem="xY6-8L-mZM" secondAttribute="trailing" id="EUv-6H-lLv"/>
-                                            <constraint firstItem="xY6-8L-mZM" firstAttribute="leading" secondItem="vHC-ef-Ujy" secondAttribute="leading" id="OG4-9h-3Fy"/>
-                                            <constraint firstItem="xY6-8L-mZM" firstAttribute="leading" secondItem="vHC-ef-Ujy" secondAttribute="leading" constant="30" id="hnF-Jf-zbo"/>
-                                            <constraint firstItem="xY6-8L-mZM" firstAttribute="top" secondItem="vHC-ef-Ujy" secondAttribute="top" constant="-15" id="k8Q-JW-C4n"/>
-                                            <constraint firstAttribute="bottom" secondItem="xY6-8L-mZM" secondAttribute="bottom" id="wxR-Y3-3zC"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fj8-Bl-4wp">
-                                <rect key="frame" x="151" y="748" width="223" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9EV-so-txv"/>
-                                    <constraint firstAttribute="height" constant="50" id="K7K-HR-Fdv"/>
-                                </constraints>
-                                <color key="tintColor" red="0.17938255110000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Modify the destination">
-                                    <backgroundConfiguration key="background" cornerRadius="46">
-                                        <color key="backgroundColor" red="0.32577253717472121" green="0.53156947026022305" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <segue destination="JyC-xM-2Uc" kind="presentation" id="jhC-9q-zoN"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Ei8-JK-kyY"/>
-                        <constraints>
-                            <constraint firstItem="A7l-Tw-NDA" firstAttribute="top" secondItem="Ei8-JK-kyY" secondAttribute="top" id="TQo-Hi-8S1"/>
-                            <constraint firstItem="Ei8-JK-kyY" firstAttribute="trailing" secondItem="A7l-Tw-NDA" secondAttribute="trailing" constant="30" id="qFb-QV-twB"/>
-                            <constraint firstItem="A7l-Tw-NDA" firstAttribute="leading" secondItem="Ei8-JK-kyY" secondAttribute="leading" constant="30" id="x7k-jL-ddS"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="topColor">
-                                <color key="value" red="0.1803921568627451" green="0.46666666666666667" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
-                                <color key="value" red="0.28256630189999998" green="0.32139223230000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Destination" id="aEa-Zh-xQ7">
-                        <barButtonItem key="backBarButtonItem" title="return" id="aVe-TT-fsY"/>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="destinationLabel" destination="n6t-LF-0Wh" id="BW0-sX-boZ"/>
-                        <outlet property="helloLabel" destination="IZA-Gk-jd5" id="S5i-mb-Z4q"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tzc-wc-fFd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2628.985507246377" y="124.55357142857142"/>
         </scene>
         <!--weather Destination-->
         <scene sceneID="FV2-CY-fJg">
@@ -1510,7 +1402,7 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="perso1" translatesAutoresizingMaskIntoConstraints="NO" id="CfD-kF-gKg">
-                                <rect key="frame" x="111" y="412" width="326" height="460"/>
+                                <rect key="frame" x="110" y="412" width="327" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pH-K6-yZ2">
@@ -1549,10 +1441,14 @@
                         <barButtonItem key="backBarButtonItem" title="return" id="39p-kL-cJK"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="TXg-WB-Yfj" id="LDX-TG-7Ch"/>
+                        <outlet property="userNameLabel" destination="w5F-WJ-XcO" id="BCf-H8-wt7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBw-0N-MvY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3365.217391304348" y="939.50892857142856"/>
+            <point key="canvasLocation" x="-3365" y="990"/>
         </scene>
     </scenes>
     <designables>
@@ -1565,7 +1461,6 @@
     </designables>
     <resources>
         <image name="Hi" width="78" height="80"/>
-        <image name="Lettering" width="366" height="470"/>
         <image name="airplane" catalog="system" width="128" height="115"/>
         <image name="arrow.down.forward.circle.fill" catalog="system" width="128" height="123"/>
         <image name="arrow.left.arrow.right" catalog="system" width="120" height="128"/>
@@ -1580,7 +1475,6 @@
         <image name="main_mic" width="360" height="360"/>
         <image name="mic" catalog="system" width="110" height="128"/>
         <image name="nuit" width="1125" height="2436"/>
-        <image name="paper-texture-background" width="4672" height="7000"/>
         <image name="perso" width="596" height="842"/>
         <image name="perso1" width="439" height="466"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>

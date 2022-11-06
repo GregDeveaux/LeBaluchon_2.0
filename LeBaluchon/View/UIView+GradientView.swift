@@ -2,7 +2,7 @@
 //  UIView+GradientView.swift
 //  LeBaluchon
 //
-//  Created by Greg-Mini on 13/10/2022.
+//  Created by Greg Deveaux on 13/10/2022.
 //
 
 import UIKit

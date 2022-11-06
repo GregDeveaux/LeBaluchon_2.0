@@ -27,8 +27,8 @@
 		BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */; };
 		BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */; };
 		BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */; };
-		BC278B96290ECC790098A82C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* City.swift */; };
-		BC278B98290ED7AC0098A82C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B97290ED7AC0098A82C /* Person.swift */; };
+		BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* DestinationCity.swift */; };
+		BC278B98290ED7AC0098A82C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B97290ED7AC0098A82C /* User.swift */; };
 		BC40283F28FB574E0044A19A /* ApiCurrencyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC40283E28FB574E0044A19A /* ApiCurrencyTest.swift */; };
 		BC40284328FB68BB0044A19A /* ApiCurrencySymbols.json in Resources */ = {isa = PBXBuildFile; fileRef = BC40284228FB68BB0044A19A /* ApiCurrencySymbols.json */; };
 		BC40284528FB6A760044A19A /* ApiCurrencyExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC40284428FB6A760044A19A /* ApiCurrencyExample.json */; };
@@ -47,7 +47,7 @@
 		BC6C14AB2916B5FD009FDF18 /* ApiCity.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AA2916B5FD009FDF18 /* ApiCity.json */; };
 		BC6C14AD2916B61A009FDF18 /* ApiCoordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* ApiCoordinates.json */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
-		BCA8E7BA28F5FBFC00570959 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B928F5FBFC00570959 /* WelcomeViewController.swift */; };
+		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
 		BCFF028F29118575008CF2EA /* NexaRustSlab-BlackShadow.otf in Resources */ = {isa = PBXBuildFile; fileRef = BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */; };
 /* End PBXBuildFile section */
 
@@ -93,8 +93,8 @@
 		BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GradientView.swift"; sourceTree = "<group>"; };
 		BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Designable.swift"; sourceTree = "<group>"; };
-		BC278B95290ECC790098A82C /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		BC278B97290ED7AC0098A82C /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		BC278B95290ECC790098A82C /* DestinationCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCity.swift; sourceTree = "<group>"; };
+		BC278B97290ED7AC0098A82C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC40283E28FB574E0044A19A /* ApiCurrencyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCurrencyTest.swift; sourceTree = "<group>"; };
 		BC40284228FB68BB0044A19A /* ApiCurrencySymbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCurrencySymbols.json; sourceTree = "<group>"; };
 		BC40284428FB6A760044A19A /* ApiCurrencyExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCurrencyExample.json; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		BC6C14AA2916B5FD009FDF18 /* ApiCity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCity.json; sourceTree = "<group>"; };
 		BC6C14AC2916B61A009FDF18 /* ApiCoordinates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCoordinates.json; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		BCA8E7B928F5FBFC00570959 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NexaRustSlab-BlackShadow.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				BCA8E7B728F5FBD200570959 /* LoginViewController.swift */,
-				BCA8E7B928F5FBFC00570959 /* WelcomeViewController.swift */,
 				BC6C14A62916AC73009FDF18 /* MapViewController.swift */,
 				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
@@ -241,8 +240,9 @@
 			children = (
 				BC40285B28FDE0F20044A19A /* API */,
 				BC40284B28FC05D10044A19A /* Json */,
-				BC278B95290ECC790098A82C /* City.swift */,
-				BC278B97290ED7AC0098A82C /* Person.swift */,
+				BC278B95290ECC790098A82C /* DestinationCity.swift */,
+				BC278B97290ED7AC0098A82C /* User.swift */,
+				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -425,7 +425,7 @@
 				BC0C6B6C28F4BB9E0075C614 /* WeatherHomeViewController.swift in Sources */,
 				BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */,
 				BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */,
-				BC278B98290ED7AC0098A82C /* Person.swift in Sources */,
+				BC278B98290ED7AC0098A82C /* User.swift in Sources */,
 				BC15FF6A28F7377000A0F594 /* WeatherDestinationViewController.swift in Sources */,
 				BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */,
 				BC40285628FDDA070044A19A /* APICountryFlag.swift in Sources */,
@@ -434,6 +434,7 @@
 				BC40285228FDC49F0044A19A /* API.swift in Sources */,
 				BC40285828FDDA740044A19A /* APIQueryService.swift in Sources */,
 				BC1D19C62905B9B500AF8838 /* APIKeys.swift in Sources */,
+				BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */,
 				BC0C6B7028F4CD030075C614 /* TranslateViewController.swift in Sources */,
 				BC40284828FBFAB40044A19A /* APICurrency.swift in Sources */,
 				BC0C6B6E28F4CCD50075C614 /* CurrencyViewController.swift in Sources */,
@@ -443,8 +444,7 @@
 				BC40285A28FDE0D10044A19A /* APIError.swift in Sources */,
 				BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */,
 				BC0C6B3C28F4B2AA0075C614 /* SceneDelegate.swift in Sources */,
-				BCA8E7BA28F5FBFC00570959 /* WelcomeViewController.swift in Sources */,
-				BC278B96290ECC790098A82C /* City.swift in Sources */,
+				BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +630,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LeBaluchon/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -659,6 +660,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LeBaluchon/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
