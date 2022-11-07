@@ -14,8 +14,10 @@ class MapViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
 
-    var user: User?
-    var destinationCity: DestinationCity?
+    var user: User!
+    var destinationCity: DestinationCity!
+
+    var pinUser: PinMap!
 
     let locationManager = CLLocationManager()
 
@@ -26,17 +28,20 @@ class MapViewController: UIViewController {
 
         setupLocationManager()
         setupMapView()
+        
     }
 }
 
 extension MapViewController: MKMapViewDelegate {
     private func setupMapView() {
         mapView.delegate = self
+
         guard let userName = user?.name else { return }
-        let pinUser = PinMap(title: "Vous êtes ici \(userName)",
+        pinUser = PinMap(title: "Vous êtes ici \(userName)",
                              coordinate: CLLocationCoordinate2D(latitude: (user?.coordinates?.latitude)!,
                                                                 longitude: (user?.coordinates?.longitude)!),
                              info: "départ")
+
 
         guard let destinationName = destinationCity?.name else { return }
         let pinDestination = PinMap(title: "Vous allez à \(destinationName)",
@@ -45,6 +50,12 @@ extension MapViewController: MKMapViewDelegate {
                                     info: "destination")
 
         mapView.addAnnotations([pinUser, pinDestination])
+    }
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: pinUser, reuseIdentifier: "pinUser")
+        annotationView.image = UIImage(named: "pinDepart")
+        return annotationView
     }
 }
 
