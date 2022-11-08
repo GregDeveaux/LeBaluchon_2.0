@@ -23,8 +23,8 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let userName = user?.name else { return }
-        userNameLabel.text = "\(userName), what's up!"
+
+        userNameLabel.text = user?.hello()
 
         setupLocationManager()
         setupMapView()
@@ -38,8 +38,8 @@ extension MapViewController: MKMapViewDelegate {
 
         guard let userName = user?.name else { return }
         pinUser = PinMap(title: "Vous êtes ici \(userName)",
-                             coordinate: CLLocationCoordinate2D(latitude: (user?.coordinates?.latitude)!,
-                                                                longitude: (user?.coordinates?.longitude)!),
+                             coordinate: CLLocationCoordinate2D(latitude: (user?.coordinates.latitude)!,
+                                                                longitude: (user?.coordinates.longitude)!),
                              info: "départ")
 
 
@@ -80,7 +80,7 @@ extension MapViewController: CLLocationManagerDelegate {
         mapView.setRegion(coordinateRegion, animated: true)
         self.mapView.showsUserLocation = true
 
-        user?.coordinates?.latitude = location.coordinate.latitude
-        user?.coordinates?.longitude = location.coordinate.longitude
+        user?.coordinates.latitude = location.coordinate.latitude
+        user?.coordinates.longitude = location.coordinate.longitude
     }
 }

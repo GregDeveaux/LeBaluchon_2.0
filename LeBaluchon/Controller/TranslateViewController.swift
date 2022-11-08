@@ -22,12 +22,13 @@ class TranslateViewController: UIViewController {
 
     @IBAction func tappedTranslationNow(_ sender: UIButton) {
 
+        baseTextView.text = String(self.baseText)
+
         API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: "FR", text: baseText, targetLang: "EN"), method: .POST) { success, recover in
             guard let recover = recover, success == true else {
                 print(API.Error.generic(reason: "not shown data"))
                 return
             }
-            self.baseTextView.text = String(self.baseText)
 
             if let text = recover.translations.first?.text {
                 self.translateTextView.text = text
