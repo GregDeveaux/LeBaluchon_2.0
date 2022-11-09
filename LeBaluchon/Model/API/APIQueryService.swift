@@ -282,7 +282,7 @@ extension API {
 
                         let latitude = Double(country.latitude)!
                         let longitude = Double(country.longitude)!
-                        let destinationCity = DestinationCity(name: "", country: country.address.country,
+                        let destinationCity = DestinationCity(country: country.address.country,
                                                               countryCode: country.address.countryCode,
                                                               coordinates: Coordinates(latitude: latitude, longitude: longitude))
                         callback(true, country)

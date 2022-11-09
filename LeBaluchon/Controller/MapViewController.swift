@@ -13,6 +13,11 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var modifyDestinationButton: UIButton!
+
+    var userName = ""
+    var destinationCityName = ""
+    var textButton = "Modify the destination"
 
     var user: User!
     var destinationCity: DestinationCity!
@@ -24,7 +29,15 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        userNameLabel.text = user?.hello()
+        userNameLabel.text = "\(userName), what's up!"
+        API.translate(sentence: userNameLabel.text!, sourceLang: "EN", targetLang: "FR", sentenceTranslate: { [self] text in
+            DispatchQueue.self.main
+            userNameLabel.text = text
+        })
+
+        API.translate(sentence: textButton, sourceLang: "EN", targetLang: "FR") { [self] text in
+            modifyDestinationButton.setTitle(text, for: .normal)
+        }
 
         setupLocationManager()
         setupMapView()

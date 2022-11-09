@@ -8,14 +8,14 @@
 import Foundation
 
 struct User {
-    var name: String
+    var name: String = ""
     var coordinates: Coordinates
 
-    func hello() -> String {
+    func hello(sourceLang: String, targetLang: String) -> String {
         var message = "\(name), what's up!"
-
-        message = API.translate(sentence: message, sourceLang: "EN", targetLang: "FR")
-
+        API.translate(sentence: message, sourceLang: sourceLang, targetLang: sourceLang, sentenceTranslate: { text in
+            message = text
+        })
         return message
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct DestinationCity {
-    var name: String
+    var name: String?
     var country: String
     var countryCode: String
     var coordinates: Coordinates

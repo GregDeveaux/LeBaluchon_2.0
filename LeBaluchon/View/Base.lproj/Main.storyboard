@@ -1443,6 +1443,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="TXg-WB-Yfj" id="LDX-TG-7Ch"/>
+                        <outlet property="modifyDestinationButton" destination="5pH-K6-yZ2" id="R5H-H9-S87"/>
                         <outlet property="userNameLabel" destination="w5F-WJ-XcO" id="lXD-ze-jXA"/>
                     </connections>
                 </viewController>

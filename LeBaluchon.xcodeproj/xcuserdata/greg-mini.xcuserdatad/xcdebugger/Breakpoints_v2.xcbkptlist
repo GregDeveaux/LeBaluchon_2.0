@@ -7,166 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "547ADB99-9BEA-4F37-98AA-CC4D8C31DCF9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LeBaluchon/Controller/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "validateButton(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "547ADB99-9BEA-4F37-98AA-CC4D8C31DCF9 - ee5461928f0cade1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LeBaluchon.LoginViewController.validateButton(__C.UIButton) -&gt; ()"
-                  moduleName = "LeBaluchon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/greg-mini/Desktop/Job/LeBaluchon_2.0/LeBaluchon/Controller/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
-                  offsetFromSymbolStart = "632">
-               </Location>
-               <Location
-                  uuid = "547ADB99-9BEA-4F37-98AA-CC4D8C31DCF9 - ee5461928f0cade1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LeBaluchon.LoginViewController.validateButton(__C.UIButton) -&gt; ()"
-                  moduleName = "LeBaluchon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/greg-mini/Desktop/Job/LeBaluchon_2.0/LeBaluchon/Controller/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
-                  offsetFromSymbolStart = "836">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CE2BABE1-3F56-443C-9CCB-46632CD35A3E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LeBaluchon/Controller/MapViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B2D27AFF-05F6-4EDB-AE90-4D67972880C3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LeBaluchon/Controller/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "foundCoordinates(of:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B2D27AFF-05F6-4EDB-AE90-4D67972880C3 - 9539f8228e2d087a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Array&lt;LeBaluchon.API.City.Coordinates&gt;&gt;) -&gt; () in LeBaluchon.LoginViewController.foundCoordinates(of: Swift.String) -&gt; Swift.Optional&lt;LeBaluchon.DestinationCity&gt;"
-                  moduleName = "LeBaluchon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/greg-mini/Desktop/Job/LeBaluchon_2.0/LeBaluchon/Controller/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "152">
-               </Location>
-               <Location
-                  uuid = "B2D27AFF-05F6-4EDB-AE90-4D67972880C3 - 9539f8228e2d087a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Array&lt;LeBaluchon.API.City.Coordinates&gt;&gt;) -&gt; () in LeBaluchon.LoginViewController.foundCoordinates(of: Swift.String) -&gt; Swift.Optional&lt;LeBaluchon.DestinationCity&gt;"
-                  moduleName = "LeBaluchon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/greg-mini/Desktop/Job/LeBaluchon_2.0/LeBaluchon/Controller/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "180">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "01CE92B2-94C3-4B5A-B480-8C97B324E736"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LeBaluchon/Controller/LoginViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "foundCoordinates(of:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "01CE92B2-94C3-4B5A-B480-8C97B324E736 - b02cc99643a665df"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LeBaluchon.LoginViewController.foundCoordinates(of: Swift.String) -&gt; Swift.Optional&lt;LeBaluchon.DestinationCity&gt;"
-                  moduleName = "LeBaluchon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/greg-mini/Desktop/Job/LeBaluchon_2.0/LeBaluchon/Controller/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "208">
-               </Location>
-               <Location
-                  uuid = "01CE92B2-94C3-4B5A-B480-8C97B324E736 - 9539f8228e2d0819"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Array&lt;LeBaluchon.API.City.Coordinates&gt;&gt;) -&gt; () in LeBaluchon.LoginViewController.foundCoordinates(of: Swift.String) -&gt; Swift.Optional&lt;LeBaluchon.DestinationCity&gt;"
-                  moduleName = "LeBaluchon"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/greg-mini/Desktop/Job/LeBaluchon_2.0/LeBaluchon/Controller/LoginViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "108">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D16B0A52-2313-4FD1-A66B-F9DB690E19E2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -177,6 +17,22 @@
             startingLineNumber = "234"
             endingLineNumber = "234"
             landmarkName = "getCoordinate(endpoint:method:callback:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B7E3F2D-CB33-4B09-A9BE-D010D8455742"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeBaluchon/Model/User.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "hello(sourceLang:targetLang:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
