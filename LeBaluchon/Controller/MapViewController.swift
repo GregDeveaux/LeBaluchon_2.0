@@ -30,14 +30,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
 
         userNameLabel.text = "\(userName), what's up!"
-        API.translate(sentence: userNameLabel.text!, sourceLang: "EN", targetLang: "FR", sentenceTranslate: { [self] text in
-            DispatchQueue.self.main
-            userNameLabel.text = text
-        })
-
-        API.translate(sentence: textButton, sourceLang: "EN", targetLang: "FR") { [self] text in
-            modifyDestinationButton.setTitle(text, for: .normal)
-        }
+        
 
         setupLocationManager()
         setupMapView()
@@ -49,15 +42,14 @@ extension MapViewController: MKMapViewDelegate {
     private func setupMapView() {
         mapView.delegate = self
 
-        guard let userName = user?.name else { return }
-        pinUser = PinMap(title: "Vous êtes ici \(userName)",
-                             coordinate: CLLocationCoordinate2D(latitude: (user?.coordinates.latitude)!,
-                                                                longitude: (user?.coordinates.longitude)!),
+        user?.name = userName
+        pinUser = PinMap(title: "Vous êtes ici \(user?.name ?? "unknow")",
+                         coordinate: CLLocationCoordinate2D(latitude: (user?.coordinates.latitude)!,
+                                                            longitude: (user?.coordinates.longitude)!),
                              info: "départ")
 
-
-        guard let destinationName = destinationCity?.name else { return }
-        let pinDestination = PinMap(title: "Vous allez à \(destinationName)",
+        destinationCity.name = destinationCityName
+        let pinDestination = PinMap(title: "Vous allez à \(destinationCityName)",
                                     coordinate: CLLocationCoordinate2D(latitude: (destinationCity?.coordinates.latitude)!,
                                                                        longitude: (destinationCity?.coordinates.longitude)!),
                                     info: "destination")

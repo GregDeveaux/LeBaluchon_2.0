@@ -17,21 +17,16 @@ class LoginViewController: UIViewController {
 
         nameTextField.delegate = self
         destinationTextField.delegate = self
-
-        
-
     }
 
 
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {
 
-        var destinationCityInfo: DestinationCity!
         API.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
-            destinationCityInfo = destinationInfo
+            self.performSegue(withIdentifier: "goMapKitController", sender: destinationInfo)
         }
 
-        performSegue(withIdentifier: "goMapKitController", sender: destinationCityInfo)
     }
 
     private func presentAlert(with error: String) {
@@ -49,7 +44,8 @@ class LoginViewController: UIViewController {
             let destinationCityInfo = sender as? DestinationCity
             destinationVC?.userName = nameTextField.text ?? "User unknow"
             destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
-            destinationVC?.destinationCity = destinationCityInfo
+            destinationVC?.destinationCity.name = destinationCityInfo
+            print("\(destinationCityInfo)")
         }
     }
 }

@@ -245,9 +245,7 @@ extension API {
         }
 
 
-        func getAddress(endpoint: EndPoint,
-                           method: Method,
-                           callback: @escaping (Bool, City.Country?) -> Void) {
+        func getAddress(endpoint: EndPoint, method: Method, callback: @escaping (Bool, City.Country?) -> Void) {
             var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
 
             request.httpMethod = method.rawValue

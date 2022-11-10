@@ -11,11 +11,10 @@ struct User {
     var name: String = ""
     var coordinates: Coordinates
 
-    func hello(sourceLang: String, targetLang: String) -> String {
-        var message = "\(name), what's up!"
+    func hello(sourceLang: String, targetLang: String, completion: @escaping (String) -> Void)  {
+        let message = "\(name), what's up!"
         API.translate(sentence: message, sourceLang: sourceLang, targetLang: sourceLang, sentenceTranslate: { text in
-            message = text
+            completion(text)
         })
-        return message
     }
 }
