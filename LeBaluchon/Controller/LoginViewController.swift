@@ -44,8 +44,8 @@ class LoginViewController: UIViewController {
             let destinationCityInfo = sender as? DestinationCity
             destinationVC?.userName = nameTextField.text ?? "User unknow"
             destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
-            destinationVC?.destinationCity.name = destinationCityInfo
-            print("\(destinationCityInfo)")
+            destinationVC?.destinationCity = destinationCityInfo
+            print("0o•°0o•°0o•°0o•°0o•°0o•°0o•°0o•°\(String(describing: destinationCityInfo))")
         }
     }
 }

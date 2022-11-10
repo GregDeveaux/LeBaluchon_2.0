@@ -23,6 +23,7 @@ class MapViewController: UIViewController {
     var destinationCity: DestinationCity!
 
     var pinUser: PinMap!
+    var pinDestination: PinMap!
 
     let locationManager = CLLocationManager()
 
@@ -43,23 +44,34 @@ extension MapViewController: MKMapViewDelegate {
         mapView.delegate = self
 
         user?.name = userName
-        pinUser = PinMap(title: "Vous êtes ici \(user?.name ?? "unknow")",
-                         coordinate: CLLocationCoordinate2D(latitude: (user?.coordinates.latitude)!,
-                                                            longitude: (user?.coordinates.longitude)!),
-                             info: "départ")
 
         destinationCity.name = destinationCityName
-        let pinDestination = PinMap(title: "Vous allez à \(destinationCityName)",
-                                    coordinate: CLLocationCoordinate2D(latitude: (destinationCity?.coordinates.latitude)!,
-                                                                       longitude: (destinationCity?.coordinates.longitude)!),
-                                    info: "destination")
+        if let latitudeOfDestination = destinationCity?.coordinates.latitude,
+            let longitudeOfDestination = destinationCity?.coordinates.longitude {
 
-        mapView.addAnnotations([pinUser, pinDestination])
+            pinDestination = PinMap(title: "Vous allez à \(destinationCityName)",
+                                    coordinate: CLLocationCoordinate2D(latitude: (latitudeOfDestination),
+                                                                       longitude: (longitudeOfDestination)),
+                                    info: "destination")
+            print(pinDestination!)
+        }
+
+        if let latitudeUser = user?.coordinates.latitude,
+            let longitudeUser = user?.coordinates.longitude {
+            pinUser = PinMap(title: "Vous êtes ici \(user?.name ?? "unknow")",
+                             coordinate: CLLocationCoordinate2D(latitude: (latitudeUser),
+                                                                longitude: (longitudeUser)),
+                             info: "départ")
+            print(pinUser!)
+        }
+//        mapView.addAnnotations([pinUser, pinDestination])
+        mapView.addAnnotation(pinDestination)
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: pinUser, reuseIdentifier: "pinUser")
         annotationView.image = UIImage(named: "pinDepart")
+        annotationView.frame.size = CGSize(width: 150, height: 90)
         return annotationView
     }
 }
