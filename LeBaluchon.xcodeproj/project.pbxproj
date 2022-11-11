@@ -112,6 +112,7 @@
 		BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityCoordinates.swift; sourceTree = "<group>"; };
 		BC6C14AA2916B5FD009FDF18 /* ApiCity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCity.json; sourceTree = "<group>"; };
 		BC6C14AC2916B61A009FDF18 /* ApiCoordinates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCoordinates.json; sourceTree = "<group>"; };
+		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NexaRustSlab-BlackShadow.otf"; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 				BC278B95290ECC790098A82C /* DestinationCity.swift */,
 				BC278B97290ED7AC0098A82C /* User.swift */,
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
+				BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */,
 			);
 			path = Model;
 			sourceTree = "<group>";

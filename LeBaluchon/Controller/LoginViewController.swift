@@ -22,11 +22,9 @@ class LoginViewController: UIViewController {
 
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {
-
         API.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
             self.performSegue(withIdentifier: "goMapKitController", sender: destinationInfo)
         }
-
     }
 
     private func presentAlert(with error: String) {
@@ -37,7 +35,7 @@ class LoginViewController: UIViewController {
     }
 
 
-        //MARK: Send data for mapKitController
+        //MARK: Send data for mapKitController with coordinates destination
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goMapKitController" {
             let destinationVC = segue.destination as? MapViewController
@@ -45,7 +43,6 @@ class LoginViewController: UIViewController {
             destinationVC?.userName = nameTextField.text ?? "User unknow"
             destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
             destinationVC?.destinationCity = destinationCityInfo
-            print("0o•°0o•°0o•°0o•°0o•°0o•°0o•°0o•°\(String(describing: destinationCityInfo))")
         }
     }
 }

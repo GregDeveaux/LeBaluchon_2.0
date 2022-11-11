@@ -6,15 +6,14 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct User {
-    var name: String = ""
-    var coordinates: Coordinates
+    var name: String
+    var coordinates: CLLocationCoordinate2D
 
-    func hello(sourceLang: String, targetLang: String, completion: @escaping (String) -> Void)  {
+    var welcomeMessage: String {
         let message = "\(name), what's up!"
-        API.translate(sentence: message, sourceLang: sourceLang, targetLang: sourceLang, sentenceTranslate: { text in
-            completion(text)
-        })
+        return message
     }
 }
