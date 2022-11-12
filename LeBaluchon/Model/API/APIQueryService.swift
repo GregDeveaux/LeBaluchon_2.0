@@ -126,9 +126,9 @@ extension API {
 
             request.httpMethod = method.rawValue
 
-            print ("\(request)")
-            print ("\(String(describing: request.allHTTPHeaderFields))")
-            print ("\(String(describing: request.httpMethod))")
+            print ("✅ \(request)")
+            print ("✅ \(String(describing: request.allHTTPHeaderFields))")
+            print ("✅ \(String(describing: request.httpMethod))")
 
             task?.cancel()
 
@@ -174,9 +174,9 @@ extension API {
 
             request.httpMethod = method.rawValue
 
-            print ("\(request)")
-            print ("\(String(describing: request.allHTTPHeaderFields))")
-            print ("\(String(describing: request.httpMethod))")
+            print ("✅ \(request)")
+            print ("✅ \(String(describing: request.allHTTPHeaderFields))")
+            print ("✅ \(String(describing: request.httpMethod))")
 
             task?.cancel()
 
@@ -250,9 +250,9 @@ extension API {
 
             request.httpMethod = method.rawValue
 
-            print ("\(request)")
-            print ("\(String(describing: request.allHTTPHeaderFields))")
-            print ("\(String(describing: request.httpMethod))")
+            print ("✅ \(request)")
+            print ("✅ \(String(describing: request.allHTTPHeaderFields))")
+            print ("✅ \(String(describing: request.httpMethod))")
 
             task?.cancel()
 
@@ -278,13 +278,8 @@ extension API {
                         let decodeData = try decoder.decode(City.Country.self, from: data)
                         let country = decodeData
 
-                        let latitude = Double(country.latitude)!
-                        let longitude = Double(country.longitude)!
-                        let destinationCity = DestinationCity(country: country.address.country,
-                                                              countryCode: country.address.countryCode,
-                                                              coordinates: Coordinates(latitude: latitude, longitude: longitude))
                         callback(true, country)
-                        print(callback)
+                        print(country)
                     } catch {
                         callback(false, nil)
                         print(Error.generic(reason: "not parsing"))

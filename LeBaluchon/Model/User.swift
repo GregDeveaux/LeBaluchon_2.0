@@ -10,7 +10,7 @@ import CoreLocation
 
 struct User {
     var name: String
-    var coordinates: CLLocationCoordinate2D
+    var coordinates: Coordinates
 
     var welcomeMessage: String {
         let message = "\(name), what's up!"

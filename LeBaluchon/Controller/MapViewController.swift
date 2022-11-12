@@ -15,6 +15,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var modifyDestinationButton: UIButton!
 
+        // properties for receive data of the segue
     var userName = ""
     var destinationCityName = ""
     var textButton = "Modify the destination"
@@ -26,68 +27,62 @@ class MapViewController: UIViewController {
     var pinDestination: PinMap!
 
     let locationManager = CLLocationManager()
-    var userCoordinates: CLLocationCoordinate2D!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         userNameLabel.text = "\(userName), what's up!"
-        
+
+        setMapView()
         setupLocationManager()
-        setupMapView()
-//        setupUser()
-
-        print("✅\(String(describing: userCoordinates))")
-
     }
-
-//    private func setupUser() {
-//        user = User(name: userName, coordinates: userCoordinates)
-//        userNameLabel.text = user.welcomeMessage
-//    }
-
-
-
-    func checkLocationServices() {
-        if CLLocationManager.locationServicesEnabled() {
-            setupLocationManager()
-        } else {
-
-        }
-    }
-
 }
 
 extension MapViewController: MKMapViewDelegate {
-    private func setupMapView() {
+
+    private func setMapView() {
         mapView.delegate = self
 
-        user?.name = userName
+            // the map will remain in its light version
+        mapView.overrideUserInterfaceStyle = .light
 
-        destinationCity.name = destinationCityName
-        if let latitudeOfDestination = destinationCity?.coordinates.latitude,
-            let longitudeOfDestination = destinationCity?.coordinates.longitude {
+            // the map follow user
+        mapView.showsUserLocation = true
 
-            pinDestination = PinMap(title: "Vous allez à \(destinationCityName)",
-                                    coordinate: CLLocationCoordinate2D(latitude: (latitudeOfDestination),
-                                                                       longitude: (longitudeOfDestination)),
-                                    info: "destination")
-            print("pin destination: \(pinDestination!)")
-        }
+            // delete the user rotation
+        mapView.isRotateEnabled = false
 
-//        if let latitudeUser = user?.coordinates.latitude,
-//            let longitudeUser = user?.coordinates.longitude {
-//            pinUser = PinMap(title: "Vous êtes ici \(user?.name ?? "unknow")",
-//                             coordinate: CLLocationCoordinate2D(latitude: (latitudeUser),
-//                                                                longitude: (longitudeUser)),
-//                             info: "départ")
-//            print(pinUser!)
-//        }
+            // we indicate the different pin for the start (location user) and the destination
+        setupPinMap()
 //        mapView.addAnnotations([pinUser, pinDestination])
         mapView.addAnnotation(pinDestination)
     }
 
+
+    private func setupPinMap() {
+
+        if let coordinatesDestination = destinationCity?.coordinates {
+            pinDestination = PinMap(title: "Vous allez à \(destinationCityName)",
+                                    coordinate: CLLocationCoordinate2D(latitude: (coordinatesDestination.latitude),
+                                                                       longitude: (coordinatesDestination.longitude)),
+                                    info: "destination")
+            print("✅ pin destination: \(pinDestination.title ?? "unknow")")
+        }
+
+//        if let userCoordinates = user?.coordinates {
+//            pinUser = PinMap(title: "Hello \(user?.name ?? "unknow")! it's you!",
+//                             coordinate: CLLocationCoordinate2D(latitude: (userCoordinates.latitude),
+//                                                                longitude: (userCoordinates.longitude)),
+//                             info: "départ")
+//            print("✅ pin destination: \(pinUser.title ?? "unknow")")
+//        }
+
+    }
+
     func getRoute(to destinationCity: MKMapItem) {
+        let userCoordinates = CLLocationCoordinate2D(latitude: user.coordinates.latitude,
+                                                     longitude: user.coordinates.longitude)
+
         let userPlacemark = MKPlacemark(coordinate: userCoordinates)
         let userMapItem = MKMapItem(placemark: userPlacemark)
 
@@ -129,6 +124,11 @@ extension MapViewController: MKMapViewDelegate {
     //MARK: found the user's coordinates for show the pin on the map
 extension MapViewController: CLLocationManagerDelegate {
 
+    private func setupUser(latitude: Double, longitude: Double) -> User {
+        print("✅ coordinates receive of user are lat:\(latitude) et long:\(longitude))")
+        return User(name: userName, coordinates: Coordinates(latitude: latitude, longitude: longitude))
+    }
+
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
@@ -137,23 +137,25 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("-----00000-00000------00000------\(locations)")
-            //        self.mapView.showsUserLocation = true
-
             // stop location user and recover the coordinates
         guard let currentLocation = locations.first else { return }
 
+            // recover and update the coordinates of user
+        let userUpdate = setupUser(latitude: locations.first!.coordinate.latitude, longitude: locations.first!.coordinate.latitude)
+
+        pinUser = PinMap(title: "Hello \(userUpdate.name)! it's you!",
+                         coordinate: CLLocationCoordinate2D(latitude: (userUpdate.coordinates.latitude),
+                                                            longitude: (userUpdate.coordinates.longitude)),
+                         info: "départ")
+        mapView.addAnnotation(pinUser)
+
+
         let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+        let span = MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
         let region = MKCoordinateRegion(center: center, span: span)
         mapView.setRegion(region, animated: true)
 
-        pinUser = PinMap(title: "Vous êtes ici \(user?.name ?? "unknow")",
-                         coordinate: CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude,
-                                                            longitude: currentLocation.coordinate.longitude),
-                             info: "départ")
-            print(pinUser!)
-        mapView.addAnnotation(pinUser)
+
     }
     
 
