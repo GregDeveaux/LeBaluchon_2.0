@@ -27,6 +27,8 @@ class MapViewController: UIViewController {
     var pinDestination: PinMap!
 
     let locationManager = CLLocationManager()
+    var currentLocationUser: CLLocationCoordinate2D!
+    var route: MKRoute!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,11 @@ class MapViewController: UIViewController {
 
         setMapView()
         setupLocationManager()
+    }
+
+    func setupUser(latitude: Double, longitude: Double) -> User {
+        print("✅ coordinates receive of user are lat:\(latitude) et long:\(longitude))")
+        return User(name: userName, coordinates: Coordinates(latitude: latitude, longitude: longitude))
     }
 }
 
@@ -55,7 +62,7 @@ extension MapViewController: MKMapViewDelegate {
             // we indicate the different pin for the start (location user) and the destination
         setupPinMap()
 //        mapView.addAnnotations([pinUser, pinDestination])
-        mapView.addAnnotation(pinDestination)
+//        mapView.addAnnotation(pinDestination)
     }
 
 
@@ -69,14 +76,13 @@ extension MapViewController: MKMapViewDelegate {
             print("✅ pin destination: \(pinDestination.title ?? "unknow")")
         }
 
-//        if let userCoordinates = user?.coordinates {
-//            pinUser = PinMap(title: "Hello \(user?.name ?? "unknow")! it's you!",
-//                             coordinate: CLLocationCoordinate2D(latitude: (userCoordinates.latitude),
-//                                                                longitude: (userCoordinates.longitude)),
-//                             info: "départ")
-//            print("✅ pin destination: \(pinUser.title ?? "unknow")")
-//        }
-
+        if let userCoordinates = currentLocationUser {
+            pinUser = PinMap(title: "Hello \(user?.name ?? "unknow")! it's you!",
+                             coordinate: CLLocationCoordinate2D(latitude: (userCoordinates.latitude),
+                                                                longitude: (userCoordinates.longitude)),
+                             info: "start")
+            print("✅ pin destination: \(pinUser.title ?? "unknow")")
+        }
     }
 
     func getRoute(to destinationCity: MKMapItem) {
@@ -110,13 +116,25 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is PinMap else { return nil}
+        guard annotation is PinMap else { return nil }
 
             // custom pinUser
-        let annotationDestinationView = MKAnnotationView(annotation: pinDestination, reuseIdentifier: "pinDestination")
-        annotationDestinationView.image = UIImage(named: "pinDestination")
-        annotationDestinationView.frame.size = CGSize(width: 150, height: 90)
-        return annotationDestinationView
+        let identifier = "customPin"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+
+        annotationView = MKAnnotationView(annotation: pinDestination, reuseIdentifier: "customPin")
+        annotationView?.image = UIImage(named: "pinDestination")
+        annotationView?.frame.origin = CGPoint(x: 150, y: 135)
+        annotationView?.frame.size = CGSize(width: 150, height: 90)
+
+
+
+//        let annotationUserView = MKAnnotationView(annotation: pinUser, reuseIdentifier: "pinUser")
+//        annotationUserView.image = UIImage(named: "pinUser")
+//        annotationUserView.frame.size = CGSize(width: 150, height: 90)
+
+        return annotationView
     }
 }
 
@@ -124,42 +142,35 @@ extension MapViewController: MKMapViewDelegate {
     //MARK: found the user's coordinates for show the pin on the map
 extension MapViewController: CLLocationManagerDelegate {
 
-    private func setupUser(latitude: Double, longitude: Double) -> User {
-        print("✅ coordinates receive of user are lat:\(latitude) et long:\(longitude))")
-        return User(name: userName, coordinates: Coordinates(latitude: latitude, longitude: longitude))
-    }
-
     private func setupLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            // stop location user and recover the coordinates
-        guard let currentLocation = locations.first else { return }
 
-            // recover and update the coordinates of user
-        let userUpdate = setupUser(latitude: locations.first!.coordinate.latitude, longitude: locations.first!.coordinate.latitude)
+        currentLocationUser = manager.location?.coordinate
 
-        pinUser = PinMap(title: "Hello \(userUpdate.name)! it's you!",
-                         coordinate: CLLocationCoordinate2D(latitude: (userUpdate.coordinates.latitude),
-                                                            longitude: (userUpdate.coordinates.longitude)),
-                         info: "départ")
-        mapView.addAnnotation(pinUser)
+        user = setupUser(latitude: currentLocationUser.latitude, longitude: currentLocationUser.longitude)
+        print("📍 latitude \(currentLocationUser.latitude) et longitude \(currentLocationUser.latitude)")
 
 
-        let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-        let region = MKCoordinateRegion(center: center, span: span)
-        mapView.setRegion(region, animated: true)
-
+//            // recover and update the coordinates of user
+//        user = setupUser(latitude: locations.first!.coordinate.latitude, longitude: locations.first!.coordinate.latitude)
+//
+//                                        pinUser = PinMap(title: "Hello \(user.name)! it's you!",
+//                                                         coordinate: CLLocationCoordinate2D(latitude: (user.coordinates.latitude),
+//                                                                                            longitude: (user.coordinates.longitude)),
+//                                                         info: "start")
+//                                        print("✅ pin user: \(pinUser.title ?? "unknow")")
+//                                        mapView.addAnnotation(pinUser)
+//
+//        let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+//        let span = MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+//        let region = MKCoordinateRegion(center: center, span: span)
+//        mapView.setRegion(region, animated: true)
 
     }
-    
-
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        checkLocationAuthorization()
-//    }
 }
