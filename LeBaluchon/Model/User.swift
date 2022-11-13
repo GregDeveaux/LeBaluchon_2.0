@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 struct User {
     var name: String
