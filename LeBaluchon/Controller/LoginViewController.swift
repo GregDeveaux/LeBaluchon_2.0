@@ -12,6 +12,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
 
+    var user: User?
+    var destinationCity: DestinationCity?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,8 +25,8 @@ class LoginViewController: UIViewController {
 
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {
-        API.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
-            self.performSegue(withIdentifier: "goMapKitController", sender: destinationInfo)
+        API.recoverInfoOnTheCity(named: destinationTextField.text!) { [self] destinationInfo in
+            performSegue(withIdentifier: "goToTabBar", sender: destinationInfo)
         }
     }
 
@@ -35,14 +38,22 @@ class LoginViewController: UIViewController {
     }
 
 
+
         //MARK: Send data for mapKitController with coordinates destination
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goMapKitController" {
+        if segue.identifier == "goToTabBar" {
+            guard let navigationViewController = self.tabBarController?.viewControllers![1] as? UINavigationController else { return }
+            let mapViewController = navigationViewController.topViewController as! MapViewController
             let destinationVC = segue.destination as? MapViewController
+
             let destinationCityInfo = sender as? DestinationCity
+
             destinationVC?.userName = nameTextField.text ?? "User unknow"
             destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
             destinationVC?.destinationCity = destinationCityInfo
+
+            tabBarController?.selectedIndex = 1
+
         }
     }
 }

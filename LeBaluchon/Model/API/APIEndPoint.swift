@@ -54,7 +54,7 @@ extension API {
 
                 case .flag(let codeIsoCountry):
                     components.host = "flagcdn.com"
-                    components.path = "/h20/\(codeIsoCountry.lowercased()).png"
+                    components.path = "/h40/\(codeIsoCountry.lowercased()).png"
 
                 case .coordinates(let city):
                     components.host = "nominatim.openstreetmap.org"

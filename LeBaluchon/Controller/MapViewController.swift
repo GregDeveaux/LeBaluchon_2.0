@@ -39,7 +39,6 @@ class MapViewController: UIViewController {
 
         userNameLabel.text = "\(userName), what's up!"
         setupLocationManager()
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
