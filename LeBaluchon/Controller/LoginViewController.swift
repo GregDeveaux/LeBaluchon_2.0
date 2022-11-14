@@ -12,8 +12,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
 
-    var user: User?
-    var destinationCity: DestinationCity?
+    let userDefaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +24,30 @@ class LoginViewController: UIViewController {
 
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {
-        API.recoverInfoOnTheCity(named: destinationTextField.text!) { [self] destinationInfo in
-            performSegue(withIdentifier: "goToTabBar", sender: destinationInfo)
+            
+        guard let userName = nameTextField.text else { return }
+        guard let destinationCityName = destinationTextField.text else { return }
+
+            // recover the info on the city after than the user wrote your destination in the textField
+        API.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
+
+            self.userDefaults.set(userName, forKey: "userName")
+            self.userDefaults.set(destinationCityName, forKey: "destinationCityName")
+            self.userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
+            self.userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")
+
+            print("✅ user name is \(userName)")
+            print("""
+            ✅ the destination is \(destinationCityName),
+            with as coordinates : - lat:\(destinationInfo?.coordinates.latitude ?? 0)
+                                  - long:\(destinationInfo?.coordinates.longitude ?? 0)
+            """)
+
+                // used to move on the MainTabView if the fields "UserName" and "destination" is completed
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = mainTabBarController
         }
     }
 
@@ -40,22 +61,26 @@ class LoginViewController: UIViewController {
 
 
         //MARK: Send data for mapKitController with coordinates destination
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToTabBar" {
-            guard let navigationViewController = self.tabBarController?.viewControllers![1] as? UINavigationController else { return }
-            let mapViewController = navigationViewController.topViewController as! MapViewController
-            let destinationVC = segue.destination as? MapViewController
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "goToTabBar" {
 
-            let destinationCityInfo = sender as? DestinationCity
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+//            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+//            sceneDelegate?.window?.rootViewController = mainTabBarController
 
-            destinationVC?.userName = nameTextField.text ?? "User unknow"
-            destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
-            destinationVC?.destinationCity = destinationCityInfo
-
-            tabBarController?.selectedIndex = 1
-
-        }
-    }
+//            guard let navigationViewController = self.tabBarController?.viewControllers![1] as? UINavigationController else { return }
+//            let mapViewController = navigationViewController.topViewController as! MapViewController
+//            let destinationVC = segue.destination as? MapViewController
+//
+//            let destinationCityInfo = sender as? DestinationCity
+//
+//            destinationVC?.userName = nameTextField.text ?? "User unknow"
+//            destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
+//            destinationVC?.destinationCity = destinationCityInfo
+//
+//        }
+//    }
 }
 
 

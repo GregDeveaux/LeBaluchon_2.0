@@ -554,7 +554,7 @@
         <!--Login View Controller-->
         <scene sceneID="rFu-qP-qSM">
             <objects>
-                <viewController storyboardIdentifier="loginViewController" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="6AF-KD-OC5" customClass="LoginViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="6AF-KD-OC5" customClass="LoginViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LAd-QM-gfh" customClass="GradientView" customModule="LeBaluchon" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -686,17 +686,16 @@
                     <connections>
                         <outlet property="destinationTextField" destination="O4G-Lr-D5u" id="F7A-2I-KbA"/>
                         <outlet property="nameTextField" destination="ou4-j2-dbG" id="l1i-pM-pgI"/>
-                        <segue destination="go8-7M-Q0W" kind="presentation" identifier="goToTabBar" id="eHU-mT-dzK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvj-4i-aNt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2920" y="248"/>
+            <point key="canvasLocation" x="-3291" y="1006"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Isv-Y5-Tdx">
             <objects>
-                <tabBarController storyboardIdentifier="tabBarController" modalPresentationStyle="fullScreen" id="go8-7M-Q0W" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" modalPresentationStyle="fullScreen" id="go8-7M-Q0W" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="DVK-al-vvF"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1QS-oH-kEu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -1388,7 +1387,7 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="perso1" translatesAutoresizingMaskIntoConstraints="NO" id="CfD-kF-gKg">
-                                <rect key="frame" x="107" y="412" width="323" height="460"/>
+                                <rect key="frame" x="107" y="412" width="322" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pH-K6-yZ2">
@@ -1402,6 +1401,9 @@
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="tappedModifyDestination:" destination="JyC-xM-2Uc" eventType="touchUpInside" id="Hel-7Z-VUl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fZu-YZ-jWY"/>

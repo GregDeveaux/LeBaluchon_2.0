@@ -15,14 +15,11 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var modifyDestinationButton: UIButton!
 
-        // properties for receive data of the segue
-    var userName = ""
-    var destinationCityName = ""
-    var textButton = "Modify the destination"
-
-    enum Pin {
-        case user, destinationCity
-    }
+    let userDefaults = UserDefaults.standard
+    let userName = UserDefaults.standard.string(forKey: "userName") ?? "unknow"
+    let destinationCityName = UserDefaults.standard.string(forKey: "destinationCityName") ?? "unknow"
+    let destinationCityLatitude = UserDefaults.standard.double(forKey: "destinationCityLatitude")
+    let destinationCityLongitude = UserDefaults.standard.double(forKey: "destinationCityLongitude")
 
     var user: User?
     var destinationCity: DestinationCity!
@@ -37,23 +34,40 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        guard let userName = UserDefaults.standard.string(forKey: "userName") else { return }
+
         userNameLabel.text = "\(userName), what's up!"
         setupLocationManager()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         setMapView()
-        print("📍 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
+        print("📍🏖 latitude \(destinationCityLatitude) et longitude \(destinationCityLongitude)")
 
-        createRoute(to: CLLocationCoordinate2D(latitude: destinationCity.coordinates.latitude, longitude: destinationCity.coordinates.longitude))
-        print("✅ route \(createRoute(to: CLLocationCoordinate2D(latitude: destinationCity.coordinates.latitude, longitude: destinationCity.coordinates.longitude)))")
+        createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude))
+        print("✅ route \(createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)))")
 
     }
 
     func setupUser(latitude: Double, longitude: Double) -> User {
-        print("✅ coordinates receive of user are lat:\(latitude) et long:\(longitude))")
+
+        print("✅ coordinates receive of \(userName) are lat:\(latitude) et long:\(longitude))")
+
+        userDefaults.set(currentLocationUser?.coordinate.latitude, forKey: "userLatitude")
+        userDefaults.set(currentLocationUser?.coordinate.longitude, forKey: "userLongitude")
+
         return User(name: userName, coordinates: Coordinates(latitude: latitude, longitude: longitude))
     }
+    @IBAction func tappedModifyDestination(_ sender: UIButton) {
+
+            // return to login view
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(identifier: "LoginViewController")
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.window?.rootViewController = loginViewController
+
+    }
+
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -79,10 +93,10 @@ extension MapViewController: MKMapViewDelegate {
 
     private func setupPinMap() {
 
-        if let coordinatesDestination = destinationCity?.coordinates {
+        if destinationCityLatitude != 0 && destinationCityLongitude != 0  {
             pinDestination = PinMap(title: "you want to go \(destinationCityName)",
-                                    coordinate: CLLocationCoordinate2D(latitude: (coordinatesDestination.latitude),
-                                                                       longitude: (coordinatesDestination.longitude)),
+                                    coordinate: CLLocationCoordinate2D(latitude: (destinationCityLatitude),
+                                                                       longitude: (destinationCityLongitude)),
                                     info: "destination")
             print("✅ pin destination: \(pinDestination.title ?? "unknow")")
         }
@@ -177,10 +191,10 @@ extension MapViewController: CLLocationManagerDelegate {
         currentLocationUser = location
 
         user = setupUser(latitude: currentLocationUser?.coordinate.latitude ?? 0, longitude: currentLocationUser?.coordinate.longitude ?? 0)
-        print("📍 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
+        print("📍😎 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
 
         let startPolyline = location.coordinate
-        let destinationPolyline = CLLocationCoordinate2D(latitude: destinationCity.coordinates.latitude, longitude: destinationCity.coordinates.longitude)
+        let destinationPolyline = CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)
 
         let coordinatesPolyline = [startPolyline, destinationPolyline]
         let polyline = MKPolyline(coordinates: coordinatesPolyline, count: coordinatesPolyline.count)
