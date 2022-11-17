@@ -27,29 +27,29 @@ class WeatherHomeViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
 //        addChildViewController()
-        showSheetWeatherDestination()
+//        showSheetWeatherDestination()
     }
 
 
-    private func showSheetWeatherDestination() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let weatherDestinationViewController = storyboard.instantiateViewController(withIdentifier: "weatherDestinationViewController")
-
-        weatherDestinationViewController.definesPresentationContext = true
-        weatherDestinationViewController.modalPresentationStyle = .pageSheet
-
-        if let sheet = weatherDestinationViewController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-
-            sheet.largestUndimmedDetentIdentifier = .medium
-            sheet.prefersGrabberVisible = true
-            sheet.accessibilityElementsHidden = false
-
-            tabBarController?.present(weatherDestinationViewController, animated: true)
-        }
-
-    }
+//    private func showSheetWeatherDestination() {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        let weatherDestinationViewController = storyboard.instantiateViewController(withIdentifier: "weatherDestinationViewController")
+//
+//        weatherDestinationViewController.definesPresentationContext = true
+//        weatherDestinationViewController.modalPresentationStyle = .pageSheet
+//
+//        if let sheet = weatherDestinationViewController.sheetPresentationController {
+//            sheet.detents = [.medium(), .large()]
+//
+//            sheet.largestUndimmedDetentIdentifier = .medium
+//            sheet.prefersGrabberVisible = true
+//            sheet.accessibilityElementsHidden = false
+//
+//            tabBarController?.present(weatherDestinationViewController, animated: true)
+//        }
+//
+//    }
 
     private func addChildViewController() {
         addChild(weatherDestinationViewController)

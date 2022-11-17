@@ -11,7 +11,9 @@ class CurrencyViewController: UIViewController {
 
     @IBOutlet var numberButton: [UIButton]!
 
-    @IBOutlet weak var textFieldEntryAmount: UITextField!
+    @IBOutlet weak var iconCurrencyPhone: UILabel!
+    @IBOutlet weak var iconCurrencyDestination: UILabel!
+    @IBOutlet weak var textFieldEntryAmount: UITextView!
     @IBOutlet weak var textFieldResult: UITextField!
     @IBOutlet weak var buttonConvert: UIButton!
     @IBOutlet weak var flagLocalImageView: UIImageView!
@@ -45,7 +47,7 @@ class CurrencyViewController: UIViewController {
 
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal) else { return }
-        self.textFieldEntryAmount.text?.append(numberText)
+        textFieldEntryAmount.text.append(numberText)
         print("tapped: \(numberText)")
 
 }
