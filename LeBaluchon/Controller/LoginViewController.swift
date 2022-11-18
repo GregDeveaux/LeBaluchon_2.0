@@ -12,10 +12,16 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
 
+    @IBOutlet weak var bubbleTextView: UITextView!
+    let welcomeText = "Hello, my friend! Welcome to the \"Le Baluchon\" App, to start you must write your name and your destination, thank you 😀"
+
     let userDefaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+            // bubble explanation before to enter in the app.
+        bubbleTextView.typeOn(sentence: welcomeText)
 
         nameTextField.delegate = self
         destinationTextField.delegate = self

@@ -48,6 +48,7 @@
 		BC6C14AD2916B61A009FDF18 /* ApiCoordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* ApiCoordinates.json */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
+		BCF48BA42926C02400F63B25 /* UITextView+TypeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */; };
 		BCFF028F29118575008CF2EA /* NexaRustSlab-BlackShadow.otf in Resources */ = {isa = PBXBuildFile; fileRef = BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
+		BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+TypeOn.swift"; sourceTree = "<group>"; };
 		BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NexaRustSlab-BlackShadow.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 		BC0C6B6928F4BAF70075C614 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */,
 				BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */,
 				BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */,
 				BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */,
@@ -434,6 +437,7 @@
 				BC1D19BA2905A11C00AF8838 /* APITranslation.swift in Sources */,
 				BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */,
 				BC40285228FDC49F0044A19A /* API.swift in Sources */,
+				BCF48BA42926C02400F63B25 /* UITextView+TypeOn.swift in Sources */,
 				BC40285828FDDA740044A19A /* APIQueryService.swift in Sources */,
 				BC1D19C62905B9B500AF8838 /* APIKeys.swift in Sources */,
 				BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */,
@@ -637,7 +641,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,7 +675,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
