@@ -46,6 +46,7 @@
 		BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */; };
 		BC6C14AB2916B5FD009FDF18 /* ApiCity.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AA2916B5FD009FDF18 /* ApiCity.json */; };
 		BC6C14AD2916B61A009FDF18 /* ApiCoordinates.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* ApiCoordinates.json */; };
+		BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
 		BCF48BA42926C02400F63B25 /* UITextView+TypeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */; };
@@ -113,6 +114,7 @@
 		BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityCoordinates.swift; sourceTree = "<group>"; };
 		BC6C14AA2916B5FD009FDF18 /* ApiCity.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCity.json; sourceTree = "<group>"; };
 		BC6C14AC2916B61A009FDF18 /* ApiCoordinates.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCoordinates.json; sourceTree = "<group>"; };
+		BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Language.swift"; sourceTree = "<group>"; };
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
 				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
+				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
 				BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */,
 			);
 			path = Controller;
@@ -427,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */,
+				BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */,
 				BC0C6B6C28F4BB9E0075C614 /* WeatherHomeViewController.swift in Sources */,
 				BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */,
 				BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */,

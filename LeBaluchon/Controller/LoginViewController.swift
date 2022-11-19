@@ -64,29 +64,6 @@ class LoginViewController: UIViewController {
         present(alert, animated: true)
     }
 
-
-
-        //MARK: Send data for mapKitController with coordinates destination
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "goToTabBar" {
-
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
-//            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-//            sceneDelegate?.window?.rootViewController = mainTabBarController
-
-//            guard let navigationViewController = self.tabBarController?.viewControllers![1] as? UINavigationController else { return }
-//            let mapViewController = navigationViewController.topViewController as! MapViewController
-//            let destinationVC = segue.destination as? MapViewController
-//
-//            let destinationCityInfo = sender as? DestinationCity
-//
-//            destinationVC?.userName = nameTextField.text ?? "User unknow"
-//            destinationVC?.destinationCityName = destinationTextField.text ?? "Destination Unknow"
-//            destinationVC?.destinationCity = destinationCityInfo
-//
-//        }
-//    }
 }
 
 

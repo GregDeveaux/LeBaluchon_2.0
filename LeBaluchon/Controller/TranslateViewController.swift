@@ -19,10 +19,14 @@ class TranslateViewController: UIViewController {
     var textToTanslate = ""
     var textTranslated = ""
 
+    var sourceLanguage = "EN"
+    var targetLanguage = "FR"
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupTranslate()
+        setupButtonsLanguage()
     }
 
     private func setupTranslate() {
@@ -30,24 +34,37 @@ class TranslateViewController: UIViewController {
         setupTextView(translateTextView)
 
         textToTanslate = baseTextView.text
+        baseTextView.text = textTranslated
     }
 
     private func setupTextView(_ textView: UITextView) {
         textView.layer.cornerRadius = 10
         textView.delegate = self
-    }
 
-    private func setupActionMenu(_ languageButton: UIButton) {
-
-        languageButton.changesSelectionAsPrimaryAction = true
-        languageButton.showsMenuAsPrimaryAction = true
-
-//        let wholeLanguage = {(action: UIAction) in
-
-//        }
+        textView.font = UIFont(name: "HelveticaNeue", size: 25)
+        textView.textColor = .pinkGranada
 
     }
 
+        //MARK: - Buttons language
+    func setupButtonsLanguage() {
+        setupActionMenu(firstLanguageButton)
+        setupActionMenu(secondLanguageButton)
+
+        recognizeButtonLanguage(firstLanguageButton, codeLanguage: sourceLanguage)
+        recognizeButtonLanguage(secondLanguageButton, codeLanguage: targetLanguage)
+
+        print("✅ you chose first language -> \(sourceLanguage)")
+        print("✅ you chose second language -> \(targetLanguage)")
+    }
+
+    func recognizeButtonLanguage(_ languageButton: UIButton, codeLanguage: String) {
+        if languageButton == self.firstLanguageButton {
+            self.sourceLanguage = codeLanguage
+        } else {
+            self.targetLanguage = codeLanguage
+        }
+    }
 }
 
 extension TranslateViewController: UITextViewDelegate {
@@ -64,24 +81,22 @@ extension TranslateViewController: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
         baseTextView.text = ""
-        baseTextView.textColor = .pinkGranada
         baseTextView.usesStandardTextScaling = true
 
         baseTextView.enablesReturnKeyAutomatically = true
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        print("le texte change")
+        print("the text changes")
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
         if baseTextView.text.isEmpty {
-            baseTextView.text = "Écris un mot ou une phrase à traduire ici"
+            baseTextView.text = "Write a word or phrase to translate here"
             baseTextView.textColor = .lightGray
         }
 
-        if baseTextView.text!.contains(" ") {
-            API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: "FR", text: baseTextView.text, targetLang: "EN"), method: .POST) { success, recover in
+            API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: sourceLanguage, text: baseTextView.text, targetLang: targetLanguage), method: .POST) { success, recover in
                 guard let recover = recover, success == true else {
                     print(API.Error.generic(reason: "not shown data"))
                     return
@@ -89,7 +104,6 @@ extension TranslateViewController: UITextViewDelegate {
 
                 if let text = recover.translations.first?.text {
                     self.translateTextView.text = text
-                }
             }
         }
 
@@ -98,17 +112,6 @@ extension TranslateViewController: UITextViewDelegate {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        guard let key = presses.first?.key else { return }
-
-        switch key.keyCode {
-            case .keyboardSpacebar:
-                print("✅ space is actived")
-            default:
-                super.pressesBegan(presses, with: event)
-        }
     }
 
 }
