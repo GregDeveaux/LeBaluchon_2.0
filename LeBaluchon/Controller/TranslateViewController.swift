@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Speech
 
 class TranslateViewController: UIViewController {
 
@@ -31,6 +32,7 @@ class TranslateViewController: UIViewController {
     @IBOutlet weak var whiteBoardOfTranslateStackView: UIStackView!
 
         // Image for the design
+    @IBOutlet weak var buttonForMicro: UIButton!
     @IBOutlet weak var handWithMicroImage: UIImageView!
 
         // Block camera
@@ -44,6 +46,12 @@ class TranslateViewController: UIViewController {
 
     var sourceLanguage = "EN"
     var targetLanguage = "FR"
+
+        // create a properties for speech voice
+    let audioEngine: AVAudioEngine? = AVAudioEngine()
+    let speechRecognizer:SFSpeechRecognizer? = SFSpeechRecognizer()
+    let requestAudio = SFSpeechAudioBufferRecognitionRequest()
+    var recognitionTask: SFSpeechRecognitionTask?
 
 
         // -------------------------------------------------------
@@ -125,11 +133,15 @@ class TranslateViewController: UIViewController {
         baseTextView.isHidden = baseText
         translateTextView.isHidden = translatedText
         handWithMicroImage.isHidden = micro
+        buttonForMicro.isHidden = micro
         handWithMicroImage.layer.shadowColor = UIColor.black.cgColor
         handWithMicroImage.layer.shadowOpacity = 0.3
         handWithMicroImage.layer.shadowOffset = CGSize(width: 15, height: 15)
         handWithMicroImage.layer.shadowRadius = 5
         cameraImageView.isHidden = camera
+
+        baseTextView.backgroundColor = .white
+        baseTextView.overrideUserInterfaceStyle = .light
     }
 
 
@@ -148,7 +160,51 @@ class TranslateViewController: UIViewController {
             self.targetLanguage = codeLanguage
         }
     }
+
+    @IBAction func tappedMicroForStartWithTheVoice(_ sender: UIButton) {
+        recordAndRecognizeSpeech()
+    }
+
+    func recordAndRecognizeSpeech() {
+        guard let inputNode = audioEngine?.inputNode else { return }
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            self.requestAudio.append(buffer)
+        }
+
+        audioEngine?.prepare()
+        do {
+            try audioEngine?.start()
+        } catch {
+            return print(error)
+        }
+
+        guard let myRecognizer = SFSpeechRecognizer() else { return }
+
+        if !myRecognizer.isAvailable {
+            return
+        }
+
+        recognitionTask = speechRecognizer?.recognitionTask(with: requestAudio, resultHandler: { result, error in
+            guard let result = result, error == nil else {
+                print("There is not result for the voice!")
+                return
+            }
+
+            let bestString = result.bestTranscription.formattedString
+            self.baseTextView.text = bestString
+            print("✅ The speech recorded!")
+
+        })
+    }
 }
+
+extension TranslateViewController: SFSpeechRecognizerDelegate {
+
+
+    
+}
+
 
 extension TranslateViewController: UITextViewDelegate {
 

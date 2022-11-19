@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
             // bubble explanation before to enter in the app.
-        bubbleTextView.typeOn(sentence: welcomeText)
+//        bubbleTextView.typeOn(sentence: welcomeText)
 
         nameTextField.delegate = self
         destinationTextField.delegate = self

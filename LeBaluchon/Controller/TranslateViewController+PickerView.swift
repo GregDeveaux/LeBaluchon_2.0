@@ -69,7 +69,7 @@ func chooseNewImage() {
             itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
                 DispatchQueue.main.sync {
                     guard let self = self, let chosenImage = image as? UIImage,
-                          self.editingImage?.image == previousImage else { return }
+                              self.editingImage?.image == previousImage else { return }
                     self.editingImage?.image = chosenImage
                 }
             }
