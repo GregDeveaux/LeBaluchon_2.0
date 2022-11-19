@@ -9,9 +9,9 @@ import UIKit
 
 extension TranslateViewController {
 
-    func setupActionMenu(_ languageButton: UIButton) {
+    func setupActionsMenu(of languageButton: UIButton, currentTitleOtherButton: String) {
 
-            // create different pieces of menu
+            // Create different pieces of menu
         let french = UIAction(title: "French") { _ in
             self.recognizeButtonLanguage(languageButton, codeLanguage: "FR")
         }
@@ -124,13 +124,18 @@ extension TranslateViewController {
                                   german, greek, estonian, finnish, hungarian, indonesian, japanese, lithuanian, latvian,
                                   polish, romanian, russian, slovak, slovenian, swedish, turkish, ukrainian]
 
-//        let deleteDoubleMenus = actions.filter({$0.title == filter})
+        let actionsWithdeleteLanguageChooseInOtherButton = actions.filter({$0.title != currentTitleOtherButton})
 
-        let menu = UIMenu(options: .singleSelection, children: actions)
+        let menu = UIMenu(identifier: .text, options: .singleSelection, children: actionsWithdeleteLanguageChooseInOtherButton)
 
-            // activation
+            // Menu activation 
         languageButton.menu = menu
         languageButton.showsMenuAsPrimaryAction = true
         languageButton.changesSelectionAsPrimaryAction = true
+
+        recognizeButtonLanguage(firstLanguageButton, codeLanguage: sourceLanguage)
+        recognizeButtonLanguage(secondLanguageButton, codeLanguage: targetLanguage)
+
+        print("✅ the title of button language -> \(languageButton.currentTitle ?? "nothing")")
     }
 }

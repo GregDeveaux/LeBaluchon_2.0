@@ -49,6 +49,7 @@
 		BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
+		BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */; };
 		BCF48BA42926C02400F63B25 /* UITextView+TypeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */; };
 		BCFF028F29118575008CF2EA /* NexaRustSlab-BlackShadow.otf in Resources */ = {isa = PBXBuildFile; fileRef = BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,7 @@
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
+		BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+PickerView.swift"; sourceTree = "<group>"; };
 		BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+TypeOn.swift"; sourceTree = "<group>"; };
 		BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NexaRustSlab-BlackShadow.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,6 +231,7 @@
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
 				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
 				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
+				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
 				BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */,
 			);
 			path = Controller;
@@ -451,6 +454,7 @@
 				BC1D19B629041FED00AF8838 /* APIWeather.swift in Sources */,
 				BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */,
 				BC0C6B3A28F4B2AA0075C614 /* AppDelegate.swift in Sources */,
+				BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */,
 				BC40285A28FDE0D10044A19A /* APIError.swift in Sources */,
 				BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */,
 				BC0C6B3C28F4B2AA0075C614 /* SceneDelegate.swift in Sources */,
