@@ -133,9 +133,6 @@ extension TranslateViewController {
         languageButton.showsMenuAsPrimaryAction = true
         languageButton.changesSelectionAsPrimaryAction = true
 
-        recognizeButtonLanguage(firstLanguageButton, codeLanguage: sourceLanguage)
-        recognizeButtonLanguage(secondLanguageButton, codeLanguage: targetLanguage)
-
         print("✅ the title of button language -> \(languageButton.currentTitle ?? "nothing")")
     }
 }

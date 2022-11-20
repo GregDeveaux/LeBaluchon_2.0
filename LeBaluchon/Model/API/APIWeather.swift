@@ -21,6 +21,20 @@ extension API {
             let rain: Rain?
             let snow: Snow?
             let sys: Sys
+            let date: Int
+
+            enum CodingKeys: String, CodingKey {
+                case name
+                case weather
+                case main
+                case visibility
+                case wind
+                case clouds
+                case rain
+                case snow
+                case sys
+                case date = "dt"
+            }
         }
 
         struct Weather: Decodable {
