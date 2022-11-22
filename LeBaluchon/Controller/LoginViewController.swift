@@ -32,6 +32,7 @@ class LoginViewController: UIViewController {
     @IBAction func validateButton(_ sender: UIButton) {
             
         guard let userName = nameTextField.text else { return }
+        
         guard let destinationCityName = destinationTextField.text else { return }
 
             // recover the info on the city after than the user wrote your destination in the textField
@@ -41,6 +42,8 @@ class LoginViewController: UIViewController {
             self.userDefaults.set(destinationCityName, forKey: "destinationCityName")
             self.userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
             self.userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")
+            self.userDefaults.set(destinationInfo?.country, forKey: "destinationCountry")
+            self.userDefaults.set(destinationInfo?.countryCode, forKey: "destinationCountryCode")
 
             print("✅ user name is \(userName)")
             print("""

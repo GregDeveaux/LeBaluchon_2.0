@@ -30,6 +30,7 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentLocationUser: CLLocation?
     var route: MKRoute?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
