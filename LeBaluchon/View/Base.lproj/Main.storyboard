@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="go8-7M-Q0W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6AF-KD-OC5">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -135,7 +135,10 @@
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrC-zv-teg">
                                                         <rect key="frame" x="0.0" y="21" width="354" height="20"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="6ak-lm-8Im"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -398,7 +401,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="black"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="tappedNumberKey:" destination="69T-SZ-NTr" eventType="touchUpInside" id="qfx-T5-qTT"/>
+                                                    <action selector="tappedResetButton:" destination="69T-SZ-NTr" eventType="touchUpInside" id="uvM-uk-Q4s"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -457,12 +460,14 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonConvert" destination="pbz-dB-Yt6" id="KQ3-wm-haB"/>
+                        <outlet property="destinationNameLabel" destination="hrC-zv-teg" id="0KU-Sq-PeT"/>
                         <outlet property="flagDestinationImageView" destination="g8y-13-MoR" id="k5g-s1-l71"/>
                         <outlet property="flagLocalImageView" destination="rii-vL-Eg4" id="2R2-xw-jC8"/>
                         <outlet property="iconCurrencyDestination" destination="oME-lY-vUD" id="xy4-fP-Gxh"/>
                         <outlet property="iconCurrencyPhone" destination="h8W-5n-7E6" id="vVE-FD-61G"/>
                         <outlet property="nameDestinationCountryLabel" destination="lJd-Cm-4RT" id="Dub-n8-taL"/>
                         <outlet property="nameLocalCountryLabel" destination="kjW-q5-1zS" id="44X-Pd-6bG"/>
+                        <outlet property="resetNumberButton" destination="gss-GP-vU0" id="ZqB-8e-Po3"/>
                         <outlet property="textFieldEntryAmount" destination="Njv-ko-jbn" id="S1e-Uq-0Lk"/>
                         <outlet property="textFieldResult" destination="JWf-wp-OdU" id="MEa-Ob-5HO"/>
                         <outletCollection property="numberButton" destination="4V1-sa-G4C" collectionClass="NSMutableArray" id="5zW-mq-hgq"/>
@@ -864,7 +869,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvj-4i-aNt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3286" y="1211"/>
+            <point key="canvasLocation" x="-2219" y="249"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Isv-Y5-Tdx">
