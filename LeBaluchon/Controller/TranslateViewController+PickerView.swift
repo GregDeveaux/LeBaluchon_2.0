@@ -41,7 +41,6 @@ func chooseNewImage() {
     // MARK: picker image library
     // -------------------------------------------------------
 
-
         // create a picker controller to load the images from photo library
     var pickerPH: PHPickerViewController {
         var configuration = PHPickerConfiguration(photoLibrary: .shared())

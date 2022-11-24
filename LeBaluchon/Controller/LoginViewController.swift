@@ -20,6 +20,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        guard let currentUserName = userDefaults.string(forKey: "userName") else { return }
+
+        if !currentUserName.isEmpty {
+            nameTextField.text = currentUserName
+            nameTextField.isEnabled = false
+        }
+
             // bubble explanation before to enter in the app.
 //        bubbleTextView.typeOn(sentence: welcomeText)
 
@@ -30,9 +37,9 @@ class LoginViewController: UIViewController {
 
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {
-            
+
         guard let userName = nameTextField.text else { return }
-        
+
         guard let destinationCityName = destinationTextField.text else { return }
 
             // recover the info on the city after than the user wrote your destination in the textField

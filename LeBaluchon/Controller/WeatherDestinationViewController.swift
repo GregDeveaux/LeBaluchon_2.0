@@ -29,7 +29,6 @@ class WeatherDestinationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        giveTheDate()
     }
 
     @IBAction func tappedButton(_ sender: Any) {

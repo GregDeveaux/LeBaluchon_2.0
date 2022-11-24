@@ -8,6 +8,11 @@
 import UIKit
 
 class WeatherHomeViewController: UIViewController {
+
+        // -------------------------------------------------------
+        // MARK: Properties
+        // -------------------------------------------------------
+
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var degresLabel: UILabel!
@@ -23,64 +28,72 @@ class WeatherHomeViewController: UIViewController {
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var characterImage: UIImageView!
 
-    var weatherDestinationViewController: UIViewController!
+    private weak var weatherDestinationViewController: UIViewController!
 
     let todayDate = Date.now
+
+
+        // -------------------------------------------------------
+        // MARK: viewDidLoad
+        // -------------------------------------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWeatherDestinationViewController()
 
         giveTheDate()
+        setupGestureRecognizer(to: weatherDestinationViewController.view)
 
-        swipeWeatherDestination()
     }
 
-    private func swipeWeatherDestination() {
-        swipeDirection(.up, action: #selector(swipeAction(direction:)))
-        swipeDirection(.down, action: #selector(swipeAction(direction:)))
-    }
 
-    @objc private func swipeAction(direction: UISwipeGestureRecognizer.Direction) {
-        switch direction {
-            case .up:
-                UIView.animate(withDuration: 0.20) {
-                    self.weatherDestinationViewController.view.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
-//                    self.weatherDestinationViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-                }
-            case .down:
-                UIView.animate(withDuration: 0.20) {
-                    self.weatherDestinationViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
-                }
-            default:
-                break
-        }
-    }
-
-        // add function to multiply swipes action and direction
-    private func swipeDirection(_ direction: UISwipeGestureRecognizer.Direction, action: Selector?) {
-        let swipe = UISwipeGestureRecognizer(target: self, action: action)
-        swipe.direction = direction
-        self.view.addGestureRecognizer(swipe)
-    }
+        // -------------------------------------------------------
+        // MARK: setups
+        // -------------------------------------------------------
 
     func setupWeatherDestinationViewController() {
         weatherDestinationViewController = storyboard?.instantiateViewController(withIdentifier: "WeatherDestinationViewController")
         addChild(weatherDestinationViewController)
         view.addSubview(weatherDestinationViewController.view)
+        setInitChildViewController(to: weatherDestinationViewController)
         weatherDestinationViewController.didMove(toParent: self)
-        setChildViewController(to: weatherDestinationViewController)
     }
 
-    func setChildViewController(to viewController: UIViewController) {
+    func setInitChildViewController(to viewController: UIViewController) {
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
         viewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         viewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         viewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         viewController.view.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
                                                     constant: 200).isActive = true
+
+        viewController.view.isUserInteractionEnabled = true
     }
 
+    func setupGestureRecognizer(to view: UIView) {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleGesture(_:)))
+        view.addGestureRecognizer(panGesture)
+    }
+
+    @objc func handleGesture(_ panGesture: UIPanGestureRecognizer) {
+        if panGesture.state == .began {
+            print("👆 begin to began!")
+        }
+        if panGesture.state == .changed {
+            let translation = panGesture.translation(in: self.view)
+            weatherDestinationViewController.view.transform = CGAffineTransform(translationX: 0, y: translation.y)
+            print("👆 begin to change!")
+        }
+        else if panGesture.state == .ended {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn) {
+                self.weatherDestinationViewController.view.transform = .identity
+            }
+            print("👆 begin to end!")
+        }
+
+
+
+    }
 
     @IBAction func tappedForWeather(_ sender: Any) {
         API.QueryService.shared.getWeather(endpoint: .weather(city: "Lille", units: "metric"),

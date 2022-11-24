@@ -26,7 +26,7 @@ class CurrencyViewController: UIViewController {
     var amountTapped: Double = 0.0
 
     let userDefaults = UserDefaults.standard
-    let locale = Locale.current
+    let localeUser = Locale.current
 
     var countryCodeDestination: String = "DE"
     var localeCurrencyDestination: String = "FR"
@@ -45,32 +45,32 @@ class CurrencyViewController: UIViewController {
         nameDestinationCountryLabel.text = userDefaults.string(forKey: "destinationCountry")?.uppercased() ?? "BELGIUM"
         destinationNameLabel.text = userDefaults.string(forKey: "destinationCityName")?.capitalized
 
-        nameLocalCountryLabel.text = locale.localizedString(forRegionCode: locale.regionCode ?? "BE")?.uppercased()
+        nameLocalCountryLabel.text = localeUser.localizedString(forRegionCode: localeUser.regionCode ?? "BE")?.uppercased()
 
-        let localeDestination = Locale(identifier: countryCodeDestination)
 //        if #available(iOS 16, *) {
-//            guard let value = localeDestination.currency?.identifier else { return }
-//            localeCurrencyDestination = value
+//            let localeDestination = Locale.Region(countryCodeDestination)
+//            iconCurrencyDestination.text = Locale.Currency(from: localeDestination)
+//
 //        } else {
-//            guard let value = localeDestination.currencyCode else { return }
-//            localeCurrencyDestination = value
+//                // Fallback on earlier versions
 //        }
-            iconCurrencyDestination.text = localeDestination.currencySymbol
+
+
 
         print("🌐 the currency symbole is: \(String(describing: countryCodeDestination)))")
 //        print("🌐 the currency symbole is: \(String(describing: localeDestination)))")
         print("🌐 the currency symbole is: \(String(describing: iconCurrencyDestination.text)))")
         print("🌐 the region name is: \(String(describing: nameLocalCountryLabel.text)))")
-        print("🌐 the region code is: \(String(describing: locale.regionCode))")
+        print("🌐 the region code is: \(String(describing: localeUser.regionCode))")
 
-        API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: locale.regionCode ?? "IT"), method: .GET) { countryFlag in
+        API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: localeUser.regionCode ?? "IT"), method: .GET) { countryFlag in
             guard let countryFlag = countryFlag else {
                 print(API.Error.generic(reason: "not shown data"))
                 return
             }
             DispatchQueue.main.async {
                 self.flagLocalImageView.image = UIImage(data: countryFlag)
-                self.iconCurrencyPhone.text = self.locale.currencySymbol
+                self.iconCurrencyPhone.text = self.localeUser.currencySymbol
                 API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: self.countryCodeDestination), method: .GET) { countryFlag in
                     guard let countryFlag = countryFlag else {
                         print(API.Error.generic(reason: "not shown data"))
@@ -108,10 +108,10 @@ class CurrencyViewController: UIViewController {
 
         var localeCurrency = ""
         if #available(iOS 16, *) {
-            guard let value  = locale.currency?.identifier else { return }
+            guard let value  = localeUser.currency?.identifier else { return }
             localeCurrency = value
         } else {
-            guard let value  = locale.currencyCode else { return }
+            guard let value  = localeUser.currencyCode else { return }
             localeCurrency = value
         }
 

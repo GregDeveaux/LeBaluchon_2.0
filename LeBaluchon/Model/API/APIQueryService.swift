@@ -127,8 +127,6 @@ extension API {
             request.httpMethod = method.rawValue
 
             print ("✅ \(request)")
-            print ("✅ \(String(describing: request.allHTTPHeaderFields))")
-            print ("✅ \(String(describing: request.httpMethod))")
 
             task?.cancel()
 
