@@ -9,6 +9,10 @@ import UIKit
 
 class CurrencyViewController: UIViewController {
 
+        // -------------------------------------------------------
+        //MARK: - properties init
+        // -------------------------------------------------------
+
     @IBOutlet var numberButton: [UIButton]!
 
     @IBOutlet weak var iconCurrencyPhone: UILabel!

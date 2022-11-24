@@ -8,7 +8,7 @@
 import UIKit
 import PhotosUI
 
-extension TranslateViewController: PHPickerViewControllerDelegate {
+extension TranslateViewController: PHPickerViewControllerDelegate, UINavigationControllerDelegate {
 
     // -------------------------------------------------------
     // MARK: load the image (library or camera)
@@ -64,16 +64,19 @@ func chooseNewImage() {
         }
 
         if let itemProvider = results.first?.itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-            let previousImage = editingImage?.image
+            let previousImage = cameraImageView.image
             itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
                 DispatchQueue.main.sync {
                     guard let self = self, let chosenImage = image as? UIImage,
-                              self.editingImage?.image == previousImage else { return }
-                    self.editingImage?.image = chosenImage
+                              self.cameraImageView.image == previousImage else { return }
+                    self.cameraImageView.image = chosenImage
+                    self.recognizeText(image: self.cameraImageView.image)
+
+                    print("✅ your image -> \(String(describing: self.cameraImageView.image))")
+                    print("✅ your text -> \(String(describing: self.recognizeText(image: self.cameraImageView.image)))")
                 }
             }
         }
-        print("✅ your image -> \(String(describing: editingImage?.image))")
 
         dismiss(animated: true)
     }
@@ -84,7 +87,7 @@ func chooseNewImage() {
     // MARK: picker camera
     // -------------------------------------------------------
 
-extension TranslateViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension TranslateViewController: UIImagePickerControllerDelegate {
 
         // create a picker controller to load the images from camera
     var pickerUI: UIImagePickerController {
@@ -105,8 +108,8 @@ extension TranslateViewController: UIImagePickerControllerDelegate, UINavigation
             return
         }
 
-        editingImage?.image = chosenImage
-        print("✅ your image -> \(String(describing: editingImage?.image))")
+        cameraImageView.image = chosenImage
+        print("✅ your image -> \(String(describing: cameraImageView.image))")
 
         dismiss(animated: true)
     }

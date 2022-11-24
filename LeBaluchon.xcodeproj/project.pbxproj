@@ -230,8 +230,8 @@
 				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
 				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
-				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
 				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
+				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
 				BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */,
 			);
 			path = Controller;

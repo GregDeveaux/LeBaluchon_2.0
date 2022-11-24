@@ -997,8 +997,10 @@
                                         <constraints>
                                             <constraint firstItem="zvg-NN-OfF" firstAttribute="leading" secondItem="3VY-VQ-eao" secondAttribute="leading" id="1CS-cf-zmR"/>
                                             <constraint firstItem="zvg-NN-OfF" firstAttribute="top" secondItem="3VY-VQ-eao" secondAttribute="top" constant="5" id="7kd-Tr-0eV"/>
+                                            <constraint firstItem="ekf-qk-BwE" firstAttribute="centerX" secondItem="3VY-VQ-eao" secondAttribute="centerX" id="H5a-fE-Ad2"/>
                                             <constraint firstAttribute="bottom" secondItem="zvg-NN-OfF" secondAttribute="bottom" constant="5" id="SRU-UK-feA"/>
                                             <constraint firstItem="TkJ-N4-Zfb" firstAttribute="top" secondItem="3VY-VQ-eao" secondAttribute="top" constant="5" id="ec8-3A-Xot"/>
+                                            <constraint firstItem="zvg-NN-OfF" firstAttribute="width" secondItem="TkJ-N4-Zfb" secondAttribute="width" id="k9M-uh-hhL"/>
                                             <constraint firstAttribute="bottom" secondItem="TkJ-N4-Zfb" secondAttribute="bottom" constant="5" id="o9f-FO-jFx"/>
                                             <constraint firstAttribute="trailing" secondItem="TkJ-N4-Zfb" secondAttribute="trailing" id="oJo-KG-FXA"/>
                                         </constraints>
@@ -1156,7 +1158,6 @@
                         <outlet property="speechButton" destination="dtJ-4J-dIJ" id="Lbi-9i-Gv1"/>
                         <outlet property="switchButton" destination="ekf-qk-BwE" id="w0q-GR-Sjr"/>
                         <outlet property="translateTextView" destination="MTx-o2-8gn" id="6OZ-iZ-QqU"/>
-                        <outlet property="whiteBoardOfTranslateStackView" destination="FdT-jS-yb3" id="zxw-ds-ORz"/>
                         <outlet property="writeButton" destination="sIO-Qg-qU2" id="sdQ-KJ-MdX"/>
                     </connections>
                 </viewController>

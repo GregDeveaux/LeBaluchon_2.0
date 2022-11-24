@@ -7,6 +7,7 @@
 
 import UIKit
 import Speech
+import Vision
 
 class TranslateViewController: UIViewController {
 
@@ -28,9 +29,6 @@ class TranslateViewController: UIViewController {
     @IBOutlet weak var speechButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
 
-        // StackView of blocks text to modify spacing
-    @IBOutlet weak var whiteBoardOfTranslateStackView: UIStackView!
-
         // Image for the design
     @IBOutlet weak var buttonForMicro: UIButton!
     @IBOutlet weak var handWithMicroImage: UIImageView!
@@ -41,9 +39,7 @@ class TranslateViewController: UIViewController {
         // create a new image view for the translation by camera
     var editingImage: UIImageView!
 
-    var textToTanslate = ""
-    var textTranslated = ""
-
+        // init source and target language
     var sourceLanguage = "EN"
     var targetLanguage = "FR"
 
@@ -52,6 +48,32 @@ class TranslateViewController: UIViewController {
     let speechRecognizer:SFSpeechRecognizer? = SFSpeechRecognizer()
     let requestAudio = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
+
+        // recover language record in the iPhone
+    let userDefaults = UserDefaults.standard
+    let localeUser = Locale.current
+
+//    lazy var languageUser: String = {
+//        var languageUser: String
+//        if #available(iOS 16, *) {
+//            languageUser = localeUser.localizedString(forLanguageCode: localeUser.language.minimalIdentifier) ?? ""
+//        } else {
+//            languageUser = Locale.preferredLanguages[0]
+//        }
+//        print("💠 you chose first language -> \(languageUser)")
+//        return languageUser
+//    }()
+//
+//    lazy var languageDestination: String = {
+//        var localDestination = Locale()
+//
+//        guard let languageDestination: String else { return }
+//
+//        let regionICodeDestination = localDestination.localizedString(forRegionCode: userDefaults.string(forKey: "destinationCountry")?.uppercased() ?? "BELGIUM")
+//        languageDestination = localDestination.localizedString(forLanguageCode: regionICodeDestination)
+//        print("💠 you chose second language -> \(languageDestination)")
+//        return languageDestination
+//    }()
 
 
         // -------------------------------------------------------
@@ -72,61 +94,39 @@ class TranslateViewController: UIViewController {
     private func setupTranslate() {
         setupTextView(baseTextView)
         setupTextView(translateTextView)
-
-        textToTanslate = baseTextView.text
-        baseTextView.text = textTranslated
     }
 
     private func setupTextView(_ textView: UITextView) {
         textView.layer.cornerRadius = 10
         textView.delegate = self
-
         textView.font = UIFont(name: "HelveticaNeue", size: 25)
         textView.textColor = .pinkGranada
     }
 
     private func setupWriteButton() {
+        baseTextView.text = ""
         hiddenView(baseText: false, translatedText: false, micro: true, camera: true)
         baseTextView.isEditable = true
-        whiteBoardOfTranslateStackView.spacing = 30
     }
 
     private func setupSpeechButton() {
+        baseTextView.text = ""
         hiddenView(baseText: false, translatedText: false, micro: false, camera: true)
         baseTextView.isEditable = false
-        whiteBoardOfTranslateStackView.spacing = 200
     }
 
     private func setupCameraButton() {
-        hiddenView(baseText: true, translatedText: true, micro: true, camera: false)
+        baseTextView.text = ""
+        hiddenView(baseText: true, translatedText: false, micro: true, camera: false)
         cameraImageView.layer.cornerRadius = 10
+        cameraImageView.image = nil
     }
 
     func setupButtonsLanguage() {
         setupActionsMenu(of: firstLanguageButton, currentTitleOtherButton: secondLanguageButton.currentTitle ?? "")
         setupActionsMenu(of: secondLanguageButton, currentTitleOtherButton: firstLanguageButton.currentTitle ?? "")
-
         print("✅ you chose first language -> \(sourceLanguage)")
         print("✅ you chose second language -> \(targetLanguage)")
-    }
-
-
-        // -------------------------------------------------------
-        // MARK: - Buttons to choose the method of translation
-        // -------------------------------------------------------
-
-    @IBAction func tappedWriteButton(_ sender: UIButton) {
-        setupWriteButton()
-    }
-    
-    @IBAction func tappedSpeechButton(_ sender: UIButton) {
-        setupSpeechButton()
-    }
-
-    @IBAction func tappedCameraButton(_ sender: UIButton) {
-        setupCameraButton()
-        chooseNewImage()
-        cameraImageView = editingImage
     }
 
     private func hiddenView(baseText: Bool, translatedText: Bool, micro: Bool, camera: Bool) {
@@ -146,11 +146,31 @@ class TranslateViewController: UIViewController {
 
 
         // -------------------------------------------------------
+        // MARK: - Buttons to choose the method of translation
+        // -------------------------------------------------------
+
+    @IBAction func tappedWriteButton(_ sender: UIButton) {
+        setupWriteButton()
+    }
+    
+    @IBAction func tappedSpeechButton(_ sender: UIButton) {
+        setupSpeechButton()
+    }
+
+    @IBAction func tappedCameraButton(_ sender: UIButton) {
+        setupCameraButton()
+        chooseNewImage()
+    }
+
+
+        // -------------------------------------------------------
         //MARK: - Buttons language
         // -------------------------------------------------------
 
     @IBAction func tappedToSwitchLanguage(_ sender: UIButton) {
-        swap(&firstLanguageButton, &secondLanguageButton)
+        swap(&sourceLanguage, &targetLanguage)
+        firstLanguageButton.setTitle(sourceLanguage, for: .normal)
+        secondLanguageButton.setTitle(targetLanguage, for: .normal)
     }
 
     func recognizeButtonLanguage(_ languageButton: UIButton, codeLanguage: String) {
@@ -164,6 +184,11 @@ class TranslateViewController: UIViewController {
     @IBAction func tappedMicroForStartWithTheVoice(_ sender: UIButton) {
         recordAndRecognizeSpeech()
     }
+
+
+        // -------------------------------------------------------
+        // MARK: - translation by the voice
+        // -------------------------------------------------------
 
     func recordAndRecognizeSpeech() {
         guard let inputNode = audioEngine?.inputNode else { return }
@@ -194,22 +219,47 @@ class TranslateViewController: UIViewController {
             let bestString = result.bestTranscription.formattedString
             self.baseTextView.text = bestString
             print("✅ The speech recorded!")
-
         })
+    }
+
+
+        // -------------------------------------------------------
+        // MARK: - translation by the image
+        // -------------------------------------------------------
+
+    func recognizeText(image: UIImage?) {
+        guard let cgImage = image?.cgImage else { return }
+
+        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+
+        let request = VNRecognizeTextRequest { request, error in
+            guard let results = request.results as? [VNRecognizedTextObservation], error == nil else { return }
+
+            let text = results.compactMap({ $0.topCandidates(1).first?.string }).joined(separator: ", ")
+
+            DispatchQueue.main.async {
+                self.baseTextView.text = text
+            }
+        }
+
+        do {
+            try handler.perform([request])
+        }
+        catch {
+            print(error)
+        }
     }
 }
 
-extension TranslateViewController: SFSpeechRecognizerDelegate {
 
-
-    
-}
-
+    // -------------------------------------------------------
+    // MARK: - translation by the keyboard
+    // -------------------------------------------------------
+    // (used also for voice and image)
 
 extension TranslateViewController: UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
         return true
     }
 
@@ -220,15 +270,7 @@ extension TranslateViewController: UITextViewDelegate {
         baseTextView.enablesReturnKeyAutomatically = true
     }
 
-    func textViewDidChange(_ textView: UITextView) {
-        print("the text changes")
-    }
-
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if baseTextView.text.isEmpty {
-            baseTextView.text = "Write a word or phrase to translate here"
-            baseTextView.textColor = .lightGray
-        }
 
         API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: sourceLanguage, text: baseTextView.text, targetLang: targetLanguage), method: .POST) { success, recover in
             guard let recover = recover, success == true else {
@@ -240,12 +282,10 @@ extension TranslateViewController: UITextViewDelegate {
                 self.translateTextView.text = text
             }
         }
-
         print("✅ le texte nouveau texte :\(baseTextView.text!)")
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-
 }

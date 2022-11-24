@@ -32,6 +32,20 @@ class WeatherHomeViewController: UIViewController {
 
     let todayDate = Date.now
 
+    lazy var backgroundUnderTabBar: UIView = {
+        let backgroundUnderTabBar = UIView()
+        backgroundUnderTabBar.frame = CGRect(x: 0, y: 800, width: UIScreen.main.bounds.width, height: 76)
+        backgroundUnderTabBar.backgroundColor = .greenAurora
+        return backgroundUnderTabBar
+    }()
+
+    lazy var lineTabBar: UIView = {
+        let lineTabBar = UIView()
+        lineTabBar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 1)
+        lineTabBar.backgroundColor = .white
+        return lineTabBar
+    }()
+
 
         // -------------------------------------------------------
         // MARK: viewDidLoad
@@ -43,7 +57,14 @@ class WeatherHomeViewController: UIViewController {
 
         giveTheDate()
         setupGestureRecognizer(to: weatherDestinationViewController.view)
+        view.addSubview(backgroundUnderTabBar)
+        backgroundImage.addSubview(lineTabBar)
 
+//        backgroundUnderTabBar.translatesAutoresizingMaskIntoConstraints = false
+//        backgroundUnderTabBar.bottomAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//
+//        lineTabBar.translatesAutoresizingMaskIntoConstraints = false
+//        lineTabBar.leftAnchor.constraint(equalTo: backgroundImage.leftAnchor, constant: 0).isActive = true
     }
 
 
