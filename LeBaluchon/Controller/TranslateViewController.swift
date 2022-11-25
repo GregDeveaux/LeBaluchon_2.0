@@ -40,8 +40,8 @@ class TranslateViewController: UIViewController {
     var editingImage: UIImageView!
 
         // init source and target language
-    var sourceLanguage = "EN"
-    var targetLanguage = "FR"
+    var sourceLanguage = ""
+    var targetLanguage = ""
 
         // create a properties for speech voice
     let audioEngine: AVAudioEngine? = AVAudioEngine()
@@ -52,38 +52,49 @@ class TranslateViewController: UIViewController {
         // recover language record in the iPhone
     let userDefaults = UserDefaults.standard
     let localeUser = Locale.current
-
-//    lazy var languageUser: String = {
-//        var languageUser: String
-//        if #available(iOS 16, *) {
-//            languageUser = localeUser.localizedString(forLanguageCode: localeUser.language.minimalIdentifier) ?? ""
-//        } else {
-//            languageUser = Locale.preferredLanguages[0]
-//        }
-//        print("💠 you chose first language -> \(languageUser)")
-//        return languageUser
-//    }()
-//
-//    lazy var languageDestination: String = {
-//        var localDestination = Locale()
-//
-//        guard let languageDestination: String else { return }
-//
-//        let regionICodeDestination = localDestination.localizedString(forRegionCode: userDefaults.string(forKey: "destinationCountry")?.uppercased() ?? "BELGIUM")
-//        languageDestination = localDestination.localizedString(forLanguageCode: regionICodeDestination)
-//        print("💠 you chose second language -> \(languageDestination)")
-//        return languageDestination
-//    }()
+    private var localeDestination: Locale!
 
 
         // -------------------------------------------------------
         //MARK: - viewDidLoad
         // -------------------------------------------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupTranslate()
         setupButtonsLanguage()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+
+        if #available(iOS 16, *) {
+            sourceLanguage = localeUser.language.maximalIdentifier
+            let languageDestination = localeUser.localizedString(forLanguageCode: sourceLanguage)
+
+            firstLanguageButton.setTitle(languageDestination, for: .normal)
+        } else {
+            guard let languageCode = localeUser.languageCode else { return }
+            sourceLanguage = languageCode
+            let languageDestination = localeUser.localizedString(forLanguageCode: sourceLanguage)
+            firstLanguageButton.setTitle(languageDestination, for: .normal)
+        }
+
+
+        let countryCode = userDefaults.string(forKey: "destinationCountryCode")
+        localeDestination = Locale(identifier: countryCode ?? "BE")
+
+        if #available(iOS 16, *) {
+            targetLanguage = localeDestination.language.maximalIdentifier
+            let languageDestination = localeDestination.localizedString(forLanguageCode: targetLanguage)
+
+            secondLanguageButton.setTitle(languageDestination, for: .normal)
+        } else {
+            guard let languageCode = localeDestination.languageCode else { return }
+            targetLanguage = languageCode
+            let languageDestination = localeDestination.localizedString(forLanguageCode: targetLanguage)
+            secondLanguageButton.setTitle(languageDestination, for: .normal)
+        }
     }
 
 
@@ -272,7 +283,8 @@ extension TranslateViewController: UITextViewDelegate {
 
     func textViewDidChangeSelection(_ textView: UITextView) {
 
-        API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: sourceLanguage, text: baseTextView.text, targetLang: targetLanguage), method: .POST) { success, recover in
+        API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: sourceLanguage, text: baseTextView.text, targetLang: targetLanguage),
+                                             method: .POST) { success, recover in
             guard let recover = recover, success == true else {
                 print(API.Error.generic(reason: "not shown data"))
                 return

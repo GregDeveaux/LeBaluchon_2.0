@@ -59,6 +59,7 @@ class MapViewController: UIViewController {
 
         return User(name: userName, coordinates: Coordinates(latitude: latitude, longitude: longitude))
     }
+    
     @IBAction func tappedModifyDestination(_ sender: UIButton) {
 
             // return to login view
