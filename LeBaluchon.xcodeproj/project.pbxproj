@@ -27,7 +27,7 @@
 		BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */; };
 		BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */; };
 		BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */; };
-		BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* DestinationCity.swift */; };
+		BC278B96290ECC790098A82C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* City.swift */; };
 		BC278B98290ED7AC0098A82C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B97290ED7AC0098A82C /* User.swift */; };
 		BC40283F28FB574E0044A19A /* ApiCurrencyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC40283E28FB574E0044A19A /* ApiCurrencyTest.swift */; };
 		BC40284328FB68BB0044A19A /* ApiCurrencySymbols.json in Resources */ = {isa = PBXBuildFile; fileRef = BC40284228FB68BB0044A19A /* ApiCurrencySymbols.json */; };
@@ -96,7 +96,7 @@
 		BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GradientView.swift"; sourceTree = "<group>"; };
 		BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Designable.swift"; sourceTree = "<group>"; };
-		BC278B95290ECC790098A82C /* DestinationCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCity.swift; sourceTree = "<group>"; };
+		BC278B95290ECC790098A82C /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		BC278B97290ED7AC0098A82C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC40283E28FB574E0044A19A /* ApiCurrencyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCurrencyTest.swift; sourceTree = "<group>"; };
 		BC40284228FB68BB0044A19A /* ApiCurrencySymbols.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ApiCurrencySymbols.json; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 			children = (
 				BC40285B28FDE0F20044A19A /* API */,
 				BC40284B28FC05D10044A19A /* Json */,
-				BC278B95290ECC790098A82C /* DestinationCity.swift */,
+				BC278B95290ECC790098A82C /* City.swift */,
 				BC278B97290ED7AC0098A82C /* User.swift */,
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
 				BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */,
@@ -458,7 +458,7 @@
 				BC40285A28FDE0D10044A19A /* APIError.swift in Sources */,
 				BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */,
 				BC0C6B3C28F4B2AA0075C614 /* SceneDelegate.swift in Sources */,
-				BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */,
+				BC278B96290ECC790098A82C /* City.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -230,7 +230,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="1">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570631970261" green="0.84520213754646845" blue="0.52930413568773238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                                 </buttonConfiguration>
@@ -244,7 +244,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="2">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -258,7 +258,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="3">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -272,7 +272,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="4">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -291,7 +291,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="6">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -305,7 +305,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="7">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -319,7 +319,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="8">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -352,7 +352,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="9">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -366,7 +366,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="0">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                                 </buttonConfiguration>
@@ -380,7 +380,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title=".">
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.075787058549999994" green="0.85741461429999999" blue="0.33969853620000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
                                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
                                                 </buttonConfiguration>
@@ -396,9 +396,10 @@
                                                 <buttonConfiguration key="configuration" style="filled">
                                                     <imageReference key="image" image="delete.left.fill" catalog="system" symbolScale="large"/>
                                                     <backgroundConfiguration key="background" cornerRadius="200">
-                                                        <color key="backgroundColor" red="0.33811570629999999" green="0.84520213749999995" blue="0.52930413570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.18039215689999999" green="0.46666666670000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </backgroundConfiguration>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="black"/>
+                                                    <color key="baseForegroundColor" red="0.0" green="1" blue="0.31842472119999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="tappedResetButton:" destination="69T-SZ-NTr" eventType="touchUpInside" id="uvM-uk-Q4s"/>
@@ -883,7 +884,7 @@
                                 <color key="value" red="0.1803921568627451" green="0.46666666666666667" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
-                                <color key="value" red="0.28256630194065224" green="0.32139223232823966" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="value" red="0.28235294117647058" green="0.32156862745098036" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>

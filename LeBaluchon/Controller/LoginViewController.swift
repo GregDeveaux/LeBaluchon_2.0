@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
         guard let destinationCityName = destinationTextField.text else { return }
 
             // recover the info on the city after than the user wrote your destination in the textField
-        API.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
+        API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
 
             self.userDefaults.set(userName, forKey: "userName")
             self.userDefaults.set(destinationCityName, forKey: "destinationCityName")
@@ -77,7 +77,10 @@ class LoginViewController: UIViewController {
 }
 
 
-    //MARK: Keyboard setup dismiss
+    // -------------------------------------------------------
+    // MARK: Keyboard setup dismiss
+    // -------------------------------------------------------
+
 extension LoginViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

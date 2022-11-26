@@ -2,7 +2,7 @@
 //  PinMap.swift
 //  LeBaluchon
 //
-//  Created by Greg-Mini on 06/11/2022.
+//  Created by Greg Deveaux on 06/11/2022.
 //
 
 import UIKit

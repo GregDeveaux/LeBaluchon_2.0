@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension API {
 
@@ -37,3 +38,4 @@ extension API {
         }
     }
 }
+

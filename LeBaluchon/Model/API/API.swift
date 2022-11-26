@@ -8,7 +8,7 @@
 import Foundation
 
 struct API {
-
+    
     enum Method: String {
         case GET, POST, PUSH
     }

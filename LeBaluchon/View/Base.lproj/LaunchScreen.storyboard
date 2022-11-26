@@ -17,18 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvx-Rd-won">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" image="backGround" translatesAutoresizingMaskIntoConstraints="NO" id="H5U-F9-inB">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" red="0.18039215689999999" green="0.46666666670000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.46186686799999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="pinDestination" translatesAutoresizingMaskIntoConstraints="NO" id="e4i-y4-Acj">
+                                <rect key="frame" x="-35" y="266" width="568" height="320"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pvx-Rd-won" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-59" id="VmY-Tk-awV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pvx-Rd-won" secondAttribute="trailing" id="gZ2-Wy-u6Y"/>
-                            <constraint firstItem="pvx-Rd-won" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hgx-ew-s1u"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pvx-Rd-won" secondAttribute="bottom" constant="-34" id="tfl-uM-IlU"/>
+                            <constraint firstItem="e4i-y4-Acj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3D2-Z5-kXo"/>
+                            <constraint firstAttribute="trailing" secondItem="e4i-y4-Acj" secondAttribute="trailing" constant="-140" id="ofc-qv-EJl"/>
+                            <constraint firstItem="e4i-y4-Acj" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-35" id="uQr-pJ-1Vt"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -38,6 +41,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backGround" width="320" height="568"/>
+        <image name="pinDestination" width="568" height="320"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

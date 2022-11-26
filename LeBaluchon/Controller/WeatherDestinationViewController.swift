@@ -26,34 +26,40 @@ class WeatherDestinationViewController: UIViewController {
 
     @IBOutlet weak var button: UIButton!
 
+    let userDefaults = UserDefaults()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
     @IBAction func tappedButton(_ sender: Any) {
-        API.QueryService.shared.getWeather(endpoint: .weather(city: "Lille", units: "metric"),
-                                           method: .GET) { success, weatherForCity in
-            guard let weatherForCity = weatherForCity, success == true else {
-                print(API.Error.generic(reason: "not shown data"))
-                return
+
+        guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
+
+        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { results in
+            switch results {
+            case .failure(let error):
+                print(error.localizedDescription)
+
+            case .success(let results):
+                let weatherForCity = results
+                self.cityLabel.text = String(weatherForCity.name)
+
+                self.degresLabel.text = String(Int(weatherForCity.main.temp))
+                self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+                self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+
+                self.dayLabel.text = String(weatherForCity.date)
+
+                if let description = weatherForCity.weather.first?.description {
+                    self.descriptionSkyLabel.text = description
+                }
+
+                self.giveTheDate(weatherForCity.date)
             }
-            self.cityLabel.text = String(weatherForCity.name)
-
-            self.degresLabel.text = String(Int(weatherForCity.main.temp))
-            self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-            self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
-
-            self.dayLabel.text = String(weatherForCity.date)
-
-            if let description = weatherForCity.weather.first?.description {
-                self.descriptionSkyLabel.text = description
-            }
-
-            self.giveTheDate(weatherForCity.date)
         }
     }
-
 
     func giveTheDate(_ date: Int) {
         let todayDate = Date(timeIntervalSinceReferenceDate: TimeInterval(date))
@@ -69,5 +75,4 @@ class WeatherDestinationViewController: UIViewController {
         dayLabel.text = formatterDay.string(from: todayDate)
         hourLabel.text = formatterHour.string(from: todayDate)
     }
-
 }

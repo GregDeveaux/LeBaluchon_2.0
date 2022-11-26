@@ -24,105 +24,16 @@ extension API {
         var session = URLSession.shared
         private var task: URLSessionDataTask?
 
-        func getCurrency(endpoint: EndPoint,
-                         method: Method,
-                         callback: @escaping (Bool, Currency.CalculateExchangeRate?) -> Void) {
-
-            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
-
-            request.allHTTPHeaderFields = endpoint.header
-
-            request.httpMethod = method.rawValue
-
-            print ("\(request)")
-            print ("\(String(describing: request.allHTTPHeaderFields))")
-            print ("\(String(describing: request.httpMethod))")
-
-            task?.cancel()
-
-            task = session.dataTask(with: request) { data, response, error in
-                DispatchQueue.main.async {
-                    guard let data = data, error == nil else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not datas!"))
-                        return
-                    }
-
-                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not a response!"))
-                        return
-                    }
-
-                    print(String(data: data, encoding: .utf8)!)
-
-                    let decoder = JSONDecoder()
-
-                    do {
-                        let decodeData = try decoder.decode(Currency.CalculateExchangeRate.self, from: data)
-                        let calculateExchangeRate = decodeData
-                        callback(true, calculateExchangeRate)
-                        print(callback)
-                    } catch {
-                        callback(false, nil)
-                        print(Error.generic(reason: "not parsing"))
-                    }
-                }
-            }
-            task?.resume()
-        }
-
-        func getWeather(endpoint: EndPoint,
-                         method: Method,
-                        callback: @escaping (Bool, Weather.DataForCity?) -> Void) {
+        func getData<Response: Decodable>(endpoint: EndPoint,
+                                          method: Method = .GET,
+                                          type: Response.Type,
+                                          callback: @escaping (Result<Response, API.Error>) -> Void) {
 
             var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
 
-            request.httpMethod = method.rawValue
-
-            print ("\(request)")
-            print ("\(String(describing: request.allHTTPHeaderFields))")
-            print ("\(String(describing: request.httpMethod))")
-
-            task?.cancel()
-
-            task = session.dataTask(with: request) { data, response, error in
-                DispatchQueue.main.async {
-                    guard let data = data, error == nil else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not datas!"))
-                        return
-                    }
-
-                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not a response!"))
-                        return
-                    }
-
-                    print(String(data: data, encoding: .utf8)!)
-
-                    let decoder = JSONDecoder()
-
-                    do {
-                        let decodeData = try decoder.decode(Weather.DataForCity.self, from: data)
-                        let weatherForCity = decodeData
-                        callback(true, weatherForCity)
-                        print(callback)
-                    } catch {
-                        callback(false, nil)
-                        print(Error.generic(reason: "not parsing"))
-                    }
-                }
+            if type == API.Currency.self {
+                request.allHTTPHeaderFields = endpoint.header
             }
-            task?.resume()
-        }
-
-        func getTranslate(endpoint: EndPoint,
-                          method: Method,
-                          callback: @escaping (Bool, Translation.Recover?) -> Void) {
-
-            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
 
             request.httpMethod = method.rawValue
 
@@ -133,14 +44,12 @@ extension API {
             task = session.dataTask(with: request) { data, response, error in
                 DispatchQueue.main.async {
                     guard let data = data, error == nil else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not datas!"))
+                        callback(.failure(.generic(reason: "There is not datas!")))
                         return
                     }
 
                     guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not a response!"))
+                        callback(.failure(.generic(reason: "There is not a response!")))
                         return
                     }
 
@@ -149,32 +58,161 @@ extension API {
                     let decoder = JSONDecoder()
 
                     do {
-                        let decodeData = try decoder.decode(Translation.Recover.self, from: data)
-                        let translate = decodeData
-                        callback(true, translate)
-                        print(callback)
+                        let decodeData = try decoder.decode(Response.self, from: data)
+                        callback(.success(decodeData))
                     } catch {
-                        callback(false, nil)
-                        print(Error.generic(reason: "not parsing"))
+                        print("🛑 Decoding error: \(error)")
+                        callback(.failure(.internal(reason: "not decode data!")))
                     }
                 }
             }
+
             task?.resume()
         }
+        
+
+//        func getCurrency(endpoint: EndPoint,
+//                         method: Method,
+//                         callback: @escaping (Bool, Currency.CalculateExchangeRate?) -> Void) {
+//
+//            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+//
+//            request.allHTTPHeaderFields = endpoint.header
+//
+//            request.httpMethod = method.rawValue
+//
+//            print ("✅ \(request)")
+//
+//            task?.cancel()
+//
+//            task = session.dataTask(with: request) { data, response, error in
+//                DispatchQueue.main.async {
+//                    guard let data = data, error == nil else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not datas!"))
+//                        return
+//                    }
+//
+//                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not a response!"))
+//                        return
+//                    }
+//
+//                    print(String(data: data, encoding: .utf8)!)
+//
+//                    let decoder = JSONDecoder()
+//
+//                    do {
+//                        let decodeData = try decoder.decode(Currency.CalculateExchangeRate.self, from: data)
+//                        let calculateExchangeRate = decodeData
+//                        callback(true, calculateExchangeRate)
+//                        print(callback)
+//                    } catch {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "not parsing"))
+//                    }
+//                }
+//            }
+//            task?.resume()
+//        }
+//
+//        func getWeather(endpoint: EndPoint,
+//                         method: Method,
+//                        callback: @escaping (Bool, Weather.DataForCity?) -> Void) {
+//
+//            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+//
+//            request.httpMethod = method.rawValue
+//
+//            print ("✅ \(request)")
+//
+//            task?.cancel()
+//
+//            task = session.dataTask(with: request) { data, response, error in
+//                DispatchQueue.main.async {
+//                    guard let data = data, error == nil else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not datas!"))
+//                        return
+//                    }
+//
+//                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not a response!"))
+//                        return
+//                    }
+//
+//                    print(String(data: data, encoding: .utf8)!)
+//
+//                    let decoder = JSONDecoder()
+//
+//                    do {
+//                        let decodeData = try decoder.decode(Weather.DataForCity.self, from: data)
+//                        let weatherForCity = decodeData
+//                        callback(true, weatherForCity)
+//                        print(callback)
+//                    } catch {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "not parsing"))
+//                    }
+//                }
+//            }
+//            task?.resume()
+//        }
+
+//        func getTranslate(endpoint: EndPoint,
+//                          method: Method,
+//                          callback: @escaping (Bool, Translation.Recover?) -> Void) {
+//
+//            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+//
+//            request.httpMethod = method.rawValue
+//
+//            print ("✅ \(request)")
+//
+//            task?.cancel()
+//
+//            task = session.dataTask(with: request) { data, response, error in
+//                DispatchQueue.main.async {
+//                    guard let data = data, error == nil else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not datas!"))
+//                        return
+//                    }
+//
+//                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not a response!"))
+//                        return
+//                    }
+//
+//                    print(String(data: data, encoding: .utf8)!)
+//
+//                    let decoder = JSONDecoder()
+//
+//                    do {
+//                        let decodeData = try decoder.decode(Translation.Recover.self, from: data)
+//                        let translate = decodeData
+//                        callback(true, translate)
+//                        print(callback)
+//                    } catch {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "not parsing"))
+//                    }
+//                }
+//            }
+//            task?.resume()
+//        }
 
         func getFlag(endpoint: EndPoint,
-                          method: Method,
+                     method: Method,
                      completionHandler: @escaping (Data?) -> Void) {
 
             var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
 
-//            request.allHTTPHeaderFields = endpoint.header
-
             request.httpMethod = method.rawValue
-
             print ("✅ \(request)")
-            print ("✅ \(String(describing: request.allHTTPHeaderFields))")
-            print ("✅ \(String(describing: request.httpMethod))")
 
             task?.cancel()
 
@@ -197,94 +235,90 @@ extension API {
             task?.resume()
         }
 
-        func getCoordinate(endpoint: EndPoint,
-                           method: Method,
-                           callback: @escaping (Bool, [City.Coordinates]?) -> Void) {
-            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
-
-            request.httpMethod = method.rawValue
-
-            print ("\(request)")
-            print ("\(String(describing: request.allHTTPHeaderFields))")
-            print ("\(String(describing: request.httpMethod))")
-
-            task?.cancel()
-
-            task = session.dataTask(with: request) { data, response, error in
-                DispatchQueue.main.async {
-                    guard let data = data, error == nil else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not datas!"))
-                        return
-                    }
-
-                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not a response!"))
-                        return
-                    }
-
-                    print(String(data: data, encoding: .utf8)!)
-
-                    let decoder = JSONDecoder()
-
-                    do {
-                        let decodeData = try decoder.decode([City.Coordinates].self, from: data)
-                        let coordinates = decodeData
-                        callback(true, coordinates)
-                        print(callback)
-                    } catch {
-                        callback(false, nil)
-                        print(Error.generic(reason: "not parsing"))
-                    }
-                }
-            }
-            task?.resume()
-        }
+//        func getCoordinate(endpoint: EndPoint,
+//                           method: Method,
+//                           callback: @escaping (Bool, [City.Coordinates]?) -> Void) {
+//            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+//
+//            request.httpMethod = method.rawValue
+//
+//            print ("\(request)")
+//
+//            task?.cancel()
+//
+//            task = session.dataTask(with: request) { data, response, error in
+//                DispatchQueue.main.async {
+//                    guard let data = data, error == nil else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not datas!"))
+//                        return
+//                    }
+//
+//                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not a response!"))
+//                        return
+//                    }
+//
+//                    print(String(data: data, encoding: .utf8)!)
+//
+//                    let decoder = JSONDecoder()
+//
+//                    do {
+//                        let decodeData = try decoder.decode([City.Coordinates].self, from: data)
+//                        let coordinates = decodeData
+//                        callback(true, coordinates)
+//                        print(callback)
+//                    } catch {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "not parsing"))
+//                    }
+//                }
+//            }
+//            task?.resume()
+//        }
 
 
-        func getAddress(endpoint: EndPoint, method: Method, callback: @escaping (Bool, City.Country?) -> Void) {
-            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
-
-            request.httpMethod = method.rawValue
-
-            print ("✅ \(request)")
-            print ("✅ \(String(describing: request.allHTTPHeaderFields))")
-            print ("✅ \(String(describing: request.httpMethod))")
-
-            task?.cancel()
-
-            task = session.dataTask(with: request) { data, response, error in
-                DispatchQueue.main.async {
-                    guard let data = data, error == nil else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not datas!"))
-                        return
-                    }
-
-                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                        callback(false, nil)
-                        print(Error.generic(reason: "There is not a response!"))
-                        return
-                    }
-
-                    print(String(data: data, encoding: .utf8)!)
-
-                    let decoder = JSONDecoder()
-
-                    do {
-                        let decodeData = try decoder.decode(City.Country.self, from: data)
-                        let country = decodeData
-
-                        callback(true, country)
-                        print(country)
-                    } catch {
-                        callback(false, nil)
-                        print(Error.generic(reason: "not parsing"))
-                    }
-                }
-            }
-            task?.resume()
-        }
+//        func getAddress(endpoint: EndPoint, method: Method, callback: @escaping (Bool, City.Country?) -> Void) {
+//            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+//
+//            request.httpMethod = method.rawValue
+//
+//            print ("✅ \(request)")
+//
+//            task?.cancel()
+//
+//            task = session.dataTask(with: request) { data, response, error in
+//                DispatchQueue.main.async {
+//                    guard let data = data, error == nil else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not datas!"))
+//                        return
+//                    }
+//
+//                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "There is not a response!"))
+//                        return
+//                    }
+//
+//                    print(String(data: data, encoding: .utf8)!)
+//
+//                    let decoder = JSONDecoder()
+//
+//                    do {
+//                        let decodeData = try decoder.decode(City.Country.self, from: data)
+//                        let country = decodeData
+//
+//                        callback(true, country)
+//                        print(country)
+//                    } catch {
+//                        callback(false, nil)
+//                        print(Error.generic(reason: "not parsing"))
+//                    }
+//                }
+//            }
+//            task?.resume()
+//        }
     }
 }

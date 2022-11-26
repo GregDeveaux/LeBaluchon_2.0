@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct DestinationCity {
+struct CityInfo {
     var name: String?
     var country: String
     var countryCode: String
-    var coordinates: Coordinates
+    var coordinates: CoordinatesInfo
 }
 
-struct Coordinates {
+struct CoordinatesInfo {
     var latitude: Double
     var longitude: Double
 }

@@ -277,24 +277,36 @@ extension TranslateViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         baseTextView.text = ""
         baseTextView.usesStandardTextScaling = true
-
         baseTextView.enablesReturnKeyAutomatically = true
     }
 
     func textViewDidChangeSelection(_ textView: UITextView) {
 
-        API.QueryService.shared.getTranslate(endpoint: .translation(sourceLang: sourceLanguage, text: baseTextView.text, targetLang: targetLanguage),
-                                             method: .POST) { success, recover in
-            guard let recover = recover, success == true else {
-                print(API.Error.generic(reason: "not shown data"))
-                return
-            }
+        guard let sentence = baseTextView.text else { return }
 
-            if let text = recover.translations.first?.text {
-                self.translateTextView.text = text
+        API.QueryService.shared.getData(endpoint: .translation(sourceLang: sourceLanguage, text: sentence, targetLang: targetLanguage),
+                                        method: .POST,
+                                        type: API.Translation.Recover.self) { result in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+
+            case .success(let result):
+                DispatchQueue.main.async {
+                    if let translatedSentence = result.translations.first?.text {
+                        self.translateTextView.text = translatedSentence
+                        print("🈯️ le texte traduit est \(translatedSentence)")
+                    }
+                }
             }
         }
         print("✅ le texte nouveau texte :\(baseTextView.text!)")
+    }
+
+    private func presentAlert() {
+        let alertVC = UIAlertController(title: "Error", message: "The result of translation failed", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alertVC, animated: true)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

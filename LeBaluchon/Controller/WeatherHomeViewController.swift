@@ -31,6 +31,7 @@ class WeatherHomeViewController: UIViewController {
     private weak var weatherDestinationViewController: UIViewController!
 
     let todayDate = Date.now
+    let userDefaults = UserDefaults.standard
 
     lazy var backgroundUnderTabBar: UIView = {
         let backgroundUnderTabBar = UIView()
@@ -55,7 +56,6 @@ class WeatherHomeViewController: UIViewController {
         super.viewDidLoad()
         setupWeatherDestinationViewController()
 
-        giveTheDate()
         setupGestureRecognizer(to: weatherDestinationViewController.view)
         view.addSubview(backgroundUnderTabBar)
         backgroundImage.addSubview(lineTabBar)
@@ -111,34 +111,57 @@ class WeatherHomeViewController: UIViewController {
             }
             print("👆 begin to end!")
         }
-
-
-
     }
 
     @IBAction func tappedForWeather(_ sender: Any) {
-        API.QueryService.shared.getWeather(endpoint: .weather(city: "Lille", units: "metric"),
-                                           method: .GET) { success, weatherForCity in
-            guard let weatherForCity = weatherForCity, success == true else {
-                print(API.Error.generic(reason: "not shown data"))
-                return
-            }
-            self.cityLabel.text = String(weatherForCity.name)
 
-            self.degresLabel.text = String(Int(weatherForCity.main.temp))
-            self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-            self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+        guard let userCityName = self.userDefaults.string(forKey: "userCityName") else { return }
 
-            self.dayLabel.text = String(weatherForCity.date)
+            API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
+                switch results {
+                case .failure(let error):
+                    print(error.localizedDescription)
 
-            if let description = weatherForCity.weather.first?.description {
-                self.descriptionSkyLabel.text = description
+                case .success(let results):
+                    let weatherForCity = results
+                    self.cityLabel.text = weatherForCity.name
+                    self.degresLabel.text = String(Int(weatherForCity.main.temp))
+                    self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+                    self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+
+                    self.dayLabel.text = String(weatherForCity.date)
+
+                    if let description = weatherForCity.weather.first?.description {
+                        self.descriptionSkyLabel.text = description
+                    }
+
+                        self.giveTheDate(weatherForCity.date)
+                }
             }
         }
-    }
+
+//        API.QueryService.shared.getWeather(endpoint: .weather(city: "Lille", units: "metric"),
+//                                           method: .GET) { success, weatherForCity in
+//            guard let weatherForCity = weatherForCity, success == true else {
+//                print(API.Error.generic(reason: "not shown data"))
+//                return
+//            }
+//            self.cityLabel.text = String(weatherForCity.name)
+//
+//            self.degresLabel.text = String(Int(weatherForCity.main.temp))
+//            self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+//            self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+//
+//            self.dayLabel.text = String(weatherForCity.date)
+//
+//            if let description = weatherForCity.weather.first?.description {
+//                self.descriptionSkyLabel.text = description
+//            }
+//        }
+//    }
 
 
-    private func giveTheDate() {
+    private func giveTheDate(_ date: Int) {
         let formatterHour = DateFormatter()
         formatterHour.timeStyle = .short
         print("✅ date of home \(formatterHour.string(from: todayDate))")

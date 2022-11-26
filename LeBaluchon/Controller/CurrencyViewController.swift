@@ -92,27 +92,45 @@ class CurrencyViewController: UIViewController {
 
     @IBAction func tappedToConvert(_ sender: UIButton) {
 
-        var localeCurrency = ""
+        var localeCurrencyUser = ""
+        var localeCurrencyDestination = "EUR"
+
         if #available(iOS 16, *) {
             guard let value  = localeUser.currency?.identifier else { return }
-            localeCurrency = value
+            localeCurrencyUser = value
         } else {
             guard let value  = localeUser.currencyCode else { return }
-            localeCurrency = value
+            localeCurrencyUser = value
         }
 
-        API.QueryService.shared.getCurrency(endpoint: .currency(to: "", from: localeCurrency, amount: amountTapped), method: .GET) { success, calculateExchangeRate in
-            guard let calculateExchangeRate = calculateExchangeRate, success == true else {
-                self.presentAlert()
-                print(API.Error.generic(reason: "not shown data"))
-                return
-            }
-            DispatchQueue.main.async {
-                self.textFieldResult.text = String(calculateExchangeRate.result )
-                print("💰result: \(String(describing: calculateExchangeRate.result))")
+       API.QueryService.shared.getData(endpoint: .currency(to: localeCurrencyDestination, from: localeCurrencyUser, amount: amountTapped),
+                                    type: API.Currency.CalculateExchangeRate.self) { result in
+                switch result {
+                case .failure(let error):
+                    self.presentAlert()
+                    print(error.localizedDescription)
+
+                case .success(let result):
+                    let calculateExchangeRate = result
+                    DispatchQueue.main.async {
+                        self.textFieldResult.text = String(calculateExchangeRate.result)
+                        print("💰result: \(String(describing: calculateExchangeRate.result))")
+                    }
+                }
             }
         }
-    }
+//        API.QueryService.shared.getCurrency(endpoint: .currency(to: "", from: localeCurrency, amount: amountTapped), method: .GET) { success, calculateExchangeRate in
+//            guard let calculateExchangeRate = calculateExchangeRate, success == true else {
+//                self.presentAlert()
+//                print(API.Error.generic(reason: "not shown data"))
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                self.textFieldResult.text = String(calculateExchangeRate.result )
+//                print("💰result: \(String(describing: calculateExchangeRate.result))")
+//            }
+//        }
+//    }
 
     private func presentAlert() {
         let alertVC = UIAlertController(title: "Error", message: "The result of currency failed", preferredStyle: .alert)

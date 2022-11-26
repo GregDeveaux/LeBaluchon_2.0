@@ -9,7 +9,8 @@ import Foundation
 
 struct User {
     var name: String
-    var coordinates: Coordinates
+    var coordinates: CoordinatesInfo
+    var city: CityInfo?
 
     var welcomeMessage: String {
         let message = "\(name), what's up!"

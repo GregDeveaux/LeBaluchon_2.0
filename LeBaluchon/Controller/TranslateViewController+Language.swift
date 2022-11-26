@@ -2,7 +2,7 @@
 //  TranslateViewController+Language.swift
 //  LeBaluchon
 //
-//  Created by Greg-Mini on 19/11/2022.
+//  Created by Greg Deveaux on 19/11/2022.
 //
 
 import UIKit

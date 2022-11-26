@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
     let destinationCityLongitude = UserDefaults.standard.double(forKey: "destinationCityLongitude")
 
     var user: User?
-    var destinationCity: DestinationCity!
+    var destinationCity: CityInfo!
 
     var pinUser: PinMap!
     var pinDestination: PinMap!
@@ -30,7 +30,6 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentLocationUser: CLLocation?
     var route: MKRoute?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +53,17 @@ class MapViewController: UIViewController {
 
         print("✅ coordinates receive of \(userName) are lat:\(latitude) et long:\(longitude))")
 
-        userDefaults.set(currentLocationUser?.coordinate.latitude, forKey: "userLatitude")
-        userDefaults.set(currentLocationUser?.coordinate.longitude, forKey: "userLongitude")
+        userDefaults.set(latitude, forKey: "userLatitude")
+        userDefaults.set(longitude, forKey: "userLongitude")
 
-        return User(name: userName, coordinates: Coordinates(latitude: latitude, longitude: longitude))
+        API.City.foundCountryByCoordinates(latitude: String(latitude), longitude: String(longitude)) { cityInfo in
+            self.userDefaults.set(cityInfo.name, forKey: "userCityName")
+            print("✅ user City Name \(self.userDefaults.set(cityInfo.name, forKey: "userCityName"))")
+        }
+        return User(name: userName, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude))
     }
     
     @IBAction func tappedModifyDestination(_ sender: UIButton) {
-
             // return to login view
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = storyboard.instantiateViewController(identifier: "LoginViewController")
@@ -108,6 +110,7 @@ extension MapViewController: MKMapViewDelegate {
                              coordinate: CLLocationCoordinate2D(latitude: (userCoordinates.latitude),
                                                                 longitude: (userCoordinates.longitude)),
                              info: "start")
+
             print("✅ pin user: \(pinUser?.title ?? "unknow")")
             print("📍 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
 

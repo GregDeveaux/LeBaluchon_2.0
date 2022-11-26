@@ -9,13 +9,27 @@ import Foundation
 
 extension API {
 
+        // -------------------------------------------------------
+        // MARK: It's here that we create URLs used by App
+        // -------------------------------------------------------
+
     enum EndPoint {
+
+            // -------------------------------------------------------
+            // MARK: Init Endpoints
+            // -------------------------------------------------------
+
         case currency(to: String, from: String, amount: Double)
         case weather(city: String, units: String)
         case translation(sourceLang: String, text: String, targetLang: String)
         case flag(codeIsoCountry: String)
         case coordinates(city: String)
         case city(latitude: String, longitude: String)
+
+
+            // -------------------------------------------------------
+            // MARK: Base URL Endpoints
+            // -------------------------------------------------------
 
         var url: URL {
             var components = URLComponents()
@@ -78,6 +92,11 @@ extension API {
             return components.url!
         }
 
+
+            // -------------------------------------------------------
+            // MARK: Header Endpoints
+            // -------------------------------------------------------
+
         var header: [String: String] {
             var key = ""
             var value = ""
@@ -86,7 +105,7 @@ extension API {
                     key = APIKeys.Currency.key.rawValue
                     value = APIKeys.Currency.value.rawValue
                 default:
-                    return [key: value]
+                    break
             }
             return [key: value]
         }
