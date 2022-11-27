@@ -21,7 +21,12 @@ extension API {
     class QueryService {
 
         static let shared = QueryService()
-        var session = URLSession.shared
+
+        let urlSession: URLSession
+        init(urlSession: URLSession = URLSession.shared) {
+            self.urlSession = urlSession
+        }
+
         private var task: URLSessionDataTask?
 
         func getData<Response: Decodable>(endpoint: EndPoint,
@@ -36,12 +41,11 @@ extension API {
             }
 
             request.httpMethod = method.rawValue
-
             print ("✅ \(request)")
 
             task?.cancel()
 
-            task = session.dataTask(with: request) { data, response, error in
+            task = urlSession.dataTask(with: request) { data, response, error in
                 DispatchQueue.main.async {
                     guard let data = data, error == nil else {
                         callback(.failure(.generic(reason: "There is not datas!")))
@@ -216,7 +220,7 @@ extension API {
 
             task?.cancel()
 
-            task = session.dataTask(with: request) { data, response, error in
+            task = urlSession.dataTask(with: request) { data, response, error in
                     guard let data = data, error == nil else {
                         completionHandler(nil)
                         print(Error.generic(reason: "There is not datas!"))

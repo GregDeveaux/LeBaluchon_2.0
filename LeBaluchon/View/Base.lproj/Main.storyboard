@@ -63,7 +63,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="cMU-NT-m4H">
                                                                 <rect key="frame" x="114.33333333333336" y="0.0" width="209.66666666666663" height="76"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="Njv-ko-jbn">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="Njv-ko-jbn">
                                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="76"/>
                                                                         <color key="textColor" red="0.34307023149048432" green="0.763916015625" blue="0.48225796312742508" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="33"/>
@@ -172,7 +172,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ivq-A1-amQ" userLabel="Text Stack View">
                                                                 <rect key="frame" x="111" y="0.0" width="213" height="75"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="JWf-wp-OdU">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" textAlignment="right" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="JWf-wp-OdU">
                                                                         <rect key="frame" x="0.0" y="0.0" width="187.33333333333334" height="75"/>
                                                                         <color key="textColor" red="0.34307023149999999" green="0.7639160156" blue="0.48225796310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="33"/>
