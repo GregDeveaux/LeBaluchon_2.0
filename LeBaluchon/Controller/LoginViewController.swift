@@ -38,9 +38,13 @@ class LoginViewController: UIViewController {
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {
 
-        guard let userName = nameTextField.text else { return }
+        guard let userName = nameTextField.text else {
+            presentAlert(with: "please enter an username")
+            return }
 
-        guard let destinationCityName = destinationTextField.text else { return }
+        guard let destinationCityName = destinationTextField.text else {
+            presentAlert(with: "please enter a destination city")
+            return }
 
             // recover the info on the city after than the user wrote your destination in the textField
         API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in

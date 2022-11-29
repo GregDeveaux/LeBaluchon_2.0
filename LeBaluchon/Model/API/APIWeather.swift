@@ -101,9 +101,5 @@ extension API {
             let sunrise: Int
             let sunset: Int
         }
-
-        func arroundTemp(temp: Double) -> Int {
-            return Int(temp)
-        }
     }
 }

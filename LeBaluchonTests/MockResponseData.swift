@@ -2,10 +2,10 @@
 //  MockResponseData.swift
 //  LeBaluchonTests
 //
-//  Created by Greg-Mini on 16/10/2022.
+//  Created by Greg Deveaux on 16/10/2022.
 //
 
-import Foundation
+import XCTest
 
     // simulation of the different calls of currency API
 class MockResponseData {
@@ -23,7 +23,7 @@ class MockResponseData {
         // recover bundle correct data for test
     static var currencyCorrectData: Data {
         let bundle = Bundle(for: MockResponseData.self)
-        let urlExample = bundle.url(forResource: "ApiCurrencyExample", withExtension: ".json")
+        let urlExample = bundle.url(forResource: "APICurrencyExample", withExtension: ".json")
         let data = try! Data(contentsOf: urlExample!)
         return data
     }
@@ -61,13 +61,5 @@ class MockResponseData {
     }
 
         // create failed response of the simulation
-    static let mockCurrencyFailed = "notGood".data(using: .utf8)
-
-//    func urlExample(ressource: String) -> Data {
-//        let bundle = Bundle(for: MockResponseData.self)
-//        let urlExample = bundle.url(forResource: ressource, withExtension: ".json")
-//        let data = try! Data(contentsOf: urlExample!)
-//        return data
-//    }
-
+    static let mockDataFailed = "notGood".data(using: .utf8)
 }

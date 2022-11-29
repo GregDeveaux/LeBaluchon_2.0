@@ -48,12 +48,12 @@ extension API {
             task = urlSession.dataTask(with: request) { data, response, error in
                 DispatchQueue.main.async {
                     guard let data = data, error == nil else {
-                        callback(.failure(.generic(reason: "There is not datas!")))
+                        callback(.failure(.generic(reason: "there is not datas!")))
                         return
                     }
 
                     guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                        callback(.failure(.generic(reason: "There is not a response!")))
+                        callback(.failure(.generic(reason: "there is not a response!")))
                         return
                     }
 

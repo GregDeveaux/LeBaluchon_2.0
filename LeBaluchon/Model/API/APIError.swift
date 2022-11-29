@@ -15,10 +15,10 @@ extension API {
 
         var errorDescription: String? {
             switch self {
-                case .generic(let reason):
-                    return reason
-                case .internal(let reason):
-                    return "Interne error: \(reason)"
+            case .generic(let reason):
+                return "🛑 Interne error: \(reason)"
+            case .internal(let reason):
+                return "🛑 Interne error: \(reason)"
             }
         }
     }
