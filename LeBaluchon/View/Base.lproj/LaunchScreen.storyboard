@@ -17,21 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" image="backGround" translatesAutoresizingMaskIntoConstraints="NO" id="H5U-F9-inB">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="backGround" translatesAutoresizingMaskIntoConstraints="NO" id="H5U-F9-inB">
+                                <rect key="frame" x="-55" y="-17" width="503" height="886"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.46186686799999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="pinDestination" translatesAutoresizingMaskIntoConstraints="NO" id="e4i-y4-Acj">
-                                <rect key="frame" x="-35" y="266" width="568" height="320"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le Baluchon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA0-dE-206">
+                                <rect key="frame" x="68" y="400" width="257.33333333333331" height="52"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="e4i-y4-Acj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3D2-Z5-kXo"/>
-                            <constraint firstAttribute="trailing" secondItem="e4i-y4-Acj" secondAttribute="trailing" constant="-140" id="ofc-qv-EJl"/>
-                            <constraint firstItem="e4i-y4-Acj" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="-35" id="uQr-pJ-1Vt"/>
+                            <constraint firstItem="zA0-dE-206" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="61U-9f-0DO"/>
+                            <constraint firstAttribute="bottom" secondItem="H5U-F9-inB" secondAttribute="bottom" constant="-17" id="YT3-Sb-Vcn"/>
+                            <constraint firstItem="H5U-F9-inB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-55" id="idT-Ae-F90"/>
+                            <constraint firstItem="zA0-dE-206" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="jgo-ss-4m3"/>
+                            <constraint firstItem="H5U-F9-inB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="55" id="xXW-bz-HhW"/>
+                            <constraint firstItem="H5U-F9-inB" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="-17" id="yYB-gp-h0U"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -42,7 +47,6 @@
     </scenes>
     <resources>
         <image name="backGround" width="320" height="568"/>
-        <image name="pinDestination" width="568" height="320"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

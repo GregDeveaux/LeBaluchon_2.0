@@ -52,3 +52,15 @@ class MockURLProtocol: URLProtocol {
         // this method is required but doesn't need to do anything
     override func stopLoading() { }
 }
+
+
+class MockUserDefaults: UserDefaults {
+    var persistedUserName: String?
+    var persistedDestination: String?
+    var persistenceKey: String?
+
+    override func set(_ value: Any?, forKey defaultName: String) {
+        persistedUserName = value as? String
+        persistenceKey = defaultName
+    }
+}

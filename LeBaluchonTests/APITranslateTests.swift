@@ -27,10 +27,6 @@ class APITranslateTests: XCTestCase {
         
             // Create the URLSession configurated
         urlSession = URLSession(configuration: configuration)
-        
-            // this is the URLRequest of the API currency rescue by enum Endpoint
-        let urlRequest = URLRequest(url: API.EndPoint.translation(sourceLang: "", text: "", targetLang: "").url)
-        
     }
     
     override func tearDownWithError() throws {
@@ -38,18 +34,23 @@ class APITranslateTests: XCTestCase {
         URLProtocol.unregisterClass(MockURLProtocol.self)
     }
 
-    func testRequestCurrenciesGenerationIsOk() {
-            // Given
+    func test_GivenTheGoodURLRequestOfTranslatationAPI_ThenTheGenerationOftheURLIsOk() {
         let sourceLanguage = "EN"
         let targetLanguage = "FR"
         let text = "big"
-            //When
         let urlEndpoint = API.EndPoint.translation(sourceLang: sourceLanguage, text: text, targetLang: targetLanguage).url
-            //Then
         XCTAssertEqual(urlEndpoint, apiURL)
     }
 
-    func testSuccessfulResponse() {
+    func test_GivenTheBadURLRequestOfTranslatationAPI_ThenTheGenerationOftheURLIsFailed() {
+        let sourceLanguage = "RUSSE"
+        let targetLanguage = "FR"
+        let text = "big"
+        let urlEndpoint = API.EndPoint.translation(sourceLang: sourceLanguage, text: text, targetLang: targetLanguage).url
+        XCTAssertNotEqual(urlEndpoint, apiURL)
+    }
+
+    func test_GivenTheGoodURLWithATranslatedTextBig_WhenIAskATranslationInFrench_ThenTheAnswerIsGrand() {
             // Given
         expectation = expectation(description: "Expectation")
         let text = "grand"
@@ -75,13 +76,61 @@ class APITranslateTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
-    
-    
-    func testPerformanceExample() throws {
-            // This is an example of a performance test case.
-        self.measure {
-                // Put the code you want to measure the time of here.
+
+    func test_GivenIAskATranslation_WhenINotRecoverAStatusCode500_ThenMyResponseFailed() {
+
+        baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
+
+        API.QueryService.shared.getData(endpoint: .translation(sourceLang: "EN", text: "big", targetLang: "FR"),
+                                        type: API.Translation.Recover.self) { result in
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not a response!")
+
+            case .success(let result):
+                XCTAssertNil(result)
+                XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+    func test_GivenIAskAConversion_WhenIRecoverABadData_ThenDecodeJsonDataFailed() {
+
+        baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseOK)
+
+        API.QueryService.shared.getData(endpoint: .translation(sourceLang: "EN", text: "big", targetLang: "FR"),
+                                        type: API.Translation.Recover.self) { result in
+            XCTAssertNotNil(result)
+
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error.localizedDescription, "🛑 Interne error: not decode data!")
+
+            case .success(let result):
+                XCTAssertNil(result)
+                XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+
+        // -------------------------------------------------------
+        //MARK: - Methode
+        // -------------------------------------------------------
+
+    private func baseQueryCurrency(data: Data?, response: HTTPURLResponse) {
+        expectation = expectation(description: "Expectation")
+
+        let data = data
+
+        MockURLProtocol.requestHandler = { request in
+            let response = response
+            return (response, data)
         }
     }
-    
 }
+

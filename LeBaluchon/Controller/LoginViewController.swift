@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  LeBaluchon
 //
-//  Created by Greg Deveaux  on 11/10/2022.
+//  Created by Greg Deveaux on 11/10/2022.
 //
 
 import UIKit
@@ -12,7 +12,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
 
+    @IBOutlet weak var baluchonLogo: UILabel!
     @IBOutlet weak var bubbleTextView: UITextView!
+    @IBOutlet weak var SunImage: UIImageView!
+    @IBOutlet weak var textNameLabel: UILabel!
+    @IBOutlet weak var textDestinationLabel: UILabel!
+    @IBOutlet weak var LetsGoButton: UIButton!
+
     let welcomeText = "Hello, my friend! Welcome to the \"Le Baluchon\" App, to start you must write your name and your destination, thank you 😀"
 
     let userDefaults = UserDefaults.standard
@@ -20,20 +26,23 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        checkTheUserNameExistInBase()
+
+//             bubble explanation before to enter in the app.
+        bubbleTextView.typeOn(sentence: welcomeText)
+
+        nameTextField.delegate = self
+        destinationTextField.delegate = self
+    }
+
+    func checkTheUserNameExistInBase() {
         guard let currentUserName = userDefaults.string(forKey: "userName") else { return }
 
         if !currentUserName.isEmpty {
             nameTextField.text = currentUserName
             nameTextField.isEnabled = false
         }
-
-            // bubble explanation before to enter in the app.
-//        bubbleTextView.typeOn(sentence: welcomeText)
-
-        nameTextField.delegate = self
-        destinationTextField.delegate = self
     }
-
 
         // MARK: Validate the user and the destination city
     @IBAction func validateButton(_ sender: UIButton) {

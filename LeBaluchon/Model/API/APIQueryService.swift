@@ -36,7 +36,7 @@ extension API {
 
             var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
 
-            if type == API.Currency.self {
+            if type == Currency.self {
                 request.allHTTPHeaderFields = endpoint.header
             }
 

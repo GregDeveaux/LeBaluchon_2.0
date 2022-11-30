@@ -1,5 +1,5 @@
 //
-//  UITextView+Extensions.swift
+//  UITextView+TypeOn.swift
 //  LeBaluchon
 //
 //  Created by Greg Deveaux on 17/11/2022.

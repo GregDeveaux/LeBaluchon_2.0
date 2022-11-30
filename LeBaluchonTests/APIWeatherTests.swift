@@ -16,6 +16,9 @@ final class APIWeatherTests: XCTestCase {
     var weatherAPI: API.Weather!
     let apiURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=Lille&units=metric&appid=\(APIKeys.Weather.key.rawValue.self)")
 
+    let currencyUser = "Lille"
+    let units = "metric"
+
     override func setUpWithError() throws {
 
             // Transform URLProtocol from MockURLProtocol
@@ -27,9 +30,6 @@ final class APIWeatherTests: XCTestCase {
 
             // Create the URLSession configurated
         urlSession = URLSession(configuration: configuration)
-
-            // this is the URLRequest of the API currency rescue by enum Endpoint
-        let urlRequest = URLRequest(url: API.EndPoint.currency(to: "", from: "", amount: 0).url)
     }
 
     override func tearDownWithError() throws {
@@ -37,17 +37,12 @@ final class APIWeatherTests: XCTestCase {
         URLProtocol.unregisterClass(MockURLProtocol.self)
     }
 
-    func testRequestCurrenciesGenerationIsOk() {
-            // Given
-        let currencyUser = "Lille"
-        let units = "metric"
-            //When
+    func test_GivenTheGoodURLRequestOfWeatherAPI_ThenTheGenerationOftheURLIsOk() {
         let urlEndpoint = API.EndPoint.weather(city: currencyUser, units: units).url
-            //Then
         XCTAssertEqual(urlEndpoint, apiURL)
     }
 
-    func testSuccessfulResponse() {
+    func test_GivenTheGoodURLWithLilleAsCityName_WhenIAskTheWeather_ThenTheAnswerIs19DegresAndScatteredClouds() {
             // Given
         expectation = expectation(description: "Expectation")
         let name = "Lille"
@@ -65,7 +60,7 @@ final class APIWeatherTests: XCTestCase {
             return (response, data)
         }
             //Then
-        API.QueryService.shared.getData(endpoint: .currency(to: "EUR", from: "USD", amount: 150.0),
+        API.QueryService.shared.getData(endpoint: .weather(city: currencyUser, units: units),
                                         type: API.Weather.DataForCity.self) { result in
             switch result {
                 case .failure(let error):
@@ -85,11 +80,60 @@ final class APIWeatherTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+
+    func test_GivenIAskATranslation_WhenINotRecoverAStatusCode500_ThenMyResponseFailed() {
+
+        baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
+
+        API.QueryService.shared.getData(endpoint: .weather(city: currencyUser, units: units),
+                                        type: API.Weather.DataForCity.self) { result in
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not a response!")
+
+            case .success(let result):
+                XCTAssertNil(result)
+                XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 10.0)
     }
 
+    func test_GivenIAskAConversion_WhenIRecoverABadData_ThenDecodeJsonDataFailed() {
+
+        baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseOK)
+
+        API.QueryService.shared.getData(endpoint: .weather(city: currencyUser, units: units),
+                                        type: API.Weather.DataForCity.self) { result in
+            XCTAssertNotNil(result)
+
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error.localizedDescription, "🛑 Interne error: not decode data!")
+
+            case .success(let result):
+                XCTAssertNil(result)
+                XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+
+        // -------------------------------------------------------
+        //MARK: - Methode
+        // -------------------------------------------------------
+
+    private func baseQueryCurrency(data: Data?, response: HTTPURLResponse) {
+        expectation = expectation(description: "Expectation")
+
+        let data = data
+
+        MockURLProtocol.requestHandler = { request in
+            let response = response
+            return (response, data)
+        }
+    }
 }

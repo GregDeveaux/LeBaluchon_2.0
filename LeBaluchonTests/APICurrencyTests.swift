@@ -10,6 +10,10 @@ import XCTest
 
 class APICurrencyTests: XCTestCase {
 
+        // -------------------------------------------------------
+        //MARK: - Properties
+        // -------------------------------------------------------
+
     var urlSession: URLSession!
     var expectation: XCTestExpectation!
 
@@ -20,7 +24,11 @@ class APICurrencyTests: XCTestCase {
     var currencyUser = "EUR"
     var currencyDestination = "USD"
     var amountTapped = 150.0
-    let currencyResult = 154.2675
+
+
+        // -------------------------------------------------------
+        //MARK: - SetUp
+        // -------------------------------------------------------
 
     override func setUpWithError() throws {
 
@@ -33,7 +41,6 @@ class APICurrencyTests: XCTestCase {
 
             // Create the URLSession configurated
         urlSession = URLSession(configuration: configuration)
-
     }
 
     override func tearDownWithError() throws {
@@ -41,19 +48,27 @@ class APICurrencyTests: XCTestCase {
         URLProtocol.unregisterClass(MockURLProtocol.self)
     }
 
-    func testRequestCurrenciesGenerationIsOk() {
-            //When
+
+        // -------------------------------------------------------
+        //MARK: - Tests
+        // -------------------------------------------------------
+
+    func test_GivenTheGoodURLRequestOfCurrencyAPI_ThenTheGenerationOftheURLIsOk() {
         let urlEndpoint = API.EndPoint.currency(to: currencyUser, from: currencyDestination, amount: amountTapped).url
-            //Then
         XCTAssertEqual(urlEndpoint, apiURL)
     }
 
-    func testSuccessfulResponse() {
-            // Given
-            //When
+    func test_GivenTheBadURLRequestOfCurrencyAPI_ThenTheGenerationOftheURLIsFailed() {
+        currencyUser = "EURO"
+        let urlEndpoint = API.EndPoint.currency(to: currencyUser, from: currencyDestination, amount: amountTapped).url
+        XCTAssertNotEqual(urlEndpoint, apiURL)
+    }
+
+    func test_GivenTheGoodURLWithAmountOf150EUR_WhenIAskAConversionInUSD_ThenTheAnswerIs154Point2675() {
+        let currencyResult = 154.2675
+
         baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseOK)
 
-            //Then
         API.QueryService.shared.getData(endpoint: API.EndPoint.currency(to: currencyUser, from: currencyDestination, amount: amountTapped),
                                         type: API.Currency.CalculateExchangeRate.self) { result in
 
@@ -65,18 +80,36 @@ class APICurrencyTests: XCTestCase {
 
             case .success(let result):
                 let calculateExchangeRate = result
-                    XCTAssertEqual(calculateExchangeRate.result, self.currencyResult)
+                    XCTAssertEqual(calculateExchangeRate.result, currencyResult)
             }
             self.expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testFailedDecodeData() {
-            //When
+    func test_GivenIAskAConversion_WhenINotRecoverAStatusCode500_ThenMyResponseFailed() {
+
+        baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
+
+        API.QueryService.shared.getData(endpoint: API.EndPoint.currency(to: currencyUser, from: currencyDestination, amount: amountTapped),
+                                        type: API.Currency.CalculateExchangeRate.self) { result in
+            switch result {
+            case .failure(let error):
+                XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not a response!")
+
+            case .success(let result):
+                XCTAssertNil(result)
+                XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+    func test_GivenIAskAConversion_WhenIRecoverABadData_ThenDecodeJsonDataFailed() {
+
         baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseOK)
 
-            //Then
         API.QueryService.shared.getData(endpoint: API.EndPoint.currency(to: currencyUser, from: currencyDestination, amount: amountTapped),
                                         type: API.Currency.CalculateExchangeRate.self) { result in
             XCTAssertNotNil(result)
@@ -97,6 +130,7 @@ class APICurrencyTests: XCTestCase {
 
 //    func testFailedData() {
 //            //When
+//        currencyUser = "EURO"
 //        baseQueryCurrency(data: nil, response: MockResponseData.responseOK)
 //
 //            //Then
@@ -106,7 +140,7 @@ class APICurrencyTests: XCTestCase {
 //
 //            switch result {
 //            case .failure(let error):
-//                    XCTAssertEqual(error.localizedDescription, "🛑 Interne error: there is not datas!")
+//                    XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not datas!")
 //
 //            case .success(let result):
 //                    XCTAssertNil(result)
@@ -118,31 +152,9 @@ class APICurrencyTests: XCTestCase {
 //    }
 
 
-    func testFailedResponse() {
-            //When
-        baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
-                    //Then
-        API.QueryService.shared.getData(endpoint: API.EndPoint.currency(to: currencyUser, from: currencyDestination, amount: amountTapped),
-                                        type: API.Currency.CalculateExchangeRate.self) { result in
-            switch result {
-            case .failure(let error):
-                XCTAssertEqual(error.localizedDescription, "🛑 Interne error: there is not a response!")
-
-            case .success(let result):
-                XCTAssertNil(result)
-                XCTFail("shouldn't execute this block")
-            }
-            self.expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 10.0)
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+        // -------------------------------------------------------
+        //MARK: - Methode
+        // -------------------------------------------------------
 
     private func baseQueryCurrency(data: Data?, response: HTTPURLResponse) {
         expectation = expectation(description: "Expectation")

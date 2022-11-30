@@ -863,21 +863,33 @@
                                     <constraint firstAttribute="trailing" secondItem="MQJ-3b-EPB" secondAttribute="trailing" id="JFT-Ld-Fvi"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="perso1" translatesAutoresizingMaskIntoConstraints="NO" id="DcG-MJ-9oq">
-                                <rect key="frame" x="0.0" y="408.33333333333326" width="414" height="452.66666666666674"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="DcG-MJ-9oq" secondAttribute="height" multiplier="430:470" id="AgP-gx-lB0"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-0a-o24">
+                                <rect key="frame" x="0.0" y="408.33333333333326" width="439" height="646"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bubbleToTalk" translatesAutoresizingMaskIntoConstraints="NO" id="1rW-xP-xUl">
+                                        <rect key="frame" x="239" y="0.0" width="200" height="166"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="perso1" translatesAutoresizingMaskIntoConstraints="NO" id="DcG-MJ-9oq">
+                                        <rect key="frame" x="0.0" y="166" width="439" height="480"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="DcG-MJ-9oq" secondAttribute="height" multiplier="430:470" id="AgP-gx-lB0"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="•" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mM2-dY-aGy">
+                                <rect key="frame" x="210" y="420" width="168" height="133"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e1n-VC-DeO"/>
                         <constraints>
-                            <constraint firstItem="DcG-MJ-9oq" firstAttribute="top" secondItem="NZv-LZ-crL" secondAttribute="bottom" constant="20" id="6uq-s5-6dw"/>
-                            <constraint firstItem="e1n-VC-DeO" firstAttribute="trailing" secondItem="DcG-MJ-9oq" secondAttribute="trailing" id="U2l-JT-dHb"/>
                             <constraint firstItem="NZv-LZ-crL" firstAttribute="top" secondItem="LAd-QM-gfh" secondAttribute="top" constant="50" id="VaM-kq-unX"/>
                             <constraint firstItem="e1n-VC-DeO" firstAttribute="trailing" secondItem="NZv-LZ-crL" secondAttribute="trailing" constant="40" id="f8M-wB-YOM"/>
                             <constraint firstItem="NZv-LZ-crL" firstAttribute="leading" secondItem="e1n-VC-DeO" secondAttribute="leading" constant="40" id="hJx-gr-KHe"/>
-                            <constraint firstItem="DcG-MJ-9oq" firstAttribute="leading" secondItem="e1n-VC-DeO" secondAttribute="leading" id="vRf-Dq-gXS"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="topColor">
@@ -891,13 +903,19 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="DCG-dF-8fl"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="LetsGoButton" destination="MQJ-3b-EPB" id="7on-ir-3Jg"/>
+                        <outlet property="SunImage" destination="DcG-MJ-9oq" id="GIs-81-tER"/>
+                        <outlet property="baluchonLogo" destination="ziG-7Z-dPV" id="Bbh-eM-Dtn"/>
+                        <outlet property="bubbleTextView" destination="mM2-dY-aGy" id="Vrm-ca-MU7"/>
                         <outlet property="destinationTextField" destination="O4G-Lr-D5u" id="F7A-2I-KbA"/>
                         <outlet property="nameTextField" destination="ou4-j2-dbG" id="l1i-pM-pgI"/>
+                        <outlet property="textDestinationLabel" destination="NdQ-SW-fQE" id="cBm-Te-eYb"/>
+                        <outlet property="textNameLabel" destination="RZA-yb-J1n" id="RIf-mm-rPe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qvj-4i-aNt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2219" y="249"/>
+            <point key="canvasLocation" x="-2220.289855072464" y="248.64130434782609"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Isv-Y5-Tdx">
@@ -1557,6 +1575,7 @@
         <image name="arrow.down.right.square.fill" catalog="system" width="128" height="114"/>
         <image name="arrow.left.arrow.right" catalog="system" width="120" height="128"/>
         <image name="arrow.up.forward.app.fill" catalog="system" width="128" height="114"/>
+        <image name="bubbleToTalk" width="200" height="166"/>
         <image name="camera" catalog="system" width="128" height="93"/>
         <image name="cloud.sun.fill" catalog="system" width="128" height="96"/>
         <image name="cloudyPower2" width="1125" height="2436"/>
@@ -1572,6 +1591,9 @@
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <image name="sun.max.fill" catalog="system" width="128" height="125"/>
         <image name="text.bubble.fill" catalog="system" width="128" height="110"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

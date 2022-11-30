@@ -26,10 +26,6 @@ final class APICoordinatesTests: XCTestCase {
 
             // Create the URLSession configurated
         urlSession = URLSession(configuration: configuration)
-
-            // this is the URLRequest of the API currency rescue by enum Endpoint
-        let urlRequest = URLRequest(url: API.EndPoint.coordinates(city: "Lille").url)
-
     }
 
     override func tearDownWithError() throws {
@@ -37,16 +33,19 @@ final class APICoordinatesTests: XCTestCase {
         URLProtocol.unregisterClass(MockURLProtocol.self)
     }
 
-    func testRequestCurrenciesGenerationIsOk() {
-            // Given
+    func test_GivenTheGoodURLRequestOfCoordinatesAPI_ThenTheGenerationOftheURLIsOk() {
         let city = "Dijon"
-            //When
         let urlEndpoint = API.EndPoint.coordinates(city: city).url
-            //Then
         XCTAssertEqual(urlEndpoint, apiURL)
     }
 
-    func testSuccessfulResponse() {
+    func test_GivenTheBadURLRequestOfCoordinatesAPI_ThenTheGenerationOftheURLIsFailed() {
+        let city = "R2D2"
+        let urlEndpoint = API.EndPoint.coordinates(city: city).url
+        XCTAssertNotEqual(urlEndpoint, apiURL)
+    }
+
+    func test_GivenTheGoodURLWithACityNamedBlois_WhenIAskTheCoordinates_ThenTheAnswerIsLatitude47Point5876861AndLongitude1Point3337639() {
             // Given
         expectation = expectation(description: "Expectation")
         let city = "Blois"
@@ -76,11 +75,59 @@ final class APICoordinatesTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func test_GivenIAskATranslation_WhenINotRecoverAStatusCode500_ThenMyResponseFailed() {
+
+        baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
+
+        API.QueryService.shared.getData(endpoint: .coordinates(city: "Miami"),
+                                        type: [API.City.Coordinates].self) { result in
+            switch result {
+                case .failure(let error):
+                    XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not a response!")
+
+                case .success(let result):
+                    XCTAssertNil(result)
+                    XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 10.0)
     }
 
+    func test_GivenIAskAConversion_WhenIRecoverABadData_ThenDecodeJsonDataFailed() {
+
+        baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseOK)
+
+        API.QueryService.shared.getData(endpoint: .coordinates(city: "Tokyo"),
+                                        type: [API.City.Coordinates].self) { result in
+            XCTAssertNotNil(result)
+
+            switch result {
+                case .failure(let error):
+                    XCTAssertEqual(error.localizedDescription, "🛑 Interne error: not decode data!")
+
+                case .success(let result):
+                    XCTAssertNil(result)
+                    XCTFail("shouldn't execute this block")
+            }
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
+
+        // -------------------------------------------------------
+        //MARK: - Methode
+        // -------------------------------------------------------
+
+    private func baseQueryCurrency(data: Data?, response: HTTPURLResponse) {
+        expectation = expectation(description: "Expectation")
+
+        let data = data
+
+        MockURLProtocol.requestHandler = { request in
+            let response = response
+            return (response, data)
+        }
+    }
 }

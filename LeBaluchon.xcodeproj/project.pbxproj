@@ -47,6 +47,7 @@
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
 		BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */; };
 		BCE061FE29355C450029A72F /* APICoordinatesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */; };
+		BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */; };
 		BCF0B807293531180037214B /* LeBaluchonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B806293531180037214B /* LeBaluchonTest.swift */; };
 		BCF0B809293540450037214B /* APICoordinatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B808293540450037214B /* APICoordinatesTests.swift */; };
 		BCF0B80B293540620037214B /* APICityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B80A293540620037214B /* APICityTests.swift */; };
@@ -118,6 +119,7 @@
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+PickerView.swift"; sourceTree = "<group>"; };
+		BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Animations.swift"; sourceTree = "<group>"; };
 		BCF0B806293531180037214B /* LeBaluchonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeBaluchonTest.swift; sourceTree = "<group>"; };
 		BCF0B808293540450037214B /* APICoordinatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICoordinatesTests.swift; sourceTree = "<group>"; };
 		BCF0B80A293540620037214B /* APICityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityTests.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				BCA8E7B728F5FBD200570959 /* LoginViewController.swift */,
+				BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */,
 				BC6C14A62916AC73009FDF18 /* MapViewController.swift */,
 				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
@@ -442,6 +445,7 @@
 				BC15FF6A28F7377000A0F594 /* WeatherDestinationViewController.swift in Sources */,
 				BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */,
 				BC40285628FDDA070044A19A /* APICountryFlag.swift in Sources */,
+				BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */,
 				BC1D19BA2905A11C00AF8838 /* APITranslation.swift in Sources */,
 				BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */,
 				BC40285228FDC49F0044A19A /* API.swift in Sources */,
