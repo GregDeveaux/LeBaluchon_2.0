@@ -119,6 +119,36 @@ final class APICityTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
+//    func test_GivenIWriteADestinationCity_WhenIPushTheButtonLetsGo_ThenTheDatasAreSaveInUserDefaults() {
+//
+//        baseQueryCurrency(data: MockResponseData.cityCorrectData, response: MockResponseData.responseOK)
+//
+//        let userDefaults = UserDefaults()
+//        let city = "Dijon"
+//
+//        API.City.recoverInfoOnTheCity(named: city) { destinationInfo in
+//            XCTAssertNotNil(destinationInfo)
+//
+//            DispatchQueue.main.async {
+//                userDefaults.set(city, forKey: "destinationCityName")
+//                userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
+//                userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")
+//                userDefaults.set(destinationInfo?.country, forKey: "destinationCountry")
+//                userDefaults.set(destinationInfo?.countryCode, forKey: "destinationCountryCode")
+//                
+//                XCTAssertNotNil(destinationInfo)
+//                XCTAssertEqual(destinationInfo?.name, userDefaults.string(forKey: "destinationCityName"))
+//                XCTAssertEqual(destinationInfo?.coordinates.latitude, userDefaults.double(forKey: "destinationCityLatitude"))
+//                XCTAssertEqual(destinationInfo?.coordinates.longitude, userDefaults.double(forKey: "destinationCityLongitude"))
+//                XCTAssertEqual(destinationInfo?.country, userDefaults.string(forKey: "destinationCountry"))
+//                XCTAssertEqual(destinationInfo?.countryCode, userDefaults.string(forKey: "destinationCountryCode"))
+//            }
+//
+//            self.expectation.fulfill()
+//        }
+//        wait(for: [expectation], timeout: 30.0)
+//    }
+
 
         // -------------------------------------------------------
         //MARK: - Methode

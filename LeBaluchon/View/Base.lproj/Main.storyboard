@@ -864,13 +864,9 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-0a-o24">
-                                <rect key="frame" x="0.0" y="408.33333333333326" width="439" height="646"/>
+                                <rect key="frame" x="0.0" y="408.33333333333326" width="0.0" height="0.0"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bubbleToTalk" translatesAutoresizingMaskIntoConstraints="NO" id="1rW-xP-xUl">
-                                        <rect key="frame" x="239" y="0.0" width="200" height="166"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="perso1" translatesAutoresizingMaskIntoConstraints="NO" id="DcG-MJ-9oq">
-                                        <rect key="frame" x="0.0" y="166" width="439" height="480"/>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="perso1" translatesAutoresizingMaskIntoConstraints="NO" id="DcG-MJ-9oq">
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="DcG-MJ-9oq" secondAttribute="height" multiplier="430:470" id="AgP-gx-lB0"/>
                                         </constraints>
@@ -903,11 +899,11 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="DCG-dF-8fl"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="LetsGoButton" destination="MQJ-3b-EPB" id="7on-ir-3Jg"/>
                         <outlet property="SunImage" destination="DcG-MJ-9oq" id="GIs-81-tER"/>
                         <outlet property="baluchonLogo" destination="ziG-7Z-dPV" id="Bbh-eM-Dtn"/>
                         <outlet property="bubbleTextView" destination="mM2-dY-aGy" id="Vrm-ca-MU7"/>
                         <outlet property="destinationTextField" destination="O4G-Lr-D5u" id="F7A-2I-KbA"/>
+                        <outlet property="letsGoButton" destination="MQJ-3b-EPB" id="zn2-Ic-TBF"/>
                         <outlet property="nameTextField" destination="ou4-j2-dbG" id="l1i-pM-pgI"/>
                         <outlet property="textDestinationLabel" destination="NdQ-SW-fQE" id="cBm-Te-eYb"/>
                         <outlet property="textNameLabel" destination="RZA-yb-J1n" id="RIf-mm-rPe"/>
@@ -1195,7 +1191,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="skyNight" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-3v-IgS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="perso1OnThefloor" translatesAutoresizingMaskIntoConstraints="NO" id="zF2-jZ-1CN">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="CloudCool" translatesAutoresizingMaskIntoConstraints="NO" id="zF2-jZ-1CN">
                                 <rect key="frame" x="40" y="362" width="335" height="349"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="349" id="DkA-qb-nPX"/>
@@ -1571,11 +1567,11 @@
         </designable>
     </designables>
     <resources>
+        <image name="CloudCool" width="468" height="652"/>
         <image name="Hi" width="78" height="80"/>
         <image name="arrow.down.right.square.fill" catalog="system" width="128" height="114"/>
         <image name="arrow.left.arrow.right" catalog="system" width="120" height="128"/>
         <image name="arrow.up.forward.app.fill" catalog="system" width="128" height="114"/>
-        <image name="bubbleToTalk" width="200" height="166"/>
         <image name="camera" catalog="system" width="128" height="93"/>
         <image name="cloud.sun.fill" catalog="system" width="128" height="96"/>
         <image name="cloudyPower2" width="1125" height="2436"/>

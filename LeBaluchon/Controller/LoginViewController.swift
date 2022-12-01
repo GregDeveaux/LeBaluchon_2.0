@@ -9,6 +9,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+        // -------------------------------------------------------
+        // MARK: - properties
+        // -------------------------------------------------------
+
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
 
@@ -17,43 +21,55 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var SunImage: UIImageView!
     @IBOutlet weak var textNameLabel: UILabel!
     @IBOutlet weak var textDestinationLabel: UILabel!
-    @IBOutlet weak var LetsGoButton: UIButton!
-
+    @IBOutlet weak var letsGoButton: UIButton!
+    
     let welcomeText = "Hello, my friend! Welcome to the \"Le Baluchon\" App, to start you must write your name and your destination, thank you 😀"
 
     let userDefaults = UserDefaults.standard
 
+    var validateEntryTextFields = false
+
+
+
+        // -------------------------------------------------------
+        // MARK: - viewDidLoad
+        // -------------------------------------------------------
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        checkTheUserNameExistInBase()
-
-//             bubble explanation before to enter in the app.
-        bubbleTextView.typeOn(sentence: welcomeText)
-
         nameTextField.delegate = self
         destinationTextField.delegate = self
+
+        checkTheUserNameExistInBase()
     }
+
+
+        // -------------------------------------------------------
+        // MARK: - method
+        // -------------------------------------------------------
 
     func checkTheUserNameExistInBase() {
         guard let currentUserName = userDefaults.string(forKey: "userName") else { return }
 
-        if !currentUserName.isEmpty {
+        if let text = nameTextField?.text, text.isEmpty {
             nameTextField.text = currentUserName
+            print("✅ user name exists, don't change, it's \(String(describing: nameTextField.text))")
             nameTextField.isEnabled = false
         }
     }
 
-        // MARK: Validate the user and the destination city
+        // Validate the user and the destination city textField are not nil then save datas and change the viewController
     @IBAction func validateButton(_ sender: UIButton) {
 
-        guard let userName = nameTextField.text else {
+        guard let userName = nameTextField.text, !userName.isEmpty else {
             presentAlert(with: "please enter an username")
             return }
 
-        guard let destinationCityName = destinationTextField.text else {
+        guard let destinationCityName = destinationTextField.text, !destinationCityName.isEmpty else {
             presentAlert(with: "please enter a destination city")
             return }
+
+        validateEntryTextFields = true
 
             // recover the info on the city after than the user wrote your destination in the textField
         API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
@@ -65,11 +81,11 @@ class LoginViewController: UIViewController {
             self.userDefaults.set(destinationInfo?.country, forKey: "destinationCountry")
             self.userDefaults.set(destinationInfo?.countryCode, forKey: "destinationCountryCode")
 
-            print("✅ user name is \(userName)")
             print("""
+            ✅ user name is \(userName)
             ✅ the destination is \(destinationCityName),
-            with as coordinates : - lat:\(destinationInfo?.coordinates.latitude ?? 0)
-                                  - long:\(destinationInfo?.coordinates.longitude ?? 0)
+               with as coordinates : - lat:\(destinationInfo?.coordinates.latitude ?? 0)
+                                     - long:\(destinationInfo?.coordinates.longitude ?? 0)
             """)
 
                 // used to move on the MainTabView if the fields "UserName" and "destination" is completed
@@ -80,7 +96,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    private func presentAlert(with error: String) {
+    func presentAlert(with error: String) {
         let alert: UIAlertController = UIAlertController(title: "Erreur", message: error, preferredStyle: .alert)
         let action: UIAlertAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(action)
