@@ -9,6 +9,11 @@ import UIKit
 
 class WeatherDestinationViewController: UIViewController {
 
+
+        // -------------------------------------------------------
+        // MARK: - properties
+        // -------------------------------------------------------
+
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var degresLabel: UILabel!
@@ -33,9 +38,9 @@ class WeatherDestinationViewController: UIViewController {
 
     }
 
-    @IBAction func tappedButton(_ sender: Any) {
-
+    override func viewDidAppear(_ animated: Bool) {
         guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
+        guard let destinationCountry = userDefaults.string(forKey: "destinationCountry") else { return }
 
         API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { results in
             switch results {
@@ -44,24 +49,67 @@ class WeatherDestinationViewController: UIViewController {
 
             case .success(let results):
                 let weatherForCity = results
-                self.cityLabel.text = String(weatherForCity.name)
+                self.cityLabel.text = destinationCity
+                self.countryLabel.text = destinationCountry
 
                 self.degresLabel.text = String(Int(weatherForCity.main.temp))
                 self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
                 self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
 
-                self.dayLabel.text = String(weatherForCity.date)
+                self.dayLabel.text = self.giveTheDate(weatherForCity.date).dayLabel
+                self.hourLabel.text = self.giveTheDate(weatherForCity.date).hourLabel
 
-                if let description = weatherForCity.weather.first?.description {
-                    self.descriptionSkyLabel.text = description
-                }
+                guard let description = weatherForCity.weather.first?.description else { return }
+                self.descriptionSkyLabel.text = description
 
-                self.giveTheDate(weatherForCity.date)
+                let imageForViewController = UIImageView.weatherImage(for: description,
+                                                                      sunrise: weatherForCity.sys.sunrise,
+                                                                      sunset: weatherForCity.sys.sunset,
+                                                                      hourOfContry: weatherForCity.date)
+                    print(" description = \(description)")
+                    print(" ☀️ \(String(describing: weatherForCity.sys.sunrise))")
+                    print(" 🌜 \(String(describing: weatherForCity.sys.sunset))")
+                    print(" ⌚️ \(String(describing: weatherForCity.date))")
+                    print(" 🖼 \(imageForViewController)")
+
+//                self.backgroundImage = imageForViewController[0]
+//                self.descriptionSkyImageView = imageForViewController[1]
+//                self.characterImage = imageForViewController[2]
+
             }
         }
     }
 
-    func giveTheDate(_ date: Int) {
+
+    @IBAction func tappedButton(_ sender: Any) {
+
+//        guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
+//
+//        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { results in
+//            switch results {
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//
+//            case .success(let results):
+//                let weatherForCity = results
+//                self.cityLabel.text = String(weatherForCity.name)
+//
+//                self.degresLabel.text = String(Int(weatherForCity.main.temp))
+//                self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+//                self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+//
+//                self.dayLabel.text = String(weatherForCity.date)
+//
+//                if let description = weatherForCity.weather.first?.description {
+//                    self.descriptionSkyLabel.text = description
+//                }
+//
+//                self.giveTheDate(weatherForCity.date)
+//            }
+//        }
+    }
+
+    func giveTheDate(_ date: Int) -> (dayLabel: String?, hourLabel: String?) {
         let todayDate = Date(timeIntervalSinceReferenceDate: TimeInterval(date))
 
         let formatterHour = DateFormatter()
@@ -72,7 +120,9 @@ class WeatherDestinationViewController: UIViewController {
         formatterDay.dateFormat = "EEEE, d"
         print("✅ hour of destination:  \(formatterDay.string(from: todayDate))")
 
-        dayLabel.text = formatterDay.string(from: todayDate)
-        hourLabel.text = formatterHour.string(from: todayDate)
+        let dayLabel = formatterDay.string(from: todayDate)
+        let hourLabel = formatterHour.string(from: todayDate)
+
+        return (dayLabel, hourLabel)
     }
 }

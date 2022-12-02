@@ -67,4 +67,6 @@ class MockResponseData {
 
         // create failed response of the simulation
     static let mockDataFailed = "notGood".data(using: .utf8)
-}
+
+        // create fake image response of the simulation
+    static let contryFlagImage = "flagImage".data(using: .utf8)!}

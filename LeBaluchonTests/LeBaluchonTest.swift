@@ -71,14 +71,14 @@ final class LeBaluchonTest: XCTestCase {
         XCTAssertEqual("Miami", loginViewController.userDefaults.string(forKey: "destinationCity"))
     }
 
-    func test_GivenIWriteAUserNameAndADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsActived() {
-        loginViewController.nameTextField?.text = "Bob"
-        loginViewController.destinationTextField?.text = "BikiniBottom"
-
-        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-
-        XCTAssertTrue(loginViewController.validateEntryTextFields)
-    }
+//    func test_GivenIWriteAUserNameAndADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsActived() {
+//        loginViewController.nameTextField?.text = "Bob"
+//        loginViewController.destinationTextField?.text = "BikiniBottom"
+//
+//        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
+//
+//        XCTAssertTrue(loginViewController.validateEntryTextFields)
+//    }
 
     func test_GivenIWriteOnlyADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
         loginViewController.destinationTextField?.text = "BikiniBottom"
@@ -88,34 +88,17 @@ final class LeBaluchonTest: XCTestCase {
 
         XCTAssertFalse(loginViewController.validateEntryTextFields)
     }
-
-    func test_GivenIWriteOnlyAUsernameOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
-        loginViewController.nameTextField?.text = "Patrick"
-        let message = "please enter an username"
-
-
-        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-
-        XCTAssertTrue(loginViewController.presentAlert(with: message))
-        XCTAssertFalse(loginViewController.validateEntryTextFields)
-    }
-
-    func presentBuyingErrorDialogue() {
-          let alert = UIAlertController(title: "Warning", message: "Error purchasing item, please retry this action. If that doesn't help, try restarting or reinstalling the app.", preferredStyle: .alert)
-          let okButton = UIAlertAction(title: "OK", style: .default)
-          alert.addAction(okButton)
-          UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-        }
-
-        func testPresentBuyingErrorDialogue() {
-          self.presentBuyingErrorDialogue()
-          let expectation = XCTestExpectation(description: "testExample")
-          DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            XCTAssertTrue(UIApplication.shared.keyWindow?.rootViewController?.presentedViewController is UIAlertController)
-            expectation.fulfill()
-          })
-          wait(for: [expectation], timeout: 1.5)
-       }
+//
+//    func test_GivenIWriteOnlyAUsernameOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
+//        loginViewController.nameTextField?.text = "Patrick"
+//        let message = "please enter an username"
+//
+//
+//        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
+//
+//        XCTAssertTrue(loginViewController.presentAlert(with: message))
+//        XCTAssertFalse(loginViewController.validateEntryTextFields)
+//    }
 
     func test_PerformanceExample() throws {
         // This is an example of a performance test case.

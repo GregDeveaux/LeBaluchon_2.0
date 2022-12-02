@@ -44,12 +44,16 @@ class WeatherHomeViewController: UIViewController {
         let lineTabBar = UIView()
         lineTabBar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 1)
         lineTabBar.backgroundColor = .white
+
+        lineTabBar.translatesAutoresizingMaskIntoConstraints = false
+        lineTabBar.bottomAnchor.constraint(equalTo: lineTabBar.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        lineTabBar.centerXAnchor.constraint(equalTo: lineTabBar.safeAreaLayoutGuide.centerXAnchor).isActive = true
         return lineTabBar
     }()
 
 
         // -------------------------------------------------------
-        // MARK: viewDidLoad
+        // MARK: view life
         // -------------------------------------------------------
 
     override func viewDidLoad() {
@@ -58,7 +62,7 @@ class WeatherHomeViewController: UIViewController {
 
         setupGestureRecognizer(to: weatherDestinationViewController.view)
         view.addSubview(backgroundUnderTabBar)
-        backgroundImage.addSubview(lineTabBar)
+        backgroundUnderTabBar.addSubview(lineTabBar)
 
 //        backgroundUnderTabBar.translatesAutoresizingMaskIntoConstraints = false
 //        backgroundUnderTabBar.bottomAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -67,6 +71,42 @@ class WeatherHomeViewController: UIViewController {
 //        lineTabBar.leftAnchor.constraint(equalTo: backgroundImage.leftAnchor, constant: 0).isActive = true
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        guard let userCityName = self.userDefaults.string(forKey: "userCityName") else { return }
+        guard let userCountry = userDefaults.string(forKey: "userCountry") else { return }
+
+            API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
+                switch results {
+                case .failure(let error):
+                    print(error.localizedDescription)
+
+                case .success(let results):
+                    let weatherForCity = results
+                    self.cityLabel.text = userCityName
+                    self.countryLabel.text = userCountry
+
+                    self.degresLabel.text = String(Int(weatherForCity.main.temp))
+                    self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+                    self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+
+                    self.dayLabel.text = self.giveTheDate(weatherForCity.date).dayLabel
+                    self.hourLabel.text = self.giveTheDate(weatherForCity.date).hourLabel
+
+                    guard let description = weatherForCity.weather.first?.description else { return }
+                    self.descriptionSkyLabel.text = description
+
+                    let imageForViewController = UIImageView.weatherImage(for: description,
+                                                                          sunrise: weatherForCity.sys.sunrise,
+                                                                          sunset: weatherForCity.sys.sunset,
+                                                                          hourOfContry: weatherForCity.date)
+                    print(" description = \(description)")
+                    print(" ☀️H \(String(describing: weatherForCity.sys.sunrise))")
+                    print(" 🌜H \(String(describing: weatherForCity.sys.sunset))")
+                    print(" ⌚️H \(String(describing: weatherForCity.date))")
+                    print(" 🖼H \(imageForViewController)")
+                }
+            }
+    }
 
         // -------------------------------------------------------
         // MARK: setups
@@ -115,63 +155,56 @@ class WeatherHomeViewController: UIViewController {
 
     @IBAction func tappedForWeather(_ sender: Any) {
 
-        guard let userCityName = self.userDefaults.string(forKey: "userCityName") else { return }
-
-            API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
-                switch results {
-                case .failure(let error):
-                    print(error.localizedDescription)
-
-                case .success(let results):
-                    let weatherForCity = results
-                    self.cityLabel.text = weatherForCity.name
-                    self.degresLabel.text = String(Int(weatherForCity.main.temp))
-                    self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-                    self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
-
-                    self.dayLabel.text = String(weatherForCity.date)
-
-                    if let description = weatherForCity.weather.first?.description {
-                        self.descriptionSkyLabel.text = description
-                    }
-
-                        self.giveTheDate(weatherForCity.date)
-                }
-            }
+//        guard let userCityName = self.userDefaults.string(forKey: "userCityName") else { return }
+//        guard let userCountry = userDefaults.string(forKey: "userCountry") else { return }
+//
+//            API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
+//                switch results {
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//
+//                case .success(let results):
+//                    let weatherForCity = results
+//                    self.cityLabel.text = userCityName
+//                    self.countryLabel.text = userCountry
+//
+//                    self.degresLabel.text = String(Int(weatherForCity.main.temp))
+//                    self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+//                    self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+//
+//                    self.dayLabel.text = self.giveTheDate(weatherForCity.date).dayLabel
+//                    self.hourLabel.text = self.giveTheDate(weatherForCity.date).hourLabel
+//
+//                    guard let description = weatherForCity.weather.first?.description else { return }
+//                    self.descriptionSkyLabel.text = description
+//
+//                    let imageForViewController = UIImageView.weatherImage(for: description,
+//                                                                          sunrise: weatherForCity.sys.sunrise,
+//                                                                          sunset: weatherForCity.sys.sunset,
+//                                                                          hourOfContry: weatherForCity.date)
+//                    print(" description = \(description)")
+//                    print(" ☀️H \(String(describing: weatherForCity.sys.sunrise))")
+//                    print(" 🌜H \(String(describing: weatherForCity.sys.sunset))")
+//                    print(" ⌚️H \(String(describing: weatherForCity.date))")
+//                    print(" 🖼H \(imageForViewController)")
+//                }
+//            }
         }
 
-//        API.QueryService.shared.getWeather(endpoint: .weather(city: "Lille", units: "metric"),
-//                                           method: .GET) { success, weatherForCity in
-//            guard let weatherForCity = weatherForCity, success == true else {
-//                print(API.Error.generic(reason: "not shown data"))
-//                return
-//            }
-//            self.cityLabel.text = String(weatherForCity.name)
-//
-//            self.degresLabel.text = String(Int(weatherForCity.main.temp))
-//            self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-//            self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
-//
-//            self.dayLabel.text = String(weatherForCity.date)
-//
-//            if let description = weatherForCity.weather.first?.description {
-//                self.descriptionSkyLabel.text = description
-//            }
-//        }
-//    }
+    func giveTheDate(_ date: Int) -> (dayLabel: String?, hourLabel: String?) {
+        let todayDate = Date(timeIntervalSinceReferenceDate: TimeInterval(date))
 
-
-    private func giveTheDate(_ date: Int) {
         let formatterHour = DateFormatter()
         formatterHour.timeStyle = .short
-        print("✅ date of home \(formatterHour.string(from: todayDate))")
+        print("✅ date of destination: \(formatterHour.string(from: todayDate))")
 
         let formatterDay = DateFormatter()
         formatterDay.dateFormat = "EEEE, d"
-        print("✅ hour of home \(formatterDay.string(from: todayDate))")
+        print("✅ hour of destination:  \(formatterDay.string(from: todayDate))")
 
-        dayLabel.text = formatterDay.string(from: todayDate)
-        hourLabel.text = formatterHour.string(from: todayDate)
+        let dayLabel = formatterDay.string(from: todayDate)
+        let hourLabel = formatterHour.string(from: todayDate)
+
+        return (dayLabel, hourLabel)
     }
-
 }

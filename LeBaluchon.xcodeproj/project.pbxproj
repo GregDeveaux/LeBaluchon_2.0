@@ -42,6 +42,8 @@
 		BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC40285C28FDE1270044A19A /* APIEndPoint.swift */; };
 		BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C14A62916AC73009FDF18 /* MapViewController.swift */; };
 		BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */; };
+		BC752159293939960015B863 /* UIImageView+WeatherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC752158293939960015B863 /* UIImageView+WeatherImage.swift */; };
+		BC75215B293979350015B863 /* APICountryFlagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC75215A293979350015B863 /* APICountryFlagTests.swift */; };
 		BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
@@ -114,6 +116,8 @@
 		BC6C14A62916AC73009FDF18 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityCoordinates.swift; sourceTree = "<group>"; };
 		BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICoordinatesExample.json; sourceTree = "<group>"; };
+		BC752158293939960015B863 /* UIImageView+WeatherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+WeatherImage.swift"; sourceTree = "<group>"; };
+		BC75215A293979350015B863 /* APICountryFlagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICountryFlagTests.swift; sourceTree = "<group>"; };
 		BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Language.swift"; sourceTree = "<group>"; };
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 				BCF0B80C293540BA0037214B /* APIWeatherTests.swift */,
 				BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */,
 				BC0C6B5028F4B2AC0075C614 /* APICurrencyTests.swift */,
+				BC75215A293979350015B863 /* APICountryFlagTests.swift */,
 				BC40284B28FC05D10044A19A /* Json */,
 			);
 			path = LeBaluchonTests;
@@ -235,6 +240,7 @@
 				BC6C14A62916AC73009FDF18 /* MapViewController.swift */,
 				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
+				BC752158293939960015B863 /* UIImageView+WeatherImage.swift */,
 				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
 				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
 				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
@@ -438,6 +444,7 @@
 			files = (
 				BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */,
 				BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */,
+				BC752159293939960015B863 /* UIImageView+WeatherImage.swift in Sources */,
 				BC0C6B6C28F4BB9E0075C614 /* WeatherHomeViewController.swift in Sources */,
 				BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */,
 				BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */,
@@ -472,6 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC40284A28FBFBB20044A19A /* MockResponseData.swift in Sources */,
+				BC75215B293979350015B863 /* APICountryFlagTests.swift in Sources */,
 				BC2AB6C82933F56500B6CE2D /* APITranslateTests.swift in Sources */,
 				BCF0B80B293540620037214B /* APICityTests.swift in Sources */,
 				BCF0B809293540450037214B /* APICoordinatesTests.swift in Sources */,

@@ -118,9 +118,9 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     func createRoute(to destinationCityCoordinates: CLLocationCoordinate2D) {
-        let userCoordinates = locationManager.location?.coordinate
+        guard let userCoordinates = locationManager.location?.coordinate else { return }
 
-        let userPlacemark = MKPlacemark(coordinate: userCoordinates!)
+        let userPlacemark = MKPlacemark(coordinate: userCoordinates)
         let destinationPlacemark = MKPlacemark(coordinate: destinationCityCoordinates)
 
         let userItem = MKMapItem(placemark: userPlacemark)
