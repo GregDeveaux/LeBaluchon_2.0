@@ -61,9 +61,7 @@ class APICountryFlagTests: XCTestCase {
         XCTAssertNotEqual(urlEndpoint, apiURL)
     }
 
-    func test_GivenTheGoodURLWithAmountOf150EUR_WhenIAskAConversionInUSD_ThenTheAnswerIs154Point2675() {
-        let flagImage = "fr.png"
-        let resultFlageImage = Data.self
+    func test_GivenIGiveFranceAsCountry_WhenIAskAFlag_ThenIShowTheFranceFlag() {
 
         baseQueryCurrency(data: MockResponseData.contryFlagImage, response: MockResponseData.responseOK)
 
@@ -74,6 +72,7 @@ class APICountryFlagTests: XCTestCase {
             }
             DispatchQueue.main.async {
                 XCTAssertNotNil(countryFlag)
+                XCTAssertEqual((self.countryCode + ".png").data(using: .utf8)!, countryFlag)
             }
 
             self.expectation.fulfill()

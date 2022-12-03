@@ -88,17 +88,29 @@ final class LeBaluchonTest: XCTestCase {
 
         XCTAssertFalse(loginViewController.validateEntryTextFields)
     }
-//
-//    func test_GivenIWriteOnlyAUsernameOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
-//        loginViewController.nameTextField?.text = "Patrick"
-//        let message = "please enter an username"
-//
-//
-//        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-//
-//        XCTAssertTrue(loginViewController.presentAlert(with: message))
-//        XCTAssertFalse(loginViewController.validateEntryTextFields)
-//    }
+
+    func test_GivenIWriteOnlyAUsernameOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
+        loginViewController.nameTextField?.text = "Patrick"
+        let message = "please enter an username"
+
+        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
+
+        XCTAssertFalse(loginViewController.validateEntryTextFields)
+    }
+
+    func test_GivenIGiveTheDescriptionWeather_WhenIUseFunction_ThenIRecoverAArrayOfImages() {
+        let description = "clear sky"
+        guard let weatherDescription = WeatherDescription(rawValue: description) else { return }
+        let sunrise = 1670042925
+        let sunset = 1670087381
+        let hourOfCountry = 1670085891
+
+        let imagesWeather = ImagesWeather.weatherImage(for: weatherDescription, sunrise: sunrise, sunset: sunset, hourOfCountry: hourOfCountry)
+
+        XCTAssertEqual(imagesWeather[0], "veryLittleCloud.png")
+        XCTAssertEqual(imagesWeather[1], "sun.max.fill")
+        XCTAssertEqual(imagesWeather[2], "perso1.pdf")
+    }
 
     func test_PerformanceExample() throws {
         // This is an example of a performance test case.

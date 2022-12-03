@@ -12,6 +12,11 @@ extension API {
 
     enum Currency {
 
+
+            // -------------------------------------------------------
+            // MARK: - parse Json
+            // -------------------------------------------------------
+
         struct CalculateExchangeRate: Decodable {
             let success: Bool
             let query: Query

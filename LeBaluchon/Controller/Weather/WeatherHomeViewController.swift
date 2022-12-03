@@ -69,44 +69,101 @@ class WeatherHomeViewController: UIViewController {
 //
 //        lineTabBar.translatesAutoresizingMaskIntoConstraints = false
 //        lineTabBar.leftAnchor.constraint(equalTo: backgroundImage.leftAnchor, constant: 0).isActive = true
+
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        guard let userCityName = self.userDefaults.string(forKey: "userCityName") else { return }
+    override func viewWillAppear(_ animated: Bool) {
+        giveMeTheWeather()
+    }
+
+
+        // -------------------------------------------------------
+        // MARK: - use API Weather, recover info
+        // -------------------------------------------------------
+
+    func giveMeTheWeather() {
+        guard let userCityName = userDefaults.string(forKey: "userCityName") else { return }
         guard let userCountry = userDefaults.string(forKey: "userCountry") else { return }
 
-            API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
-                switch results {
+        API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { [self] results in
+            switch results {
                 case .failure(let error):
                     print(error.localizedDescription)
 
                 case .success(let results):
                     let weatherForCity = results
-                    self.cityLabel.text = userCityName
-                    self.countryLabel.text = userCountry
+                    cityLabel.text = userCityName
+                    countryLabel.text = userCountry
 
-                    self.degresLabel.text = String(Int(weatherForCity.main.temp))
-                    self.hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-                    self.lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+                    degresLabel.text = String(Int(weatherForCity.main.temp))
+                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
 
-                    self.dayLabel.text = self.giveTheDate(weatherForCity.date).dayLabel
-                    self.hourLabel.text = self.giveTheDate(weatherForCity.date).hourLabel
+                    dayLabel.text = self.giveMeTheDate(weatherForCity.date).dayLabel
+                    hourLabel.text = self.giveMeTheDate(weatherForCity.date).hourLabel
 
-                    guard let description = weatherForCity.weather.first?.description else { return }
-                    self.descriptionSkyLabel.text = description
+                    guard let description = weatherForCity.weather.first?.description,
+                          let weatherDescription = WeatherDescription(rawValue: description)
+                    else { return }
+                    descriptionSkyLabel.text = weatherDescription.rawValue
 
-                    let imageForViewController = UIImageView.weatherImage(for: description,
-                                                                          sunrise: weatherForCity.sys.sunrise,
-                                                                          sunset: weatherForCity.sys.sunset,
-                                                                          hourOfContry: weatherForCity.date)
-                    print(" description = \(description)")
-                    print(" ☀️H \(String(describing: weatherForCity.sys.sunrise))")
-                    print(" 🌜H \(String(describing: weatherForCity.sys.sunset))")
-                    print(" ⌚️H \(String(describing: weatherForCity.date))")
-                    print(" 🖼H \(imageForViewController)")
-                }
+                        // Recover the images by the description weather
+                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
+                                                                 sunrise: weatherForCity.sys.sunrise,
+                                                                 sunset: weatherForCity.sys.sunset,
+                                                                 hourOfCountry: weatherForCity.date)
+                    print("""
+                          ✅ Description = \(description)
+                          ☀️ \(String(describing: weatherForCity.sys.sunrise))
+                          🌜 \(String(describing: weatherForCity.sys.sunset))
+                          ⌚️ \(String(describing: weatherForCity.date))
+                          🖼 \(weatherImages)
+                    """)
+
+                    giveMeTheWeatherImages(weatherImages: weatherImages,
+                                           background: backgroundImage,
+                                           description: descriptionSkyImageView,
+                                           characterImage: characterImage)
             }
+        }
     }
+
+
+        // -------------------------------------------------------
+        // MARK: - modify images of ViewController
+        // -------------------------------------------------------
+
+    private func giveMeTheWeatherImages(weatherImages: [String], background: UIImageView, description: UIImageView, characterImage: UIImageView) {
+        background.image = UIImage(named: weatherImages[0])
+        description.image = UIImage(systemName: weatherImages[1])
+        if weatherImages[1] == "sun.max.fill" {
+            description.tintColor = .yellow
+        }
+        self.characterImage.image = UIImage(named: weatherImages[2])
+    }
+
+
+        // -------------------------------------------------------
+        // MARK: - format date
+        // -------------------------------------------------------
+
+    private func giveMeTheDate(_ date: Int) -> (dayLabel: String?, hourLabel: String?) {
+        let todayDate = Date(timeIntervalSinceReferenceDate: TimeInterval(date))
+
+        let formatterHour = DateFormatter()
+        formatterHour.timeStyle = .short
+        print("✅ date of destination: \(formatterHour.string(from: todayDate))")
+
+        let formatterDay = DateFormatter()
+        formatterDay.dateFormat = "EEEE, d"
+        print("✅ hour of destination:  \(formatterDay.string(from: todayDate))")
+
+        let dayLabel = formatterDay.string(from: todayDate)
+        let hourLabel = formatterHour.string(from: todayDate)
+
+        return (dayLabel, hourLabel)
+    }
+
 
         // -------------------------------------------------------
         // MARK: setups

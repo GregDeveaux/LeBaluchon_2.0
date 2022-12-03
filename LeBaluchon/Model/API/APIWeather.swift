@@ -11,6 +11,10 @@ import UIKit
 extension API {
     enum Weather {
 
+            // -------------------------------------------------------
+            // MARK: - parse Json
+            // -------------------------------------------------------
+
         struct DataForCity: Decodable {
             let name: String
             let weather: [Weather]
@@ -68,7 +72,7 @@ extension API {
         struct Wind: Decodable {
             let speed: Double
             let deg: Int
-            let gust: Int?
+            let gust: Double?
         }
 
         struct Clouds: Decodable {
@@ -77,8 +81,8 @@ extension API {
         }
 
         struct Rain: Decodable {
-            let oneHour: Int
-            let threeHour: Int
+            let oneHour: Double
+            let threeHour: Double?
 
             enum CodingKeys: String, CodingKey {
                 case oneHour = "1h"

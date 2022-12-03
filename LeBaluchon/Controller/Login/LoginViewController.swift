@@ -30,13 +30,13 @@ class LoginViewController: UIViewController {
     var validateEntryTextFields = false
 
 
-
         // -------------------------------------------------------
         // MARK: - viewDidLoad
         // -------------------------------------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         nameTextField.delegate = self
         destinationTextField.delegate = self
 
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
 
 
         // -------------------------------------------------------
-        // MARK: - method
+        // MARK: - User name exist ?
         // -------------------------------------------------------
 
     func checkTheUserNameExistInBase() {
@@ -58,41 +58,44 @@ class LoginViewController: UIViewController {
         }
     }
 
-        // Validate the user and the destination city textField are not nil then save datas and change the viewController
+
+        // -----------------------------------------------------
+        // MARK: - Recover the info on the City and play the app
+        // -----------------------------------------------------
+
+        // Validate the user and the destination city textField if aren't nil then save datas and change the viewController
     @IBAction func validateButton(_ sender: UIButton) {
 
         guard let userName = nameTextField.text, !userName.isEmpty else {
             presentAlert(with: "please enter an username")
-            return }
+            return
+        }
 
         guard let destinationCityName = destinationTextField.text, !destinationCityName.isEmpty else {
             presentAlert(with: "please enter a destination city")
-            return }
+            return
+        }
 
         validateEntryTextFields = true
 
             // recover the info on the city after than the user wrote your destination in the textField
         API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
 
-            self.userDefaults.set(userName, forKey: "userName")
-            self.userDefaults.set(destinationCityName, forKey: "destinationCityName")
+            self.userDefaults.set(userName.capitalized, forKey: "userName")
+            self.userDefaults.set(destinationCityName.capitalized, forKey: "destinationCityName")
             self.userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
             self.userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")
             self.userDefaults.set(destinationInfo?.country, forKey: "destinationCountry")
             self.userDefaults.set(destinationInfo?.countryCode, forKey: "destinationCountryCode")
 
             print("""
-            ✅ user name is \(userName)
-            ✅ the destination is \(destinationCityName),
+            ✅ user name is \(userName.capitalized)
+            ✅ the destination is \(destinationCityName.capitalized),
                with as coordinates : - lat:\(destinationInfo?.coordinates.latitude ?? 0)
                                      - long:\(destinationInfo?.coordinates.longitude ?? 0)
             """)
 
-                // used to move on the MainTabView if the fields "UserName" and "destination" is completed
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
-            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-            sceneDelegate?.window?.rootViewController = mainTabBarController
+            self.changeViewController()
         }
     }
 
@@ -103,6 +106,13 @@ class LoginViewController: UIViewController {
         present(alert, animated: true)
     }
 
+    func changeViewController() {
+            // used to move on the MainTabView if the fields "UserName" and "destination" is completed
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        sceneDelegate?.window?.rootViewController = mainTabBarController
+    }
 }
 
 

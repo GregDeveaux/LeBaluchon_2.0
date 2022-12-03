@@ -9,6 +9,10 @@ import Foundation
 
 extension API {
 
+        // -------------------------------------------------------
+        // MARK: - parse Json
+        // -------------------------------------------------------
+
     enum City {
         struct Coordinates: Decodable {
             var latitude: String
@@ -51,9 +55,9 @@ extension API {
         }
 
 
-            // -------------------------------------------------------
-            // MARK: recover coordinates, name country and code country...
-            // -------------------------------------------------------
+            // -------------------------------------------------------------
+            // MARK: - recover coordinates, name country and code country...
+            // -------------------------------------------------------------
             // ...thanks to the writing of the destination by the destinationTextField
 
         static func recoverInfoOnTheCity(named city: String, completion: @escaping (CityInfo?) -> Void) {
@@ -67,20 +71,20 @@ extension API {
             QueryService.shared.getData(endpoint: .coordinates(city: city),
                                         type: [City.Coordinates].self) { results in
                 switch results {
-                case .failure(let error):
-                    print(error.localizedDescription)
+                    case .failure(let error):
+                        print(error.localizedDescription)
 
-                case .success(let results):
-                    let coordinates = results
+                    case .success(let results):
+                        let coordinates = results
 
-                    guard let latitude = coordinates.first?.latitude,
-                          let longitude = coordinates.first?.longitude else { return }
-                    print("✅ latitude of the destination: \(latitude)")
-                    print("✅ longitude of the destination: \(longitude)")
+                        guard let latitude = coordinates.first?.latitude,
+                              let longitude = coordinates.first?.longitude else { return }
+                        print("✅ latitude of the destination: \(latitude)")
+                        print("✅ longitude of the destination: \(longitude)")
 
                         API.City.foundCountryByCoordinates(latitude: latitude, longitude: longitude) { country in
-                        completion(country)
-                    }
+                            completion(country)
+                        }
                 }
             }
         }
@@ -91,26 +95,46 @@ extension API {
             QueryService.shared.getData(endpoint: .city(latitude: latitude, longitude: longitude),
                                         type: City.Country.self) { result in
                 switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
+                    case .failure(let error):
+                        print(error.localizedDescription)
 
-                case .success(let result):
+                    case .success(let result):
                         let infoDestination = result
+
                         let city = createDestinationCity(destination: infoDestination)
                         completion(city)
-                    print("✅ the found city is \(latitude)")
+                        print("✅ the found city is \(city)")
                 }
             }
         }
 
+
+            // -------------------------------------------------------
+            // MARK: - create City info
+            // -------------------------------------------------------
+
         static private func createDestinationCity(destination: API.City.Country) -> CityInfo {
+
+            let name: String = {
+                var name = ""
+                if let city = destination.address.city {
+                    name = city
+                }
+                else if let town = destination.address.town {
+                    name = town
+                }
+                else if let village = destination.address.village {
+                    name = village
+                }
+                return name
+            }()
 
             let country = destination.address.country
             let countryCode = destination.address.countryCode
             let latitude = Double(destination.latitude)!
             let longitude = Double(destination.longitude)!
 
-            return CityInfo(country: country, countryCode: countryCode, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude))
+            return CityInfo(name: name, country: country, countryCode: countryCode, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude))
         }
     }
 }

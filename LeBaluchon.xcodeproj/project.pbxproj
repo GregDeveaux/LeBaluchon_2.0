@@ -42,7 +42,7 @@
 		BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC40285C28FDE1270044A19A /* APIEndPoint.swift */; };
 		BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C14A62916AC73009FDF18 /* MapViewController.swift */; };
 		BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */; };
-		BC752159293939960015B863 /* UIImageView+WeatherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC752158293939960015B863 /* UIImageView+WeatherImage.swift */; };
+		BC752159293939960015B863 /* ImagesWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC752158293939960015B863 /* ImagesWeather.swift */; };
 		BC75215B293979350015B863 /* APICountryFlagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC75215A293979350015B863 /* APICountryFlagTests.swift */; };
 		BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
@@ -116,7 +116,7 @@
 		BC6C14A62916AC73009FDF18 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityCoordinates.swift; sourceTree = "<group>"; };
 		BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICoordinatesExample.json; sourceTree = "<group>"; };
-		BC752158293939960015B863 /* UIImageView+WeatherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+WeatherImage.swift"; sourceTree = "<group>"; };
+		BC752158293939960015B863 /* ImagesWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesWeather.swift; sourceTree = "<group>"; };
 		BC75215A293979350015B863 /* APICountryFlagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICountryFlagTests.swift; sourceTree = "<group>"; };
 		BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Language.swift"; sourceTree = "<group>"; };
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
@@ -184,8 +184,7 @@
 				BC40284628FBF6F90044A19A /* Model */,
 				BC0C6B6928F4BAF70075C614 /* View */,
 				BC0C6B6A28F4BB040075C614 /* Controller */,
-				BC0C6B3928F4B2AA0075C614 /* AppDelegate.swift */,
-				BC0C6B3B28F4B2AA0075C614 /* SceneDelegate.swift */,
+				BCE82E14293B558B004D44F6 /* Delegate */,
 				BCFF028B2911853D008CF2EA /* Ressources */,
 				BC0C6B4728F4B2AC0075C614 /* Info.plist */,
 			);
@@ -204,7 +203,7 @@
 				BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */,
 				BC0C6B5028F4B2AC0075C614 /* APICurrencyTests.swift */,
 				BC75215A293979350015B863 /* APICountryFlagTests.swift */,
-				BC40284B28FC05D10044A19A /* Json */,
+				BC40284B28FC05D10044A19A /* JsonForTests */,
 			);
 			path = LeBaluchonTests;
 			sourceTree = "<group>";
@@ -221,12 +220,8 @@
 		BC0C6B6928F4BAF70075C614 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */,
-				BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */,
-				BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */,
-				BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */,
+				BCE82E15293B56A4004D44F6 /* Extensions */,
 				BC0C6B3F28F4B2AA0075C614 /* Main.storyboard */,
-				BC0C6B4228F4B2AC0075C614 /* Assets.xcassets */,
 				BC0C6B4428F4B2AC0075C614 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -235,16 +230,11 @@
 		BC0C6B6A28F4BB040075C614 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BCA8E7B728F5FBD200570959 /* LoginViewController.swift */,
-				BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */,
-				BC6C14A62916AC73009FDF18 /* MapViewController.swift */,
-				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
-				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
-				BC752158293939960015B863 /* UIImageView+WeatherImage.swift */,
-				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
-				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
-				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
-				BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */,
+				BCE82E0F293B54CC004D44F6 /* Login */,
+				BCE82E12293B5575004D44F6 /* Map */,
+				BCE82E10293B5542004D44F6 /* Weather */,
+				BCE82E11293B556B004D44F6 /* Translate */,
+				BCE82E13293B557E004D44F6 /* Currency */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,12 +254,13 @@
 				BC278B95290ECC790098A82C /* CityInfo.swift */,
 				BC278B97290ED7AC0098A82C /* User.swift */,
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
+				BC752158293939960015B863 /* ImagesWeather.swift */,
 				BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		BC40284B28FC05D10044A19A /* Json */ = {
+		BC40284B28FC05D10044A19A /* JsonForTests */ = {
 			isa = PBXGroup;
 			children = (
 				BC1D19BB2905A14B00AF8838 /* APITranslationExample.json */,
@@ -278,7 +269,7 @@
 				BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */,
 				BC0E986E29355D9A00564119 /* APICityExample.json */,
 			);
-			path = Json;
+			path = JsonForTests;
 			sourceTree = "<group>";
 		};
 		BC40285B28FDE0F20044A19A /* API */ = {
@@ -297,9 +288,74 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		BCE82E0F293B54CC004D44F6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BCA8E7B728F5FBD200570959 /* LoginViewController.swift */,
+				BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		BCE82E10293B5542004D44F6 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
+				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
+			);
+			path = Weather;
+			sourceTree = "<group>";
+		};
+		BCE82E11293B556B004D44F6 /* Translate */ = {
+			isa = PBXGroup;
+			children = (
+				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
+				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
+				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
+			);
+			path = Translate;
+			sourceTree = "<group>";
+		};
+		BCE82E12293B5575004D44F6 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				BC6C14A62916AC73009FDF18 /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		BCE82E13293B557E004D44F6 /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */,
+			);
+			path = Currency;
+			sourceTree = "<group>";
+		};
+		BCE82E14293B558B004D44F6 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				BC0C6B3928F4B2AA0075C614 /* AppDelegate.swift */,
+				BC0C6B3B28F4B2AA0075C614 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		BCE82E15293B56A4004D44F6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */,
+				BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */,
+				BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */,
+				BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BCFF028B2911853D008CF2EA /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				BC0C6B4228F4B2AC0075C614 /* Assets.xcassets */,
 				BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */,
 			);
 			path = Ressources;
@@ -444,7 +500,7 @@
 			files = (
 				BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */,
 				BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */,
-				BC752159293939960015B863 /* UIImageView+WeatherImage.swift in Sources */,
+				BC752159293939960015B863 /* ImagesWeather.swift in Sources */,
 				BC0C6B6C28F4BB9E0075C614 /* WeatherHomeViewController.swift in Sources */,
 				BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */,
 				BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */,

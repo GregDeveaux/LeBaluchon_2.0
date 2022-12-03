@@ -9,6 +9,10 @@ import Foundation
 
 extension API {
 
+        // -------------------------------------------------------
+        // MARK: - parse Json
+        // -------------------------------------------------------
+
     enum Translation {
         struct Recover: Decodable {
             let translations: [Translated]

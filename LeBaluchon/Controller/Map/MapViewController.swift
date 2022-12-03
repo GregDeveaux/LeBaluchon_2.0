@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
     let destinationCityLatitude = UserDefaults.standard.double(forKey: "destinationCityLatitude")
     let destinationCityLongitude = UserDefaults.standard.double(forKey: "destinationCityLongitude")
 
-    var user: User?
+    var user: User!
     var destinationCity: CityInfo!
 
     var pinUser: PinMap!
@@ -34,31 +34,29 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let userName = UserDefaults.standard.string(forKey: "userName") else { return }
-
-        userNameLabel.text = "\(userName), what's up!"
         setupLocationManager()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setMapView()
         print("📍🏖 latitude \(destinationCityLatitude) et longitude \(destinationCityLongitude)")
 
         createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude))
         print("✅ route \(createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)))")
-
     }
 
     func setupUser(latitude: Double, longitude: Double) -> User {
 
         print("✅ coordinates receive of \(userName) are lat:\(latitude) et long:\(longitude))")
-
         userDefaults.set(latitude, forKey: "userLatitude")
         userDefaults.set(longitude, forKey: "userLongitude")
 
         API.City.foundCountryByCoordinates(latitude: String(latitude), longitude: String(longitude)) { cityInfo in
             self.userDefaults.set(cityInfo.name, forKey: "userCityName")
-            print("✅ user City Name \(self.userDefaults.set(cityInfo.name, forKey: "userCityName"))")
+            self.userDefaults.set(cityInfo.country, forKey: "userCountry")
+            self.userDefaults.set(cityInfo.countryCode, forKey: "userCountryCode")
+            self.userNameLabel.text = self.user.welcomeMessage
+            print("✅📲 user City Name \(cityInfo.name), in \(cityInfo.country) with country code : \(cityInfo.countryCode)")
         }
         return User(name: userName, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude))
     }
@@ -69,9 +67,7 @@ class MapViewController: UIViewController {
         let loginViewController = storyboard.instantiateViewController(identifier: "LoginViewController")
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
         sceneDelegate?.window?.rootViewController = loginViewController
-
     }
-
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -94,7 +90,6 @@ extension MapViewController: MKMapViewDelegate {
         mapView.addAnnotation(pinDestination)
     }
 
-
     private func setupPinMap() {
 
         if destinationCityLatitude != 0 && destinationCityLongitude != 0  {
@@ -113,7 +108,6 @@ extension MapViewController: MKMapViewDelegate {
 
             print("✅ pin user: \(pinUser?.title ?? "unknow")")
             print("📍 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
-
         }
     }
 
@@ -167,7 +161,7 @@ extension MapViewController: MKMapViewDelegate {
         switch annotation.title {
             case "you want to go \(destinationCityName)":
                 annotationView?.image = UIImage(named: "pinDestination")
-            case "Hello \(userName)! it's you!":
+            case user?.welcomeMessage:
                 annotationView?.image = UIImage(named: "pinUser")
             default:
                 break
@@ -178,8 +172,10 @@ extension MapViewController: MKMapViewDelegate {
     }
 }
 
+    // -------------------------------------------------------
+    //MARK: - found the user's coordinates
+    // -------------------------------------------------------
 
-    //MARK: found the user's coordinates for show the pin on the map
 extension MapViewController: CLLocationManagerDelegate {
 
     private func setupLocationManager() {
@@ -189,25 +185,28 @@ extension MapViewController: CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
 
+        // geolocalization of user
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         guard let location = locations.first else { return }
-
         currentLocationUser = location
 
+            // Save the User
         user = setupUser(latitude: currentLocationUser?.coordinate.latitude ?? 0, longitude: currentLocationUser?.coordinate.longitude ?? 0)
-        print("📍😎 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
 
+            // create aline a line between the user and the destination
         let startPolyline = location.coordinate
         let destinationPolyline = CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)
-
         let coordinatesPolyline = [startPolyline, destinationPolyline]
         let polyline = MKPolyline(coordinates: coordinatesPolyline, count: coordinatesPolyline.count)
+
         mapView.addOverlay(polyline)
-//        let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-//        let span = MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-//        let region = MKCoordinateRegion(center: center, span: span)
-//        mapView.setRegion(region, animated: true)
+
+        let center = CLLocationCoordinate2D(latitude: currentLocationUser?.coordinate.latitude ?? 0,
+                                            longitude: currentLocationUser?.coordinate.longitude ?? 0)
+        let span = MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)
+        let region = MKCoordinateRegion(center: center, span: span)
+        mapView.setRegion(region, animated: true)
 
     }
 }

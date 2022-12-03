@@ -8,7 +8,11 @@
 import Foundation
 
 extension API {
-    
+
+        // -------------------------------------------------------
+        // MARK: - parse Json
+        // -------------------------------------------------------
+
     enum CountryFlag {
         struct Flag {
             var imageData: Data
