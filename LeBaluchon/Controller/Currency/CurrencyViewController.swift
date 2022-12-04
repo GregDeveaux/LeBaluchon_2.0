@@ -35,28 +35,35 @@ class CurrencyViewController: UIViewController {
 
     var countryCodeDestination: String = ""
     var localeCurrencyDestination: String = ""
+    var currencyDestinationName: String = ""
+
+    var countryCodeUser: String = ""
+    var localeCurrencyUser: String = ""
+    var currencyUserSymbol: String = ""
+
+
+        // -------------------------------------------------------
+        //MARK: - viewDidLoad
+        // -------------------------------------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addFlagCountries()
         recoverDataOfUserDefaults()
-
-        localeDestination = Locale(identifier: countryCodeDestination)
-        iconCurrencyDestination.text = localeDestination.currencySymbol
+        addFlagCountries()
 
 
+        if #available(iOS 16, *) {
+            localeDestination = Locale()
+//            let currency = Locale.Currency(from: localeDestination as! Decoder)
+//            iconCurrencyDestination.text = Locale.lo
 
-//        if #available(iOS 16, *) {
-//            let localeDestination = Locale.Region(countryCodeDestination)
-//            iconCurrencyDestination.text = Locale.Currency(from: localeDestination)
-//
-//        } else {
-//                // Fallback on earlier versions
-//        }
+        } else {
+                // Fallback on earlier versions
+        }
 
         print("🌐 the currency symbole is: \(String(describing: countryCodeDestination)))")
-//        print("🌐 the currency symbole is: \(String(describing: localeDestination)))")
+        print("🌐 the currency symbole is: \(String(describing: localeDestination)))")
         print("🌐 the currency symbole is: \(String(describing: iconCurrencyDestination.text)))")
         print("🌐 the region name is: \(String(describing: nameLocalCountryLabel.text)))")
         print("🌐 the region code is: \(String(describing: localeUser.regionCode))")
@@ -65,10 +72,45 @@ class CurrencyViewController: UIViewController {
     }
 
     private func recoverDataOfUserDefaults() {
-        countryCodeDestination = userDefaults.string(forKey: "destinationCountryCode")?.uppercased()  ?? "BE"
+        countryCodeDestination = userDefaults.string(forKey: "destinationCountryCode")?.uppercased() ?? "BE"
         nameDestinationCountryLabel.text = userDefaults.string(forKey: "destinationCountry")?.uppercased() ?? "BELGIUM"
         destinationNameLabel.text = userDefaults.string(forKey: "destinationCityName")?.capitalized
     }
+
+    func modifyTextOnView() {
+            // write info Iphone parameter:
+            // - country
+        let regionCode = self.localeUser.regionCode
+        nameLocalCountryLabel.text = self.localeUser.localizedString(forRegionCode: regionCode ?? "Nothing")?.uppercased()
+        
+            // - currency symbol
+        iconCurrencyPhone.text = self.localeUser.currencySymbol
+
+            // write info destination country:
+
+
+            // - currency symbol
+        localeDestination = Locale(identifier: countryCodeDestination)
+        var countryMaxLanguageIdentifier = ""
+
+        if #available(iOS 16, *) {
+            countryMaxLanguageIdentifier = localeDestination.language.maximalIdentifier
+            currencyDestinationName = localeDestination.currency?.identifier ?? "EUR"
+        } else {
+            countryMaxLanguageIdentifier = localeDestination.identifier
+            currencyDestinationName = localeDestination.currencyCode ?? "EUR"
+        }
+        let localizedLanguage = Locale(identifier: countryMaxLanguageIdentifier)
+        print("🟠🔶🔸identifier language: \(localizedLanguage)")
+        iconCurrencyDestination.text = localizedLanguage.currencySymbol
+
+
+
+    }
+
+        // -------------------------------------------------------
+        //MARK: - keyboard keys
+        // -------------------------------------------------------
 
     @IBAction func tappedResetButton(_ sender: UIButton) {
         if textFieldEntryAmount.text.count >= 1 {
@@ -92,9 +134,7 @@ class CurrencyViewController: UIViewController {
 
     @IBAction func tappedToConvert(_ sender: UIButton) {
 
-        var localeCurrencyUser = ""
-        var localeCurrencyDestination = "EUR"
-
+            // recover the currency code
         if #available(iOS 16, *) {
             guard let value  = localeUser.currency?.identifier else { return }
             localeCurrencyUser = value
@@ -103,7 +143,7 @@ class CurrencyViewController: UIViewController {
             localeCurrencyUser = value
         }
 
-       API.QueryService.shared.getData(endpoint: .currency(to: localeCurrencyDestination, from: localeCurrencyUser, amount: amountTapped),
+       API.QueryService.shared.getData(endpoint: .currency(to: currencyDestinationName, from: localeCurrencyUser, amount: amountTapped),
                                     type: API.Currency.CalculateExchangeRate.self) { result in
                 switch result {
                 case .failure(let error):
@@ -132,6 +172,11 @@ class CurrencyViewController: UIViewController {
 //        }
 //    }
 
+
+        // -------------------------------------------------------
+        //MARK: - alert
+        // -------------------------------------------------------
+
     private func presentAlert() {
         let alertVC = UIAlertController(title: "Error", message: "The result of currency failed", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -140,7 +185,7 @@ class CurrencyViewController: UIViewController {
 
 
         // -------------------------------------------------------
-        //MARK: - Flag UIImageView
+        //MARK: - flag UIImageView
         // -------------------------------------------------------
 
     func addFlagCountries() {
@@ -154,7 +199,7 @@ class CurrencyViewController: UIViewController {
             }
             DispatchQueue.main.async {
                 self.flagLocalImageView.image = UIImage(data: countryFlag)
-                self.iconCurrencyPhone.text = self.localeUser.currencySymbol
+
                 API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: self.countryCodeDestination), method: .GET) { countryFlag in
                     guard let countryFlag = countryFlag else {
                         print(API.Error.generic(reason: "not shown data"))
@@ -162,6 +207,7 @@ class CurrencyViewController: UIViewController {
                     }
                     DispatchQueue.main.async {
                         self.flagDestinationImageView.image = UIImage(data: countryFlag)
+                        self.modifyTextOnView()
                     }
                 }
             }

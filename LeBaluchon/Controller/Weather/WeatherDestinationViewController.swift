@@ -41,10 +41,9 @@ class WeatherDestinationViewController: UIViewController {
         // MARK: - viewDidAppear
         // -------------------------------------------------------
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         giveMeTheWeather()
     }
-
 
 
         // -------------------------------------------------------
@@ -55,47 +54,47 @@ class WeatherDestinationViewController: UIViewController {
         guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
         guard let destinationCountry = userDefaults.string(forKey: "destinationCountry") else { return }
 
-//        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { [self] results in
-//            switch results {
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//
-//                case .success(let results):
-//                    let weatherForCity = results
-//                    cityLabel.text = destinationCity
-//                    countryLabel.text = destinationCountry
-//
-//                    degresLabel.text = String(Int(weatherForCity.main.temp))
-//                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-//                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
-//
-//                    dayLabel.text = self.giveMeTheDate(weatherForCity.date).dayLabel
-//                    hourLabel.text = self.giveMeTheDate(weatherForCity.date).hourLabel
-//
-//                    guard let description = weatherForCity.weather.first?.description,
-//                          let weatherDescription = WeatherDescription(rawValue: description)
-//                    else { return }
-//                    descriptionSkyLabel.text = weatherDescription.rawValue
-//
-//                        // Recover the images by the description weather
-//                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
-//                                                                 sunrise: weatherForCity.sys.sunrise,
-//                                                                 sunset: weatherForCity.sys.sunset,
-//                                                                 hourOfCountry: weatherForCity.date)
-//                    print("""
-//                          ✅ Description = \(description)
-//                          ☀️ \(String(describing: weatherForCity.sys.sunrise))
-//                          🌜 \(String(describing: weatherForCity.sys.sunset))
-//                          ⌚️ \(String(describing: weatherForCity.date))
-//                          🖼 \(weatherImages)
-//                    """)
-//
-//                    giveMeTheWeatherImages(weatherImages: weatherImages,
-//                                           background: backgroundImage,
-//                                           description: descriptionSkyImageView,
-//                                           characterImage: characterImage)
-//            }
-//        }
+        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { [self] results in
+            switch results {
+                case .failure(let error):
+                    print(error.localizedDescription)
+
+                case .success(let results):
+                    let weatherForCity = results
+                    cityLabel.text = destinationCity
+                    countryLabel.text = destinationCountry
+
+                    degresLabel.text = String(Int(weatherForCity.main.temp))
+                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+
+                    dayLabel.text = self.giveMeTheDate(weatherForCity.date).dayLabel
+                    hourLabel.text = self.giveMeTheDate(weatherForCity.date).hourLabel
+
+                    guard let description = weatherForCity.weather.first?.description,
+                          let weatherDescription = WeatherDescription(rawValue: description)
+                    else { return }
+                    descriptionSkyLabel.text = weatherDescription.rawValue
+
+                        // Recover the images by the description weather
+                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
+                                                                   sunrise: weatherForCity.sys.sunrise,
+                                                                   sunset: weatherForCity.sys.sunset,
+                                                                   hourOfCountry: weatherForCity.date)
+                    print("""
+                              ✅ Description = \(description)
+                              ☀️ \(String(describing: weatherForCity.sys.sunrise))
+                              🌜 \(String(describing: weatherForCity.sys.sunset))
+                              ⌚️ \(String(describing: weatherForCity.date))
+                              🖼 \(weatherImages)
+                        """)
+
+                    giveMeTheWeatherImages(weatherImages: weatherImages,
+                                           background: backgroundImage,
+                                           description: descriptionSkyImageView,
+                                           characterImage: characterImage)
+            }
+        }
     }
 
 

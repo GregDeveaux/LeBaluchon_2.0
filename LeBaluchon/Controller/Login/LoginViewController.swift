@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
 
 
         // -------------------------------------------------------
-        // MARK: - User name exist ?
+        // MARK: - user name exist ?
         // -------------------------------------------------------
 
     func checkTheUserNameExistInBase() {
@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
 
 
         // -----------------------------------------------------
-        // MARK: - Recover the info on the City and play the app
+        // MARK: - recover the info on the City and play the app
         // -----------------------------------------------------
 
         // Validate the user and the destination city textField if aren't nil then save datas and change the viewController
@@ -77,6 +77,10 @@ class LoginViewController: UIViewController {
         }
 
         validateEntryTextFields = true
+
+        if destinationTextField.text?.last == " " {
+            destinationTextField.text?.removeLast()
+        }
 
             // recover the info on the city after than the user wrote your destination in the textField
         API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
@@ -99,12 +103,22 @@ class LoginViewController: UIViewController {
         }
     }
 
+
+        // -------------------------------------------------------
+        // MARK: - alert
+        // -------------------------------------------------------
+
     func presentAlert(with error: String) {
         let alert: UIAlertController = UIAlertController(title: "Erreur", message: error, preferredStyle: .alert)
         let action: UIAlertAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(action)
         present(alert, animated: true)
     }
+
+
+        // -------------------------------------------------------
+        // MARK: - change ViewController after validation
+        // -------------------------------------------------------
 
     func changeViewController() {
             // used to move on the MainTabView if the fields "UserName" and "destination" is completed

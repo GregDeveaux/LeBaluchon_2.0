@@ -28,7 +28,7 @@ enum ImagesWeather {
         case clearSkyNight = "skyNight.png"
         case fewCloudsNight = "littleCloudyByNight.png"
         case scatteredCloudsDay = "littleCloudy.png"
-        case scatteredCloudsNight = "ByNight.png"
+        case scatteredCloudsNight = "scatteredCloudsNight.png"
         case brokenCloudsDay = "cloudyPower1.png"
         case brokenCloudsNight = "cloudyByNight.png"
         case overcastCloudsDay = "cloudyPower2.png"
@@ -111,7 +111,6 @@ extension ImagesWeather {
                 } else {
                     weatherImage = imagesByDescription(background: .overcastCloudsNight, icon: .brokenClouds, personna: .brokenClouds)
                 }
-
             case .showerRain:
                 if hourOfCountry >= sunrise && hourOfCountry <= sunset {
                     weatherImage = imagesByDescription(background: .rainDay, icon: .rain, personna: .brokenClouds)
