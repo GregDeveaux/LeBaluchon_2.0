@@ -691,17 +691,6 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiG-fk-x86">
-                                <rect key="frame" x="332" y="257" width="67" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="eiL-FH-ygg"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
-                                <connections>
-                                    <action selector="tappedForWeather:" destination="GJG-if-et3" eventType="touchUpInside" id="AMo-ir-rfi"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R6q-V1-djs"/>
                         <constraints>
@@ -709,7 +698,6 @@
                             <constraint firstItem="X72-vQ-EWi" firstAttribute="trailing" secondItem="R6q-V1-djs" secondAttribute="trailing" id="6RL-wf-kvt"/>
                             <constraint firstAttribute="bottom" secondItem="0jF-D6-f6q" secondAttribute="bottom" id="7K2-SP-kRK"/>
                             <constraint firstItem="0jF-D6-f6q" firstAttribute="top" secondItem="fzb-zJ-pWe" secondAttribute="top" id="BHG-h5-54F"/>
-                            <constraint firstItem="XiG-fk-x86" firstAttribute="top" secondItem="HX9-hk-j8g" secondAttribute="bottom" constant="-35" id="EAF-4D-LIz"/>
                             <constraint firstItem="oqi-Wh-ZyX" firstAttribute="top" secondItem="fzb-zJ-pWe" secondAttribute="top" constant="25" id="M8O-Jd-WNz"/>
                             <constraint firstItem="HX9-hk-j8g" firstAttribute="leading" secondItem="R6q-V1-djs" secondAttribute="leading" constant="90" id="MY1-wh-GB5"/>
                             <constraint firstAttribute="trailing" secondItem="0jF-D6-f6q" secondAttribute="trailing" id="Mam-XV-Fny"/>
@@ -717,10 +705,8 @@
                             <constraint firstItem="1n8-uJ-LAd" firstAttribute="top" secondItem="XlA-VC-YUx" secondAttribute="bottom" constant="15" id="T2L-m7-P8C"/>
                             <constraint firstItem="R6q-V1-djs" firstAttribute="trailing" secondItem="HX9-hk-j8g" secondAttribute="trailing" constant="90" id="VVC-Wu-cEG"/>
                             <constraint firstItem="0jP-BE-1rn" firstAttribute="leading" secondItem="R6q-V1-djs" secondAttribute="leading" id="WLB-wi-zSg"/>
-                            <constraint firstItem="R6q-V1-djs" firstAttribute="trailing" secondItem="XiG-fk-x86" secondAttribute="trailing" constant="15" id="bdy-ca-B5H"/>
                             <constraint firstItem="0jF-D6-f6q" firstAttribute="leading" secondItem="R6q-V1-djs" secondAttribute="leading" id="bnA-jB-MA8"/>
                             <constraint firstItem="oqi-Wh-ZyX" firstAttribute="centerX" secondItem="fzb-zJ-pWe" secondAttribute="centerX" id="dH2-zd-tdb"/>
-                            <constraint firstItem="XiG-fk-x86" firstAttribute="leading" secondItem="R6q-V1-djs" secondAttribute="leading" constant="332" id="gr1-FU-Wml"/>
                             <constraint firstItem="XlA-VC-YUx" firstAttribute="centerX" secondItem="fzb-zJ-pWe" secondAttribute="centerX" id="idk-oI-f6C"/>
                             <constraint firstItem="X72-vQ-EWi" firstAttribute="leading" secondItem="R6q-V1-djs" secondAttribute="leading" id="k1l-vQ-Vdj"/>
                             <constraint firstItem="XlA-VC-YUx" firstAttribute="top" secondItem="oqi-Wh-ZyX" secondAttribute="bottom" constant="10" id="kqV-36-p4I"/>
@@ -1419,15 +1405,15 @@
                     <connections>
                         <outlet property="backgroundImage" destination="l8n-3v-IgS" id="eSk-uQ-MQq"/>
                         <outlet property="characterImage" destination="zF2-jZ-1CN" id="FRd-nG-WUY"/>
-                        <outlet property="cityLabel" destination="4Ik-do-Xkj" id="uKD-lx-cfo"/>
-                        <outlet property="countryLabel" destination="sSA-1V-IOb" id="kCd-BB-ERf"/>
+                        <outlet property="cityDestinationLabel" destination="4Ik-do-Xkj" id="4sa-Hs-awj"/>
+                        <outlet property="countryDestinationLabel" destination="sSA-1V-IOb" id="bRj-Td-yPa"/>
                         <outlet property="dayLabel" destination="GIG-Mj-jJ4" id="yXB-YO-YLb"/>
-                        <outlet property="degresLabel" destination="Noh-Li-tSb" id="Hrd-e7-Kzd"/>
                         <outlet property="descriptionSkyImageView" destination="h0L-aB-zL1" id="FZP-vl-aG1"/>
                         <outlet property="descriptionSkyLabel" destination="ShT-Kv-GFs" id="goQ-Zb-4gy"/>
                         <outlet property="hightTempDayLabel" destination="fJR-uk-MAw" id="LY6-fc-brt"/>
                         <outlet property="hourLabel" destination="rZl-jp-Y4u" id="5Ag-sb-04I"/>
                         <outlet property="lowTempDayLabel" destination="Xrh-Td-9Ro" id="1j0-jG-qiK"/>
+                        <outlet property="temperatureDestinationLabel" destination="Noh-Li-tSb" id="lCg-2X-0yo"/>
                         <outletCollection property="unitTempLabels" destination="ZLa-vI-8CG" collectionClass="NSMutableArray" id="Awd-LL-jUk"/>
                         <outletCollection property="unitTempLabels" destination="fVV-CV-FGW" collectionClass="NSMutableArray" id="NAQ-XD-5yt"/>
                         <outletCollection property="unitTempLabels" destination="U4d-gV-tf1" collectionClass="NSMutableArray" id="Gtr-pf-7uH"/>

@@ -7,15 +7,26 @@
 
 import UIKit
 
+//protocol WeatherDestinationViewControllerDelegate: AnyObject {
+//    func rescueTheData(_ vc: WeatherDestinationViewController)
+//}
+
 class WeatherDestinationViewController: UIViewController {
+
+//    weak var delegate: WeatherDestinationViewControllerDelegate?
+//
+//    func rescueData() {
+//        delegate?.rescueTheData(self)
+//    }
 
         // -------------------------------------------------------
         // MARK: - properties
         // -------------------------------------------------------
 
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
-    @IBOutlet weak var degresLabel: UILabel!
+    @IBOutlet weak var cityDestinationLabel: UILabel!
+    @IBOutlet weak var countryDestinationLabel: UILabel!
+    @IBOutlet weak var temperatureDestinationLabel: UILabel!
+    
     @IBOutlet var unitTempLabels: [UILabel]!
     @IBOutlet weak var hightTempDayLabel: UILabel!
     @IBOutlet weak var lowTempDayLabel: UILabel!
@@ -28,9 +39,9 @@ class WeatherDestinationViewController: UIViewController {
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var characterImage: UIImageView!
 
-    @IBOutlet weak var button: UIButton!
-
     let userDefaults = UserDefaults()
+
+    var destinationCityzzzzz = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +52,8 @@ class WeatherDestinationViewController: UIViewController {
         // MARK: - viewDidAppear
         // -------------------------------------------------------
 
-    override func viewWillAppear(_ animated: Bool) {
-        giveMeTheWeather()
+    override func viewDidAppear(_ animated: Bool) {
+//        giveMeTheWeather()
     }
 
 
@@ -61,38 +72,47 @@ class WeatherDestinationViewController: UIViewController {
 
                 case .success(let results):
                     let weatherForCity = results
-                    cityLabel.text = destinationCity
-                    countryLabel.text = destinationCountry
 
-                    degresLabel.text = String(Int(weatherForCity.main.temp))
-                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+                        // >>>>>> si j'enregistre dans une propriété, là ça marche
+                    destinationCityzzzzz = destinationCity
+                    print(destinationCityzzzzz)
 
-                    dayLabel.text = self.giveMeTheDate(weatherForCity.date).dayLabel
-                    hourLabel.text = self.giveMeTheDate(weatherForCity.date).hourLabel
+                        // >>>>>> et dès que je veux l'afficher, ça ne marche plus
+                        // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
+                    cityDestinationLabel.text = destinationCity
 
-                    guard let description = weatherForCity.weather.first?.description,
-                          let weatherDescription = WeatherDescription(rawValue: description)
-                    else { return }
-                    descriptionSkyLabel.text = weatherDescription.rawValue
-
-                        // Recover the images by the description weather
-                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
-                                                                   sunrise: weatherForCity.sys.sunrise,
-                                                                   sunset: weatherForCity.sys.sunset,
-                                                                   hourOfCountry: weatherForCity.date)
-                    print("""
-                              ✅ Description = \(description)
-                              ☀️ \(String(describing: weatherForCity.sys.sunrise))
-                              🌜 \(String(describing: weatherForCity.sys.sunset))
-                              ⌚️ \(String(describing: weatherForCity.date))
-                              🖼 \(weatherImages)
-                        """)
-
-                    giveMeTheWeatherImages(weatherImages: weatherImages,
-                                           background: backgroundImage,
-                                           description: descriptionSkyImageView,
-                                           characterImage: characterImage)
+//                    cityDestinationLabel.text = destinationCity
+//                    countryDestinationLabel.text = destinationCountry
+//
+//                    temperatureDestinationLabel.text = String(Int(weatherForCity.main.temp))
+//                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
+//                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
+//
+//                    dayLabel.text = self.giveMeTheDate(weatherForCity.date).dayLabel
+//                    hourLabel.text = self.giveMeTheDate(weatherForCity.date).hourLabel
+//
+//                    guard let description = weatherForCity.weather.first?.description,
+//                          let weatherDescription = WeatherDescription(rawValue: description)
+//                    else { return }
+//                    descriptionSkyLabel.text = weatherDescription.rawValue
+//
+//                        // Recover the images by the description weather
+//                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
+//                                                                   sunrise: weatherForCity.sys.sunrise,
+//                                                                   sunset: weatherForCity.sys.sunset,
+//                                                                   hourOfCountry: weatherForCity.date)
+//                    print("""
+//                                  ✅ Description = \(description)
+//                                  ☀️ \(String(describing: weatherForCity.sys.sunrise))
+//                                  🌜 \(String(describing: weatherForCity.sys.sunset))
+//                                  ⌚️ \(String(describing: weatherForCity.date))
+//                                  🖼 \(weatherImages)
+//                            """)
+//
+//                    giveMeTheWeatherImages(weatherImages: weatherImages,
+//                                           background: backgroundImage,
+//                                           description: descriptionSkyImageView,
+//                                           characterImage: characterImage)
             }
         }
     }
