@@ -11,7 +11,7 @@ import PhotosUI
 extension TranslateViewController: PHPickerViewControllerDelegate, UINavigationControllerDelegate {
 
     // -------------------------------------------------------
-    // MARK: load the image (library or camera)
+    // MARK: - load the image (library or camera)
     // -------------------------------------------------------
 
 func chooseNewImage() {
@@ -38,7 +38,7 @@ func chooseNewImage() {
 }
 
     // -------------------------------------------------------
-    // MARK: picker image library
+    // MARK: - picker image library
     // -------------------------------------------------------
 
         // create a picker controller to load the images from photo library
@@ -84,7 +84,7 @@ func chooseNewImage() {
 
 
     // -------------------------------------------------------
-    // MARK: picker camera
+    // MARK: - picker camera
     // -------------------------------------------------------
 
 extension TranslateViewController: UIImagePickerControllerDelegate {

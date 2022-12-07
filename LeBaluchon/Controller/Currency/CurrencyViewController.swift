@@ -25,20 +25,23 @@ class CurrencyViewController: UIViewController {
     @IBOutlet weak var flagDestinationImageView: UIImageView!
     @IBOutlet weak var nameDestinationCountryLabel: UILabel!
     @IBOutlet weak var resetNumberButton: UIButton!
-    @IBOutlet weak var destinationNameLabel: UILabel!
+    @IBOutlet weak var nameDestinationLabel: UILabel!
+    @IBOutlet var whiteBoardView: [UIView]!
 
     var amountTapped: Double = 0.0
 
     let userDefaults = UserDefaults.standard
+
     let localeUser = Locale.current
     var localeDestination: Locale!
 
     var countryCodeDestination: String = ""
-    var localeCurrencyDestination: String = ""
-    var currencyDestinationName: String = ""
-
     var countryCodeUser: String = ""
-    var localeCurrencyUser: String = ""
+
+    var currencyDestinationName: String = ""
+    var currencyDestinationSymbol: String = ""
+
+    var currencyUserName: String = ""
     var currencyUserSymbol: String = ""
 
 
@@ -50,63 +53,18 @@ class CurrencyViewController: UIViewController {
         super.viewDidLoad()
 
         recoverDataOfUserDefaults()
+        whiteBoardView[0].currencyDesign()
+        whiteBoardView[1].currencyDesign()
         addFlagCountries()
-
-
-        if #available(iOS 16, *) {
-            localeDestination = Locale()
-//            let currency = Locale.Currency(from: localeDestination as! Decoder)
-//            iconCurrencyDestination.text = Locale.lo
-
-        } else {
-                // Fallback on earlier versions
-        }
-
-        print("🌐 the currency symbole is: \(String(describing: countryCodeDestination)))")
-        print("🌐 the currency symbole is: \(String(describing: localeDestination)))")
-        print("🌐 the currency symbole is: \(String(describing: iconCurrencyDestination.text)))")
-        print("🌐 the region name is: \(String(describing: nameLocalCountryLabel.text)))")
-        print("🌐 the region code is: \(String(describing: localeUser.regionCode))")
-
-
     }
 
     private func recoverDataOfUserDefaults() {
         countryCodeDestination = userDefaults.string(forKey: "destinationCountryCode")?.uppercased() ?? "BE"
         nameDestinationCountryLabel.text = userDefaults.string(forKey: "destinationCountry")?.uppercased() ?? "BELGIUM"
-        destinationNameLabel.text = userDefaults.string(forKey: "destinationCityName")?.capitalized
+        guard let nameDestination = userDefaults.string(forKey: "destinationCityName")?.capitalized else { return }
+        nameDestinationLabel.text = "you have chosen as destination: \(nameDestination)"
     }
 
-    func modifyTextOnView() {
-            // write info Iphone parameter:
-            // - country
-        let regionCode = self.localeUser.regionCode
-        nameLocalCountryLabel.text = self.localeUser.localizedString(forRegionCode: regionCode ?? "Nothing")?.uppercased()
-        
-            // - currency symbol
-        iconCurrencyPhone.text = self.localeUser.currencySymbol
-
-            // write info destination country:
-
-
-            // - currency symbol
-        localeDestination = Locale(identifier: countryCodeDestination)
-        var countryMaxLanguageIdentifier = ""
-
-        if #available(iOS 16, *) {
-            countryMaxLanguageIdentifier = localeDestination.language.maximalIdentifier
-            currencyDestinationName = localeDestination.currency?.identifier ?? "EUR"
-        } else {
-            countryMaxLanguageIdentifier = localeDestination.identifier
-            currencyDestinationName = localeDestination.currencyCode ?? "EUR"
-        }
-        let localizedLanguage = Locale(identifier: countryMaxLanguageIdentifier)
-        print("🟠🔶🔸identifier language: \(localizedLanguage)")
-        iconCurrencyDestination.text = localizedLanguage.currencySymbol
-
-
-
-    }
 
         // -------------------------------------------------------
         //MARK: - keyboard keys
@@ -134,18 +92,9 @@ class CurrencyViewController: UIViewController {
 
     @IBAction func tappedToConvert(_ sender: UIButton) {
 
-            // recover the currency code
-        if #available(iOS 16, *) {
-            guard let value  = localeUser.currency?.identifier else { return }
-            localeCurrencyUser = value
-        } else {
-            guard let value  = localeUser.currencyCode else { return }
-            localeCurrencyUser = value
-        }
-
-       API.QueryService.shared.getData(endpoint: .currency(to: currencyDestinationName, from: localeCurrencyUser, amount: amountTapped),
-                                    type: API.Currency.CalculateExchangeRate.self) { result in
-                switch result {
+        API.QueryService.shared.getData(endpoint: .currency(to: currencyDestinationName, from: currencyUserName, amount: amountTapped),
+                                        type: API.Currency.CalculateExchangeRate.self) { result in
+            switch result {
                 case .failure(let error):
                     self.presentAlert()
                     print(error.localizedDescription)
@@ -156,21 +105,37 @@ class CurrencyViewController: UIViewController {
                         self.textFieldResult.text = String(calculateExchangeRate.result)
                         print("💰result: \(String(describing: calculateExchangeRate.result))")
                     }
-                }
             }
         }
-//        API.QueryService.shared.getCurrency(endpoint: .currency(to: "", from: localeCurrency, amount: amountTapped), method: .GET) { success, calculateExchangeRate in
-//            guard let calculateExchangeRate = calculateExchangeRate, success == true else {
-//                self.presentAlert()
-//                print(API.Error.generic(reason: "not shown data"))
-//                return
-//            }
-//            DispatchQueue.main.async {
-//                self.textFieldResult.text = String(calculateExchangeRate.result )
-//                print("💰result: \(String(describing: calculateExchangeRate.result))")
-//            }
-//        }
-//    }
+    }
+
+
+        // -------------------------------------------------------
+        //MARK: - found the currency of the destination city
+        // -------------------------------------------------------
+
+    func giveMeTheCurrencySymbolDestination(countryCode: String) {
+        if #available(iOS 16, *) {
+                // for user part
+            currencyUserName = localeUser.currency?.identifier ?? "unknow"
+                // for destination city part
+            let regionCode = Locale.Region(countryCode)
+            localeDestination = Locale(languageCode: "", languageRegion: regionCode)
+            currencyDestinationName = localeDestination.currency?.identifier ?? "unknow"
+        } else {
+                // for user part
+            currencyUserName  = localeUser.currencyCode ?? "unknow"
+                // for destination city part
+            currencyDestinationName = localeDestination.currencyCode ?? "unknow"
+        }
+        currencyDestinationSymbol = localeDestination.currencySymbol ?? "unknow"
+
+            // show symbol on the view
+        let regionCode = self.localeUser.regionCode
+        nameLocalCountryLabel.text = self.localeUser.localizedString(forRegionCode: regionCode ?? "Nothing")?.uppercased()
+        iconCurrencyPhone.text = self.localeUser.currencySymbol
+        iconCurrencyDestination.text = currencyDestinationSymbol
+    }
 
 
         // -------------------------------------------------------
@@ -205,9 +170,9 @@ class CurrencyViewController: UIViewController {
                         print(API.Error.generic(reason: "not shown data"))
                         return
                     }
-                    DispatchQueue.main.async {
-                        self.flagDestinationImageView.image = UIImage(data: countryFlag)
-                        self.modifyTextOnView()
+                    DispatchQueue.main.async { [self] in
+                        flagDestinationImageView.image = UIImage(data: countryFlag)
+                        giveMeTheCurrencySymbolDestination(countryCode: countryCodeDestination)
                     }
                 }
             }

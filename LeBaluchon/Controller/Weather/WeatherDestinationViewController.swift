@@ -53,7 +53,7 @@ class WeatherDestinationViewController: UIViewController {
         // -------------------------------------------------------
 
     override func viewDidAppear(_ animated: Bool) {
-//        giveMeTheWeather()
+
     }
 
 
@@ -79,8 +79,8 @@ class WeatherDestinationViewController: UIViewController {
 
                         // >>>>>> et dès que je veux l'afficher, ça ne marche plus
                         // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
-                    cityDestinationLabel.text = destinationCity
-
+//                    cityDestinationLabel.text = destinationCity
+//
 //                    cityDestinationLabel.text = destinationCity
 //                    countryDestinationLabel.text = destinationCountry
 //

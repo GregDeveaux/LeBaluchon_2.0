@@ -60,13 +60,13 @@ extension API {
             // -------------------------------------------------------------
             // ...thanks to the writing of the destination by the destinationTextField
 
-        static func recoverInfoOnTheCity(named city: String, completion: @escaping (CityInfo?) -> Void) {
+        static func recoverInfoOnTheCity(named city: String, completion: @escaping (DestinationCity?) -> Void) {
             API.City.foundCoordinates(of: city) { recoverInfo in
                 completion(recoverInfo)
             }
         }
 
-        static private func foundCoordinates(of city: String, completion: @escaping(CityInfo) -> Void) {
+        static private func foundCoordinates(of city: String, completion: @escaping(DestinationCity) -> Void) {
 
             QueryService.shared.getData(endpoint: .coordinates(city: city),
                                         type: [City.Coordinates].self) { results in
@@ -90,7 +90,7 @@ extension API {
         }
 
             // ...thanks to the writing of the latitude and longitude
-        static func foundCountryByCoordinates(latitude: String, longitude: String, completion: @escaping(CityInfo) -> Void) {
+        static func foundCountryByCoordinates(latitude: String, longitude: String, completion: @escaping(DestinationCity) -> Void) {
 
             QueryService.shared.getData(endpoint: .city(latitude: latitude, longitude: longitude),
                                         type: City.Country.self) { result in
@@ -113,7 +113,7 @@ extension API {
             // MARK: - create City info
             // -------------------------------------------------------
 
-        static private func createDestinationCity(destination: API.City.Country) -> CityInfo {
+        static private func createDestinationCity(destination: API.City.Country) -> DestinationCity {
 
             let name: String = {
                 var name = ""
@@ -134,7 +134,7 @@ extension API {
             let latitude = Double(destination.latitude)!
             let longitude = Double(destination.longitude)!
 
-            return CityInfo(name: name, country: country, countryCode: countryCode, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude))
+            return DestinationCity(name: name, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude), country: country, countryCode: countryCode)
         }
     }
 }

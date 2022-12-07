@@ -68,6 +68,16 @@ class TranslateViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
 
+    }
+
+
+        // -------------------------------------------------------
+        // MARK: - setups
+        // -------------------------------------------------------
+
+    func setupInitFirstLanguage() {
+
+            // for user
         if #available(iOS 16, *) {
             sourceLanguage = localeUser.language.maximalIdentifier
             let languageDestination = localeUser.localizedString(forLanguageCode: sourceLanguage)
@@ -80,7 +90,7 @@ class TranslateViewController: UIViewController {
             firstLanguageButton.setTitle(languageDestination, for: .normal)
         }
 
-
+            // for destination city
         let countryCode = userDefaults.string(forKey: "destinationCountryCode")
         localeDestination = Locale(identifier: countryCode ?? "BE")
 
@@ -96,11 +106,6 @@ class TranslateViewController: UIViewController {
             secondLanguageButton.setTitle(languageDestination, for: .normal)
         }
     }
-
-
-        // -------------------------------------------------------
-        // MARK: - setups
-        // -------------------------------------------------------
 
     private func setupTranslate() {
         setupTextView(baseTextView)

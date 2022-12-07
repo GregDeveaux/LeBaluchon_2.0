@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
     let destinationCityLongitude = UserDefaults.standard.double(forKey: "destinationCityLongitude")
 
     var user: User!
-    var destinationCity: CityInfo!
+    var destinationCity: DestinationCity!
 
     var pinUser: PinMap!
     var pinDestination: PinMap!
@@ -45,20 +45,22 @@ class MapViewController: UIViewController {
         print("✅ route \(createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)))")
     }
 
-    func setupUser(latitude: Double, longitude: Double) -> User {
-
-        print("✅ coordinates receive of \(userName) are lat:\(latitude) et long:\(longitude))")
-        userDefaults.set(latitude, forKey: "userLatitude")
-        userDefaults.set(longitude, forKey: "userLongitude")
-
-        API.City.foundCountryByCoordinates(latitude: String(latitude), longitude: String(longitude)) { cityInfo in
-            self.userDefaults.set(cityInfo.name, forKey: "userCityName")
-            self.userDefaults.set(cityInfo.country, forKey: "userCountry")
-            self.userDefaults.set(cityInfo.countryCode, forKey: "userCountryCode")
-            self.userNameLabel.text = self.user.welcomeMessage
+    func setupUser(latitude: Double, longitude: Double) {
+        API.City.foundCountryByCoordinates(latitude: String(latitude), longitude: String(longitude)) { [self] cityInfo in
+            user = User(name: userName,
+                        coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude),
+                        cityName: cityInfo.name,
+                        country: cityInfo.country,
+                        countryCode: cityInfo.countryCode)
+//            userDefaults.set(latitude, forKey: "userLatitude")
+//            userDefaults.set(longitude, forKey: "userLongitude")
+//            userDefaults.set(cityInfo.name, forKey: "userCityName")
+//            userDefaults.set(cityInfo.country, forKey: "userCountry")
+//            userDefaults.set(cityInfo.countryCode, forKey: "userCountryCode")
+            userNameLabel.text = user.welcomeMessage
             print("✅📲 user City Name \(cityInfo.name), in \(cityInfo.country) with country code : \(cityInfo.countryCode)")
+            print("✅ coordinates receive of \(userName) are lat:\(latitude) et long:\(longitude))")
         }
-        return User(name: userName, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude))
     }
     
     @IBAction func tappedModifyDestination(_ sender: UIButton) {
@@ -191,8 +193,8 @@ extension MapViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         currentLocationUser = location
 
-            // Save the User
-        user = setupUser(latitude: currentLocationUser?.coordinate.latitude ?? 0, longitude: currentLocationUser?.coordinate.longitude ?? 0)
+            // Save the coordinates of user
+        setupUser(latitude: currentLocationUser?.coordinate.latitude ?? 0, longitude: currentLocationUser?.coordinate.longitude ?? 0)
 
             // create aline a line between the user and the destination
         let startPolyline = location.coordinate

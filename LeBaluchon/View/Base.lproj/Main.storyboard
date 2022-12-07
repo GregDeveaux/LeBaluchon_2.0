@@ -35,7 +35,7 @@
                                                 <color key="textColor" red="0.41786406721174657" green="0.61149512081784385" blue="0.56396382044285298" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xf-cc-0H6" userLabel="Enter number View">
+                                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xf-cc-0H6" userLabel="Enter number View">
                                                 <rect key="frame" x="0.0" y="25" width="354" height="106"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="7dH-0k-VoZ" userLabel="Enter number Stack View">
@@ -100,31 +100,29 @@
                                             <constraint firstItem="bmT-Hg-skP" firstAttribute="top" secondItem="PA5-u3-8AJ" secondAttribute="top" id="qBd-0v-Vsw"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-dB-Yt6">
-                                        <rect key="frame" x="125.33333333333334" y="147.33333333333334" width="103.33333333333334" height="70"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-dB-Yt6">
+                                        <rect key="frame" x="132" y="142.66666666666666" width="90" height="90"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="C1W-Ak-d2s"/>
-                                            <constraint firstAttribute="height" constant="70" id="tVt-xh-Iqt"/>
+                                            <constraint firstAttribute="height" constant="90" id="C1W-Ak-d2s"/>
+                                            <constraint firstAttribute="width" secondItem="pbz-dB-Yt6" secondAttribute="height" multiplier="1:1" id="nE8-PK-Ns5"/>
+                                            <constraint firstAttribute="height" constant="90" id="tVt-xh-Iqt"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" cornerStyle="dynamic">
-                                            <imageReference key="image" image="dollarsign.circle.fill" catalog="system" symbolScale="large"/>
-                                            <backgroundConfiguration key="background" cornerRadius="71"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="50" scale="large" weight="black"/>
-                                            <color key="baseForegroundColor" systemColor="systemYellowColor"/>
-                                        </buttonConfiguration>
+                                        <color key="tintColor" systemColor="systemYellowColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="piece" symbolScale="large"/>
+                                        </state>
                                         <connections>
                                             <action selector="tappedToConvert:" destination="69T-SZ-NTr" eventType="touchUpInside" id="yXV-lV-SNi"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q5s-NR-uEy" userLabel="Destination Stack View">
-                                        <rect key="frame" x="0.0" y="222" width="354" height="154"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q5s-NR-uEy" userLabel="Destination Stack View">
+                                        <rect key="frame" x="0.0" y="243" width="354" height="133"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="9B6-ZN-1Qd" userLabel="Text Destination Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="41"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="9B6-ZN-1Qd" userLabel="Text Destination Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="20"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="you have chosen as destination:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Uj-kNi">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="you have chosen as destination: New York" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Uj-kNi">
                                                         <rect key="frame" x="0.0" y="0.0" width="354" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="tEG-Ki-haJ"/>
@@ -133,19 +131,10 @@
                                                         <color key="textColor" red="0.41786406720000002" green="0.61149512080000001" blue="0.56396382040000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrC-zv-teg">
-                                                        <rect key="frame" x="0.0" y="21" width="354" height="20"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="6ak-lm-8Im"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                             </stackView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-bh-zae" userLabel="Enter number View">
-                                                <rect key="frame" x="0.0" y="49" width="354" height="105"/>
+                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-bh-zae" userLabel="result View">
+                                                <rect key="frame" x="0.0" y="28" width="354" height="105"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="bhJ-pj-xhJ" userLabel="Enter number Stack View">
                                                         <rect key="frame" x="15" y="15" width="324" height="75"/>
@@ -461,12 +450,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonConvert" destination="pbz-dB-Yt6" id="KQ3-wm-haB"/>
-                        <outlet property="destinationNameLabel" destination="hrC-zv-teg" id="0KU-Sq-PeT"/>
                         <outlet property="flagDestinationImageView" destination="g8y-13-MoR" id="k5g-s1-l71"/>
                         <outlet property="flagLocalImageView" destination="rii-vL-Eg4" id="2R2-xw-jC8"/>
                         <outlet property="iconCurrencyDestination" destination="oME-lY-vUD" id="xy4-fP-Gxh"/>
                         <outlet property="iconCurrencyPhone" destination="h8W-5n-7E6" id="vVE-FD-61G"/>
                         <outlet property="nameDestinationCountryLabel" destination="lJd-Cm-4RT" id="Dub-n8-taL"/>
+                        <outlet property="nameDestinationLabel" destination="Puc-Uj-kNi" id="g1J-f4-F3q"/>
                         <outlet property="nameLocalCountryLabel" destination="kjW-q5-1zS" id="44X-Pd-6bG"/>
                         <outlet property="resetNumberButton" destination="gss-GP-vU0" id="ZqB-8e-Po3"/>
                         <outlet property="textFieldEntryAmount" destination="Njv-ko-jbn" id="S1e-Uq-0Lk"/>
@@ -482,6 +471,8 @@
                         <outletCollection property="numberButton" destination="l8q-XP-XRK" collectionClass="NSMutableArray" id="QfS-xR-kFu"/>
                         <outletCollection property="numberButton" destination="xi0-AQ-xVO" collectionClass="NSMutableArray" id="ZWz-PN-ujb"/>
                         <outletCollection property="numberButton" destination="onh-3w-f7l" collectionClass="NSMutableArray" id="1XK-Pi-SVq"/>
+                        <outletCollection property="whiteBoardView" destination="ahY-bh-zae" collectionClass="NSMutableArray" id="zby-ko-5M3"/>
+                        <outletCollection property="whiteBoardView" destination="3xf-cc-0H6" collectionClass="NSMutableArray" id="StD-XT-WUa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ArR-Wk-Vw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1556,6 +1547,7 @@
         <image name="moon.fill" catalog="system" width="128" height="123"/>
         <image name="perso1" width="439" height="466"/>
         <image name="perso1OnThefloor" width="439" height="445"/>
+        <image name="piece" width="284" height="298"/>
         <image name="skyNight" width="1125" height="2436"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <image name="sun.max.fill" catalog="system" width="128" height="125"/>

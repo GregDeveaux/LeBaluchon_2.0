@@ -28,7 +28,7 @@
 		BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */; };
 		BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */; };
 		BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */; };
-		BC278B96290ECC790098A82C /* CityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* CityInfo.swift */; };
+		BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* DestinationCity.swift */; };
 		BC278B98290ED7AC0098A82C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B97290ED7AC0098A82C /* User.swift */; };
 		BC2AB6C82933F56500B6CE2D /* APITranslateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */; };
 		BC40284528FB6A760044A19A /* APICurrencyExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC40284428FB6A760044A19A /* APICurrencyExample.json */; };
@@ -48,6 +48,7 @@
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
 		BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */; };
+		BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD5D6A029400F9B0050F07C /* UIView+Design.swift */; };
 		BCE061FE29355C450029A72F /* APICoordinatesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */; };
 		BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */; };
 		BCF0B807293531180037214B /* LeBaluchonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B806293531180037214B /* LeBaluchonTest.swift */; };
@@ -101,7 +102,7 @@
 		BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GradientView.swift"; sourceTree = "<group>"; };
 		BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Designable.swift"; sourceTree = "<group>"; };
-		BC278B95290ECC790098A82C /* CityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInfo.swift; sourceTree = "<group>"; };
+		BC278B95290ECC790098A82C /* DestinationCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCity.swift; sourceTree = "<group>"; };
 		BC278B97290ED7AC0098A82C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITranslateTests.swift; sourceTree = "<group>"; };
 		BC40284428FB6A760044A19A /* APICurrencyExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICurrencyExample.json; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+PickerView.swift"; sourceTree = "<group>"; };
+		BCD5D6A029400F9B0050F07C /* UIView+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Design.swift"; sourceTree = "<group>"; };
 		BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Animations.swift"; sourceTree = "<group>"; };
 		BCF0B806293531180037214B /* LeBaluchonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeBaluchonTest.swift; sourceTree = "<group>"; };
 		BCF0B808293540450037214B /* APICoordinatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICoordinatesTests.swift; sourceTree = "<group>"; };
@@ -251,7 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				BC40285B28FDE0F20044A19A /* API */,
-				BC278B95290ECC790098A82C /* CityInfo.swift */,
+				BC278B95290ECC790098A82C /* DestinationCity.swift */,
 				BC278B97290ED7AC0098A82C /* User.swift */,
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
 				BC752158293939960015B863 /* ImagesWeather.swift */,
@@ -347,6 +349,7 @@
 				BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */,
 				BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */,
 				BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */,
+				BCD5D6A029400F9B0050F07C /* UIView+Design.swift */,
 				BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */,
 			);
 			path = Extensions;
@@ -506,6 +509,7 @@
 				BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */,
 				BC278B98290ED7AC0098A82C /* User.swift in Sources */,
 				BC15FF6A28F7377000A0F594 /* WeatherDestinationViewController.swift in Sources */,
+				BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */,
 				BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */,
 				BC40285628FDDA070044A19A /* APICountryFlag.swift in Sources */,
 				BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */,
@@ -526,7 +530,7 @@
 				BC40285A28FDE0D10044A19A /* APIError.swift in Sources */,
 				BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */,
 				BC0C6B3C28F4B2AA0075C614 /* SceneDelegate.swift in Sources */,
-				BC278B96290ECC790098A82C /* CityInfo.swift in Sources */,
+				BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
