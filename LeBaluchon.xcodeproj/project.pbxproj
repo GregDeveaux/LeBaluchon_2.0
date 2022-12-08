@@ -50,6 +50,7 @@
 		BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */; };
 		BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD5D6A029400F9B0050F07C /* UIView+Design.swift */; };
 		BCE061FE29355C450029A72F /* APICoordinatesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */; };
+		BCE1E1A829429E5500BEF405 /* TranslateViewController+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */; };
 		BCE3F646294151A4001F7422 /* ListOfLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE3F645294151A4001F7422 /* ListOfLanguages.swift */; };
 		BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */; };
 		BCF0B807293531180037214B /* LeBaluchonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B806293531180037214B /* LeBaluchonTest.swift */; };
@@ -126,6 +127,7 @@
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+PickerView.swift"; sourceTree = "<group>"; };
 		BCD5D6A029400F9B0050F07C /* UIView+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Design.swift"; sourceTree = "<group>"; };
+		BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Design.swift"; sourceTree = "<group>"; };
 		BCE3F645294151A4001F7422 /* ListOfLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfLanguages.swift; sourceTree = "<group>"; };
 		BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Animations.swift"; sourceTree = "<group>"; };
 		BCF0B806293531180037214B /* LeBaluchonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeBaluchonTest.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
 				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
 				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
+				BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */,
 			);
 			path = Translate;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */,
+				BCE1E1A829429E5500BEF405 /* TranslateViewController+Design.swift in Sources */,
 				BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */,
 				BC752159293939960015B863 /* ImagesWeather.swift in Sources */,
 				BC0C6B6C28F4BB9E0075C614 /* WeatherHomeViewController.swift in Sources */,

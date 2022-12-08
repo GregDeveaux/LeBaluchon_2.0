@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Language: String {
+enum Language: String, CaseIterable {
     case French
     case English
     case Italian

@@ -24,7 +24,7 @@ final class LeBaluchonTest: XCTestCase {
     }
 
     func test_User() throws {
-        let user = User(name: "Robert", coordinates: CoordinatesInfo(latitude: 49.5532646, longitude: 2.9392577))
+        let user = User(name:"Robert", coordinates: CoordinatesInfo(latitude: 49.5532646, longitude: 2.9392577), cityName: "", country: "", countryCode: "")
         XCTAssertEqual(user.name, "Robert")
         XCTAssertEqual(user.coordinates.latitude, 49.5532646)
         XCTAssertEqual(user.coordinates.longitude, 2.9392577)
@@ -32,7 +32,7 @@ final class LeBaluchonTest: XCTestCase {
     }
 
     func test_City() throws {
-        let city = DestinationCity(name: "Dijon", country: "France", countryCode: "fr", coordinates: CoordinatesInfo(latitude: 47.3215806, longitude: 5.0414701))
+        let city = DestinationCity(name: "Dijon", coordinates: CoordinatesInfo(latitude: 47.3215806, longitude: 5.0414701), country: "France", countryCode: "fr")
         XCTAssertEqual(city.name, "Dijon")
         XCTAssertEqual(city.country, "France")
         XCTAssertEqual(city.countryCode, "fr")

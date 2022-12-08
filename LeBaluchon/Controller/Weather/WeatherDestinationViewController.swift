@@ -23,10 +23,9 @@ class WeatherDestinationViewController: UIViewController {
         // MARK: - properties
         // -------------------------------------------------------
 
-    @IBOutlet weak var cityDestinationLabel: UILabel!
-    @IBOutlet weak var countryDestinationLabel: UILabel!
-    @IBOutlet weak var temperatureDestinationLabel: UILabel!
-    
+    @IBOutlet weak var countryNameDestinationLabel: UILabel!
+    @IBOutlet weak var cityNameDestinationLabel: UILabel!
+    @IBOutlet weak var temperatureOfDestinationLabel: UILabel!
     @IBOutlet var unitTempLabels: [UILabel]!
     @IBOutlet weak var hightTempDayLabel: UILabel!
     @IBOutlet weak var lowTempDayLabel: UILabel!
@@ -79,12 +78,10 @@ class WeatherDestinationViewController: UIViewController {
 
                         // >>>>>> et dès que je veux l'afficher, ça ne marche plus
                         // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
-//                    cityDestinationLabel.text = destinationCity
+//                    cityNameDestinationLabel.text = destinationCity
+//                    countryNameDestinationLabel.text = destinationCountry
 //
-//                    cityDestinationLabel.text = destinationCity
-//                    countryDestinationLabel.text = destinationCountry
-//
-//                    temperatureDestinationLabel.text = String(Int(weatherForCity.main.temp))
+                    temperatureOfDestinationLabel.text = String(Int(weatherForCity.main.temp))
 //                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
 //                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
 //

@@ -1396,15 +1396,15 @@
                     <connections>
                         <outlet property="backgroundImage" destination="l8n-3v-IgS" id="eSk-uQ-MQq"/>
                         <outlet property="characterImage" destination="zF2-jZ-1CN" id="FRd-nG-WUY"/>
-                        <outlet property="cityDestinationLabel" destination="4Ik-do-Xkj" id="4sa-Hs-awj"/>
-                        <outlet property="countryDestinationLabel" destination="sSA-1V-IOb" id="bRj-Td-yPa"/>
+                        <outlet property="cityNameDestinationLabel" destination="4Ik-do-Xkj" id="HUy-WR-bOe"/>
+                        <outlet property="countryNameDestinationLabel" destination="sSA-1V-IOb" id="GO8-yo-VHE"/>
                         <outlet property="dayLabel" destination="GIG-Mj-jJ4" id="yXB-YO-YLb"/>
                         <outlet property="descriptionSkyImageView" destination="h0L-aB-zL1" id="FZP-vl-aG1"/>
                         <outlet property="descriptionSkyLabel" destination="ShT-Kv-GFs" id="goQ-Zb-4gy"/>
                         <outlet property="hightTempDayLabel" destination="fJR-uk-MAw" id="LY6-fc-brt"/>
                         <outlet property="hourLabel" destination="rZl-jp-Y4u" id="5Ag-sb-04I"/>
                         <outlet property="lowTempDayLabel" destination="Xrh-Td-9Ro" id="1j0-jG-qiK"/>
-                        <outlet property="temperatureDestinationLabel" destination="Noh-Li-tSb" id="lCg-2X-0yo"/>
+                        <outlet property="temperatureOfDestinationLabel" destination="Noh-Li-tSb" id="wW4-7b-Q2j"/>
                         <outletCollection property="unitTempLabels" destination="ZLa-vI-8CG" collectionClass="NSMutableArray" id="Awd-LL-jUk"/>
                         <outletCollection property="unitTempLabels" destination="fVV-CV-FGW" collectionClass="NSMutableArray" id="NAQ-XD-5yt"/>
                         <outletCollection property="unitTempLabels" destination="U4d-gV-tf1" collectionClass="NSMutableArray" id="Gtr-pf-7uH"/>

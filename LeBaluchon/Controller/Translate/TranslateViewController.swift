@@ -79,14 +79,18 @@ class TranslateViewController: UIViewController {
         localeDestination = Locale(identifier: countryCode ?? "BE")
 
             // language user
-        sourceLanguage = foundMyLanguageCode(with: localeUser).currentCodeLanguage
-        titleFirstLanguage = foundMyLanguageCode(with: localeUser).currentLanguage
+        titleFirstLanguage = foundMyLanguageCode(with: localeUser)
         firstLanguageButton.setTitle(titleFirstLanguage, for: .normal)
+        guard let sourceCode = Language(rawValue: titleFirstLanguage) else { return }
+        sourceLanguage = sourceCode.code
 
             // language destination
-        targetLanguage = foundMyLanguageCode(with: localeDestination).currentCodeLanguage
-        titleSecondLanguage = foundMyLanguageCode(with: localeDestination).currentLanguage
+        titleSecondLanguage = foundMyLanguageCode(with: localeDestination)
         secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
+        print("✅✅✅ you 2de -> \(String(describing: localeDestination)) ✅✅✅")
+        print("✅✅✅ you 2de -> \(titleSecondLanguage) ✅✅✅")
+        guard let targetCode = Language(rawValue: titleSecondLanguage) else { return }
+        targetLanguage = targetCode.code
 
         print("✅✅ you button first language -> \(firstLanguageButton.currentTitle ?? "Nothing")")
         print("✅✅ you button second language -> \(secondLanguageButton.currentTitle ?? "Nothing")")
@@ -96,15 +100,16 @@ class TranslateViewController: UIViewController {
 
         // roll menu with all languages
     func setupButtonsLanguage() {
-        setupActionsMenu(of: firstLanguageButton, localeLanguage: titleFirstLanguage, codeLanguage: sourceLanguage)
-        setupActionsMenu(of: secondLanguageButton, localeLanguage: titleSecondLanguage, codeLanguage: targetLanguage)
+        setupActionsMenu(of: firstLanguageButton)
+        setupActionsMenu(of: secondLanguageButton)
     }
 
-    private func foundMyLanguageCode(with locale: Locale) -> (currentCodeLanguage: String, currentLanguage: String) {
+    private func foundMyLanguageCode(with locale: Locale) -> String {
             // recover language code
         var currentCodeLanguage = ""
         if #available(iOS 16, *) {
             currentCodeLanguage = locale.language.minimalIdentifier
+            print("✅✅✅✅✅✅ you language code -> \(currentCodeLanguage)")
         } else {
             if let localeLanguageCode = locale.languageCode {
                 currentCodeLanguage = localeLanguageCode
@@ -115,55 +120,10 @@ class TranslateViewController: UIViewController {
         let currentLanguage = currentLocale.localizedString(forLanguageCode: currentCodeLanguage) ?? ""
         print("✅✅✅✅✅✅ you language -> \(currentLanguage)")
 
-        return (currentCodeLanguage: currentCodeLanguage, currentLanguage: currentLanguage)
+        return currentLanguage
     }
 
 
-    private func setupTranslate() {
-        setupTextView(baseTextView)
-        setupTextView(translateTextView)
-    }
-
-    private func setupTextView(_ textView: UITextView) {
-        textView.layer.cornerRadius = 10
-        textView.delegate = self
-        textView.font = UIFont(name: "HelveticaNeue", size: 25)
-        textView.textColor = .pinkGranada
-    }
-
-    private func setupWriteButton() {
-        baseTextView.text = ""
-        hiddenView(baseText: false, translatedText: false, micro: true, camera: true)
-        baseTextView.isEditable = true
-    }
-
-    private func setupSpeechButton() {
-        baseTextView.text = ""
-        hiddenView(baseText: false, translatedText: false, micro: false, camera: true)
-        baseTextView.isEditable = false
-    }
-
-    private func setupCameraButton() {
-        baseTextView.text = ""
-        hiddenView(baseText: true, translatedText: false, micro: true, camera: false)
-        cameraImageView.layer.cornerRadius = 10
-        cameraImageView.image = nil
-    }
-
-    private func hiddenView(baseText: Bool, translatedText: Bool, micro: Bool, camera: Bool) {
-        baseTextView.isHidden = baseText
-        translateTextView.isHidden = translatedText
-        handWithMicroImage.isHidden = micro
-        buttonForMicro.isHidden = micro
-        handWithMicroImage.layer.shadowColor = UIColor.black.cgColor
-        handWithMicroImage.layer.shadowOpacity = 0.3
-        handWithMicroImage.layer.shadowOffset = CGSize(width: 15, height: 15)
-        handWithMicroImage.layer.shadowRadius = 5
-        cameraImageView.isHidden = camera
-
-        baseTextView.backgroundColor = .white
-        baseTextView.overrideUserInterfaceStyle = .light
-    }
 
 
         // -------------------------------------------------------
@@ -192,15 +152,11 @@ class TranslateViewController: UIViewController {
         swap(&titleFirstLanguage, &titleSecondLanguage)
         firstLanguageButton.setTitle(titleFirstLanguage, for: .normal)
         secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
+        swap(&sourceLanguage, &targetLanguage)
+        swap(&baseTextView.text, &translateTextView.text)
     }
 
-    func recognizeButtonLanguageTapped(_ languageButton: UIButton, codeLanguage: String) {
-        if languageButton == self.firstLanguageButton {
-            self.sourceLanguage = codeLanguage
-        } else {
-            self.targetLanguage = codeLanguage
-        }
-    }
+
 
 
         // -------------------------------------------------------
