@@ -42,6 +42,8 @@ class TranslateViewController: UIViewController {
         // init source and target language
     var sourceLanguage = ""
     var targetLanguage = ""
+    var titleFirstLanguage = ""
+    var titleSecondLanguage = ""
 
         // create a properties for speech voice
     let audioEngine: AVAudioEngine? = AVAudioEngine()
@@ -52,22 +54,18 @@ class TranslateViewController: UIViewController {
         // recover language record in the iPhone
     let userDefaults = UserDefaults.standard
     let localeUser = Locale.current
-    private var localeDestination: Locale!
+    var localeDestination: Locale!
 
 
         // -------------------------------------------------------
-        //MARK: - viewDidLoad
+        // MARK: - viewDidLoad
         // -------------------------------------------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupInitFirstLanguages()
         setupTranslate()
-        setupButtonsLanguage()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-
     }
 
 
@@ -75,37 +73,51 @@ class TranslateViewController: UIViewController {
         // MARK: - setups
         // -------------------------------------------------------
 
-    func setupInitFirstLanguage() {
+    func setupInitFirstLanguages() {
 
-            // for user
-        if #available(iOS 16, *) {
-            sourceLanguage = localeUser.language.maximalIdentifier
-            let languageDestination = localeUser.localizedString(forLanguageCode: sourceLanguage)
-
-            firstLanguageButton.setTitle(languageDestination, for: .normal)
-        } else {
-            guard let languageCode = localeUser.languageCode else { return }
-            sourceLanguage = languageCode
-            let languageDestination = localeUser.localizedString(forLanguageCode: sourceLanguage)
-            firstLanguageButton.setTitle(languageDestination, for: .normal)
-        }
-
-            // for destination city
         let countryCode = userDefaults.string(forKey: "destinationCountryCode")
         localeDestination = Locale(identifier: countryCode ?? "BE")
 
-        if #available(iOS 16, *) {
-            targetLanguage = localeDestination.language.maximalIdentifier
-            let languageDestination = localeDestination.localizedString(forLanguageCode: targetLanguage)
+            // language user
+        sourceLanguage = foundMyLanguageCode(with: localeUser).currentCodeLanguage
+        titleFirstLanguage = foundMyLanguageCode(with: localeUser).currentLanguage
+        firstLanguageButton.setTitle(titleFirstLanguage, for: .normal)
 
-            secondLanguageButton.setTitle(languageDestination, for: .normal)
-        } else {
-            guard let languageCode = localeDestination.languageCode else { return }
-            targetLanguage = languageCode
-            let languageDestination = localeDestination.localizedString(forLanguageCode: targetLanguage)
-            secondLanguageButton.setTitle(languageDestination, for: .normal)
-        }
+            // language destination
+        targetLanguage = foundMyLanguageCode(with: localeDestination).currentCodeLanguage
+        titleSecondLanguage = foundMyLanguageCode(with: localeDestination).currentLanguage
+        secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
+
+        print("✅✅ you button first language -> \(firstLanguageButton.currentTitle ?? "Nothing")")
+        print("✅✅ you button second language -> \(secondLanguageButton.currentTitle ?? "Nothing")")
+
+        setupButtonsLanguage()
     }
+
+        // roll menu with all languages
+    func setupButtonsLanguage() {
+        setupActionsMenu(of: firstLanguageButton, localeLanguage: titleFirstLanguage, codeLanguage: sourceLanguage)
+        setupActionsMenu(of: secondLanguageButton, localeLanguage: titleSecondLanguage, codeLanguage: targetLanguage)
+    }
+
+    private func foundMyLanguageCode(with locale: Locale) -> (currentCodeLanguage: String, currentLanguage: String) {
+            // recover language code
+        var currentCodeLanguage = ""
+        if #available(iOS 16, *) {
+            currentCodeLanguage = locale.language.minimalIdentifier
+        } else {
+            if let localeLanguageCode = locale.languageCode {
+                currentCodeLanguage = localeLanguageCode
+            }
+        }
+        let currentLocale = Locale(identifier: "en_US")
+            // here, we mix localeDestination/localeUser with locale English version to recover language in English version
+        let currentLanguage = currentLocale.localizedString(forLanguageCode: currentCodeLanguage) ?? ""
+        print("✅✅✅✅✅✅ you language -> \(currentLanguage)")
+
+        return (currentCodeLanguage: currentCodeLanguage, currentLanguage: currentLanguage)
+    }
+
 
     private func setupTranslate() {
         setupTextView(baseTextView)
@@ -136,13 +148,6 @@ class TranslateViewController: UIViewController {
         hiddenView(baseText: true, translatedText: false, micro: true, camera: false)
         cameraImageView.layer.cornerRadius = 10
         cameraImageView.image = nil
-    }
-
-    func setupButtonsLanguage() {
-        setupActionsMenu(of: firstLanguageButton, currentTitleOtherButton: secondLanguageButton.currentTitle ?? "")
-        setupActionsMenu(of: secondLanguageButton, currentTitleOtherButton: firstLanguageButton.currentTitle ?? "")
-        print("✅ you chose first language -> \(sourceLanguage)")
-        print("✅ you chose second language -> \(targetLanguage)")
     }
 
     private func hiddenView(baseText: Bool, translatedText: Bool, micro: Bool, camera: Bool) {
@@ -180,16 +185,16 @@ class TranslateViewController: UIViewController {
 
 
         // -------------------------------------------------------
-        //MARK: - Buttons language
+        //MARK: - Buttons switch language
         // -------------------------------------------------------
 
     @IBAction func tappedToSwitchLanguage(_ sender: UIButton) {
-        swap(&sourceLanguage, &targetLanguage)
-        firstLanguageButton.setTitle(sourceLanguage, for: .normal)
-        secondLanguageButton.setTitle(targetLanguage, for: .normal)
+        swap(&titleFirstLanguage, &titleSecondLanguage)
+        firstLanguageButton.setTitle(titleFirstLanguage, for: .normal)
+        secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
     }
 
-    func recognizeButtonLanguage(_ languageButton: UIButton, codeLanguage: String) {
+    func recognizeButtonLanguageTapped(_ languageButton: UIButton, codeLanguage: String) {
         if languageButton == self.firstLanguageButton {
             self.sourceLanguage = codeLanguage
         } else {
@@ -197,14 +202,14 @@ class TranslateViewController: UIViewController {
         }
     }
 
-    @IBAction func tappedMicroForStartWithTheVoice(_ sender: UIButton) {
-        recordAndRecognizeSpeech()
-    }
-
 
         // -------------------------------------------------------
         // MARK: - translation by the voice
         // -------------------------------------------------------
+
+    @IBAction func tappedMicroForStartWithTheVoice(_ sender: UIButton) {
+        recordAndRecognizeSpeech()
+    }
 
     func recordAndRecognizeSpeech() {
         guard let inputNode = audioEngine?.inputNode else { return }
@@ -228,6 +233,7 @@ class TranslateViewController: UIViewController {
 
         recognitionTask = speechRecognizer?.recognitionTask(with: requestAudio, resultHandler: { result, error in
             guard let result = result, error == nil else {
+                self.presentAlert()
                 print("There is not result for the voice!")
                 return
             }
@@ -293,13 +299,14 @@ extension TranslateViewController: UITextViewDelegate {
                                         method: .POST,
                                         type: API.Translation.Recover.self) { result in
             switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
+                case .failure(let error):
+                    self.presentAlert()
+                    print(error.localizedDescription)
 
-            case .success(let result):
-                DispatchQueue.main.async {
-                    if let translatedSentence = result.translations.first?.text {
-                        self.translateTextView.text = translatedSentence
+                case .success(let result):
+                    DispatchQueue.main.async {
+                        if let translatedSentence = result.translations.first?.text {
+                            self.translateTextView.text = translatedSentence
                         print("🈯️ le texte traduit est \(translatedSentence)")
                     }
                 }

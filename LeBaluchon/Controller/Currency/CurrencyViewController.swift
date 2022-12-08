@@ -91,20 +91,24 @@ class CurrencyViewController: UIViewController {
     }
 
     @IBAction func tappedToConvert(_ sender: UIButton) {
+            // check number tapped is different of zero
+        presentAlert(message: "please entry a number who different of zero, thank you")
+        if textFieldEntryAmount.text != "0" {
+            buttonFrontBack(name: buttonConvert, imageCheck: "piece.png")
+            API.QueryService.shared.getData(endpoint: .currency(to: currencyDestinationName, from: currencyUserName, amount: amountTapped),
+                                            type: API.Currency.CalculateExchangeRate.self) { result in
+                switch result {
+                    case .failure(let error):
+                        self.presentAlert(message: "The result of currency failed")
+                        print(error.localizedDescription)
 
-        API.QueryService.shared.getData(endpoint: .currency(to: currencyDestinationName, from: currencyUserName, amount: amountTapped),
-                                        type: API.Currency.CalculateExchangeRate.self) { result in
-            switch result {
-                case .failure(let error):
-                    self.presentAlert()
-                    print(error.localizedDescription)
-
-                case .success(let result):
-                    let calculateExchangeRate = result
-                    DispatchQueue.main.async {
-                        self.textFieldResult.text = String(calculateExchangeRate.result)
-                        print("💰result: \(String(describing: calculateExchangeRate.result))")
-                    }
+                    case .success(let result):
+                        let calculateExchangeRate = result
+                        DispatchQueue.main.async {
+                            self.textFieldResult.text = String(calculateExchangeRate.result)
+                            print("💰result: \(String(describing: calculateExchangeRate.result))")
+                        }
+                }
             }
         }
     }
@@ -142,8 +146,8 @@ class CurrencyViewController: UIViewController {
         //MARK: - alert
         // -------------------------------------------------------
 
-    private func presentAlert() {
-        let alertVC = UIAlertController(title: "Error", message: "The result of currency failed", preferredStyle: .alert)
+    private func presentAlert(message: String) {
+        let alertVC = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel))
         present(alertVC, animated: true)
     }
@@ -183,5 +187,19 @@ class CurrencyViewController: UIViewController {
         flag.layer.cornerRadius = 5
         flag.layer.borderWidth = 1
         flag.layer.borderColor = .init(genericCMYKCyan: 50, magenta: 0, yellow: 50, black: 10, alpha: 0.5)
+    }
+
+
+        // -------------------------------------------------------
+        //MARK: - animations
+        // -------------------------------------------------------
+
+        // animation button template
+    private func buttonFrontBack(name button: UIButton, imageCheck: String) {
+        button.setImage(UIImage(named: imageCheck), for: .normal)
+        UIView.transition(with: button,
+                          duration: 0.25,
+                          options: UIView.AnimationOptions.transitionFlipFromLeft,
+                          animations: nil)
     }
 }

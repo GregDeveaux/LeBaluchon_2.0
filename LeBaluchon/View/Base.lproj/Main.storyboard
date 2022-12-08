@@ -100,18 +100,18 @@
                                             <constraint firstItem="bmT-Hg-skP" firstAttribute="top" secondItem="PA5-u3-8AJ" secondAttribute="top" id="qBd-0v-Vsw"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-dB-Yt6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-dB-Yt6">
                                         <rect key="frame" x="132" y="142.66666666666666" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="C1W-Ak-d2s"/>
                                             <constraint firstAttribute="width" secondItem="pbz-dB-Yt6" secondAttribute="height" multiplier="1:1" id="nE8-PK-Ns5"/>
                                             <constraint firstAttribute="height" constant="90" id="tVt-xh-Iqt"/>
                                         </constraints>
-                                        <color key="tintColor" systemColor="systemYellowColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
                                             <imageReference key="image" image="piece" symbolScale="large"/>
                                         </state>
+                                        <state key="selected" image="piece"/>
                                         <connections>
                                             <action selector="tappedToConvert:" destination="69T-SZ-NTr" eventType="touchUpInside" id="yXV-lV-SNi"/>
                                         </connections>

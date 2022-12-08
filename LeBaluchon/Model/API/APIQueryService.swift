@@ -35,9 +35,16 @@ extension API {
                                           callback: @escaping (Result<Response, API.Error>) -> Void) {
             
             var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
-            
-            if type == Currency.self {
-                request.allHTTPHeaderFields = endpoint.header
+
+            // if use currency, add header
+            if #available(iOS 16.0, *) {
+                if request.url?.host() == "api.apilayer.com" {
+                    request.allHTTPHeaderFields = endpoint.header
+                }
+            } else {
+                if request.url?.host == "api.apilayer.com" {
+                    request.allHTTPHeaderFields = endpoint.header
+                }
             }
             
             request.httpMethod = method.rawValue

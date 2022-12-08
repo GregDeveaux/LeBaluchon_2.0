@@ -50,6 +50,7 @@
 		BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */; };
 		BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD5D6A029400F9B0050F07C /* UIView+Design.swift */; };
 		BCE061FE29355C450029A72F /* APICoordinatesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */; };
+		BCE3F646294151A4001F7422 /* ListOfLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE3F645294151A4001F7422 /* ListOfLanguages.swift */; };
 		BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */; };
 		BCF0B807293531180037214B /* LeBaluchonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B806293531180037214B /* LeBaluchonTest.swift */; };
 		BCF0B809293540450037214B /* APICoordinatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B808293540450037214B /* APICoordinatesTests.swift */; };
@@ -125,6 +126,7 @@
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
 		BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+PickerView.swift"; sourceTree = "<group>"; };
 		BCD5D6A029400F9B0050F07C /* UIView+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Design.swift"; sourceTree = "<group>"; };
+		BCE3F645294151A4001F7422 /* ListOfLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfLanguages.swift; sourceTree = "<group>"; };
 		BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Animations.swift"; sourceTree = "<group>"; };
 		BCF0B806293531180037214B /* LeBaluchonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeBaluchonTest.swift; sourceTree = "<group>"; };
 		BCF0B808293540450037214B /* APICoordinatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICoordinatesTests.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				BC278B97290ED7AC0098A82C /* User.swift */,
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
 				BC752158293939960015B863 /* ImagesWeather.swift */,
+				BCE3F645294151A4001F7422 /* ListOfLanguages.swift */,
 				BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */,
 			);
 			path = Model;
@@ -522,6 +525,7 @@
 				BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */,
 				BC0C6B7028F4CD030075C614 /* TranslateViewController.swift in Sources */,
 				BC40284828FBFAB40044A19A /* APICurrency.swift in Sources */,
+				BCE3F646294151A4001F7422 /* ListOfLanguages.swift in Sources */,
 				BC0C6B6E28F4CCD50075C614 /* CurrencyViewController.swift in Sources */,
 				BC1D19B629041FED00AF8838 /* APIWeather.swift in Sources */,
 				BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */,
