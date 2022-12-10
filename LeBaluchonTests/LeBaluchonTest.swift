@@ -41,8 +41,8 @@ final class LeBaluchonTest: XCTestCase {
     }
 
     func test_PinMap() throws {
-        let pinMap = PinMap(title: "you want to go Dijon", coordinate: CLLocationCoordinate2D(latitude: 47.3215806, longitude: 5.0414701), info: "destination")
-        XCTAssertEqual(pinMap.title, "you want to go Dijon")
+        let pinMap = PinMap(title: "you want to go to Dijon", coordinate: CLLocationCoordinate2D(latitude: 47.3215806, longitude: 5.0414701), info: "destination")
+        XCTAssertEqual(pinMap.title, "you want to go to Dijon")
         XCTAssertEqual(pinMap.coordinate.latitude, 47.3215806)
         XCTAssertEqual(pinMap.coordinate.longitude, 5.0414701)
         XCTAssertEqual(pinMap.info, "destination")

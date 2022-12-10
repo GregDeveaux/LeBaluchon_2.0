@@ -95,7 +95,7 @@ extension MapViewController: MKMapViewDelegate {
     private func setupPinMap() {
 
         if destinationCityLatitude != 0 && destinationCityLongitude != 0  {
-            pinDestination = PinMap(title: "you want to go \(destinationCityName)",
+            pinDestination = PinMap(title: "you want to go to \(destinationCityName)",
                                     coordinate: CLLocationCoordinate2D(latitude: (destinationCityLatitude),
                                                                        longitude: (destinationCityLongitude)),
                                     info: "destination")
@@ -161,7 +161,7 @@ extension MapViewController: MKMapViewDelegate {
         }
 
         switch annotation.title {
-            case "you want to go \(destinationCityName)":
+            case "you want to go to \(destinationCityName)":
                 annotationView?.image = UIImage(named: "pinDestination")
             case user?.welcomeMessage:
                 annotationView?.image = UIImage(named: "pinUser")

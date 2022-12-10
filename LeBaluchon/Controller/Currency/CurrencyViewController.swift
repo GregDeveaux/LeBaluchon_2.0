@@ -92,7 +92,6 @@ class CurrencyViewController: UIViewController {
 
     @IBAction func tappedToConvert(_ sender: UIButton) {
             // check number tapped is different of zero
-        presentAlert(message: "please entry a number who different of zero, thank you")
         if textFieldEntryAmount.text != "0" {
             buttonFrontBack(name: buttonConvert, imageCheck: "piece.png")
             API.QueryService.shared.getData(endpoint: .currency(to: currencyDestinationName, from: currencyUserName, amount: amountTapped),
@@ -110,6 +109,8 @@ class CurrencyViewController: UIViewController {
                         }
                 }
             }
+        } else {
+            presentAlert(message: "please entry a number who different of zero, thank you")
         }
     }
 
@@ -139,17 +140,6 @@ class CurrencyViewController: UIViewController {
         nameLocalCountryLabel.text = self.localeUser.localizedString(forRegionCode: regionCode ?? "Nothing")?.uppercased()
         iconCurrencyPhone.text = self.localeUser.currencySymbol
         iconCurrencyDestination.text = currencyDestinationSymbol
-    }
-
-
-        // -------------------------------------------------------
-        //MARK: - alert
-        // -------------------------------------------------------
-
-    private func presentAlert(message: String) {
-        let alertVC = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel))
-        present(alertVC, animated: true)
     }
 
 

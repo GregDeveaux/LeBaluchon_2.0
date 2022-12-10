@@ -8,89 +8,148 @@
 import Foundation
 
 enum Language: String, CaseIterable {
-    case French
-    case English
-    case Italian
-    case Spanish
-    case Portuguese
-    case Bulgarian
-    case Chinese
-    case Czech
-    case Danish
-    case Dutch
-    case German
-    case Greek
-    case Estonian
-    case Finnish
-    case Hungarian
-    case Indonesian
-    case Japanese
-    case Lithuanian
-    case Latvian
-    case Polish
-    case Romanian
-    case Russian
-    case Slovak
-    case Slovenian
-    case Swedish
-    case Turkish
-    case Ukrainian
+    case french = "French"
+    case english = "English"
+    case italian = "Italian"
+    case spanish = "Spanish"
+    case portuguese = "Portuguese"
+    case bulgarian = "Bulgarian"
+    case chinese = "Chinese"
+    case czech = "Czech"
+    case danish = "Danish"
+    case dutch = "Dutch"
+    case german = "German"
+    case greek = "Greek"
+    case estonian = "Estonian"
+    case finnish = "Finnish"
+    case hungarian = "Hungarian"
+    case indonesian = "Indonesian"
+    case japanese = "Japanese"
+    case lithuanian = "Lithuanian"
+    case latvian = "Latvian"
+    case polish = "Polish"
+    case romanian = "Romanian"
+    case russian = "Russian"
+    case slovak = "Slovak"
+    case slovenian = "Slovenian"
+    case swedish = "Swedish"
+    case turkish = "Turkish"
+    case ukrainian = "Ukrainian"
 
     var code: String {
         switch self {
-            case .French:
+            case .french:
                 return "FR"
-            case .English:
+            case .english:
                 return "EN"
-            case .Italian:
+            case .italian:
                 return "IT"
-            case .Spanish:
+            case .spanish:
                 return "ES"
-            case .Portuguese:
+            case .portuguese:
                 return "PT"
-            case .Bulgarian:
+            case .bulgarian:
                 return "BG"
-            case .Chinese:
+            case .chinese:
                 return "ZH"
-            case .Czech:
+            case .czech:
                 return "CS"
-            case .Danish:
+            case .danish:
                 return "DA"
-            case .Dutch:
+            case .dutch:
                 return "NL"
-            case .German:
+            case .german:
                 return "DE"
-            case .Greek:
+            case .greek:
                 return "EL"
-            case .Estonian:
+            case .estonian:
                 return "ET"
-            case .Finnish:
+            case .finnish:
                 return "FI"
-            case .Hungarian:
+            case .hungarian:
                 return "HU"
-            case .Indonesian:
+            case .indonesian:
                 return "ID"
-            case .Japanese:
+            case .japanese:
                 return "JA"
-            case .Lithuanian:
+            case .lithuanian:
                 return "LT"
-            case .Latvian:
+            case .latvian:
                 return "LV"
-            case .Polish:
+            case .polish:
                 return "PL"
-            case .Romanian:
+            case .romanian:
                 return "RO"
-            case .Russian:
+            case .russian:
                 return "RU"
-            case .Slovak:
+            case .slovak:
                 return "SK"
-            case .Slovenian:
+            case .slovenian:
                 return "SL"
-            case .Swedish:
+            case .swedish:
                 return "SV"
-            case .Turkish:
+            case .turkish:
                 return "TR"
-            case .Ukrainian:
+            case .ukrainian:
+                return "UK"
+        }
+    }
+    
+    var image: String {
+        switch self {
+            case .french:
+                return "piece.png"
+            case .english:
+                return "sunWithFlagEnglish.png"
+            case .italian:
+                return "AppIcon.png"
+            case .spanish:
+                return "ES"
+            case .portuguese:
+                return "PT"
+            case .bulgarian:
+                return "BG"
+            case .chinese:
+                return "ZH"
+            case .czech:
+                return "CS"
+            case .danish:
+                return "DA"
+            case .dutch:
+                return "NL"
+            case .german:
+                return "DE"
+            case .greek:
+                return "EL"
+            case .estonian:
+                return "ET"
+            case .finnish:
+                return "FI"
+            case .hungarian:
+                return "HU"
+            case .indonesian:
+                return "ID"
+            case .japanese:
+                return "JA"
+            case .lithuanian:
+                return "LT"
+            case .latvian:
+                return "LV"
+            case .polish:
+                return "PL"
+            case .romanian:
+                return "RO"
+            case .russian:
+                return "RU"
+            case .slovak:
+                return "SK"
+            case .slovenian:
+                return "SL"
+            case .swedish:
+                return "SV"
+            case .turkish:
+                return "TR"
+            case .ukrainian:
                 return "UK"
         }
     }

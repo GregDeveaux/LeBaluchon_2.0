@@ -149,10 +149,20 @@ class TranslateViewController: UIViewController {
         // -------------------------------------------------------
 
     @IBAction func tappedToSwitchLanguage(_ sender: UIButton) {
+        print("🅿️ \(titleFirstLanguage), \(titleSecondLanguage)")
         swap(&titleFirstLanguage, &titleSecondLanguage)
+        print("Ⓜ️ \(titleFirstLanguage), \(titleSecondLanguage)")
+
         firstLanguageButton.setTitle(titleFirstLanguage, for: .normal)
         secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
-        swap(&sourceLanguage, &targetLanguage)
+
+        guard let sourceCode = Language(rawValue: titleFirstLanguage) else { return }
+        sourceLanguage = sourceCode.code
+        guard let targetCode = Language(rawValue: titleSecondLanguage) else { return }
+        targetLanguage = targetCode.code
+
+        setupButtonsLanguage()
+
         swap(&baseTextView.text, &translateTextView.text)
     }
 
@@ -256,7 +266,6 @@ extension TranslateViewController: UITextViewDelegate {
                                         type: API.Translation.Recover.self) { result in
             switch result {
                 case .failure(let error):
-                    self.presentAlert()
                     print(error.localizedDescription)
 
                 case .success(let result):

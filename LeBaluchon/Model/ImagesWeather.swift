@@ -15,6 +15,7 @@ enum WeatherDescription: String {
     case showerRain = "shower rain"
     case lightRain = "light rain"
     case overcastCloud = "overcast clouds"
+    case moderateRain = "moderate rain"
     case rain
     case thunderstorm
     case snow = "light snow"
@@ -34,7 +35,9 @@ enum ImagesWeather {
         case overcastCloudsDay = "cloudyPower2.png"
         case overcastCloudsNight = "overcastCloudsNight.png"
         case lightRainDay = "lightRainDay.png"
-        case lightRainNight = "lightRainNight"
+        case lightRainNight = "lightRainNight.png"
+        case moderateRainDay = "moderateRainByDay.png"
+        case moderateRainNight = "moderateRainByNight.png"
         case rainDay = "rainByDay.png"
         case rainNight = "rainByNight.png"
         case thunderstormDay = "stormByDay.png"
@@ -122,6 +125,12 @@ extension ImagesWeather {
                     weatherImage = imagesByDescription(background: .lightRainDay, icon: .lightRain, personna: .brokenClouds)
                 } else {
                     weatherImage = imagesByDescription(background: .lightRainNight, icon: .lightRain, personna: .brokenClouds)
+                }
+            case .moderateRain:
+                if hourOfCountry >= sunrise && hourOfCountry <= sunset {
+                    weatherImage = imagesByDescription(background: .moderateRainDay, icon: .lightRain, personna: .brokenClouds)
+                } else {
+                    weatherImage = imagesByDescription(background: .moderateRainNight, icon: .lightRain, personna: .brokenClouds)
                 }
             case .rain:
                 if hourOfCountry >= sunrise && hourOfCountry <= sunset {

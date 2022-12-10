@@ -11,15 +11,17 @@ import UIKit
 extension TranslateViewController {
 
     func setupTranslate() {
-        setupTextView(baseTextView)
-        setupTextView(translateTextView)
+        setupTextView(baseTextView, language: Language(rawValue: titleFirstLanguage) ?? .czech)
+        setupTextView(translateTextView, language: Language(rawValue: titleSecondLanguage) ?? .ukrainian)
     }
 
-    private func setupTextView(_ textView: UITextView) {
+    private func setupTextView(_ textView: UITextView, language: Language) {
         textView.layer.cornerRadius = 10
         textView.delegate = self
         textView.font = UIFont(name: "HelveticaNeue", size: 25)
         textView.textColor = .pinkGranada
+        guard let imageBackground = UIImage(named: language.image) else { return }
+        textView.layer.contents = imageBackground.cgImage
     }
 
     func setupWriteButton() {

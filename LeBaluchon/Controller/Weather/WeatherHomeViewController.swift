@@ -7,12 +7,11 @@
 
 import UIKit
 
-//extension WeatherHomeViewController: WeatherDestinationViewControllerDelegate {
-//    func rescueTheData(_ vc: WeatherDestinationViewController) {
-//        weatherDestinationViewController.cityDestinationLabel.text = "Rien"
-//        print("🍀 \(String(describing: weatherDestinationViewController.cityDestinationLabel.text))")
-//    }
-//}
+protocol WeatherDestinationDelegate {
+    func rescueTheTemperatures(today: String, hightTemperature: String, lowTemperature: String, unit: String)
+    func rescueTheImages(background: UIImage, icone: UIImage, personna: UIImage)
+    func rescueTheDate(day: String, hour: String)
+}
 
 class WeatherHomeViewController: UIViewController {
 
@@ -36,10 +35,12 @@ class WeatherHomeViewController: UIViewController {
     @IBOutlet weak var characterImage: UIImageView!
 
     private weak var weatherDestinationSheet: UIViewController!
-    let weatherDestinationViewController = WeatherDestinationViewController()
+    var myDelegate: WeatherDestinationDelegate?
 
     let todayDate = Date.now
     let userDefaults = UserDefaults.standard
+
+    let unit = "metric"
 
     lazy var backgroundUnderTabBar: UIView = {
         let backgroundUnderTabBar = UIView()
@@ -67,10 +68,13 @@ class WeatherHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWeatherDestinationViewController()
+        giveMeTheWeather()
 
         setupGestureRecognizer(to: weatherDestinationSheet.view)
         view.addSubview(backgroundUnderTabBar)
         backgroundUnderTabBar.addSubview(lineTabBar)
+
+
 
 //        backgroundUnderTabBar.translatesAutoresizingMaskIntoConstraints = false
 //        backgroundUnderTabBar.bottomAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -78,9 +82,12 @@ class WeatherHomeViewController: UIViewController {
 //        lineTabBar.translatesAutoresizingMaskIntoConstraints = false
 //        lineTabBar.leftAnchor.constraint(equalTo: backgroundImage.leftAnchor, constant: 0).isActive = true
 
-        giveMeTheWeather()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+            //  call the destination to send the data
+        giveMeTheDestinationWeather()
+    }
 
         // -------------------------------------------------------
         // MARK: - use API Weather, recover info
@@ -128,26 +135,80 @@ class WeatherHomeViewController: UIViewController {
                     giveMeTheWeatherImages(weatherImages: weatherImages,
                                            background: backgroundImage,
                                            description: descriptionSkyImageView,
-                                           characterImage: characterImage)
-
-                        // call the destination to send the data
-                    weatherDestinationViewController.giveMeTheWeather()
+                                           personnaImage: characterImage)
             }
         }
     }
 
 
+    func giveMeTheDestinationWeather() {
+
+        guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
+
+        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { results in
+            switch results {
+                case .failure(let error):
+                    self.presentAlert(message: "Sorry, the destination weather failed")
+                    print(error.localizedDescription)
+
+                case .success(let results):
+                    let weatherForCity = results
+                    let temperatureDestination = String(Int(weatherForCity.main.temp))
+                    let hightTemperatureDestination = String(Int(weatherForCity.main.tempMax))
+                    let lowTemperatureDestination = String(Int(weatherForCity.main.tempMin))
+                    print(temperatureDestination)
+                    print(hightTemperatureDestination)
+                    print(lowTemperatureDestination)
+                    self.myDelegate?.rescueTheTemperatures(today: temperatureDestination,
+                                                         hightTemperature: hightTemperatureDestination,
+                                                         lowTemperature: lowTemperatureDestination,
+                                                         unit: self.unit)
+                    print("➡️⌚️ \(String(describing: self.myDelegate?.rescueTheTemperatures(today: temperatureDestination,hightTemperature: hightTemperatureDestination,lowTemperature: lowTemperatureDestination,unit: self.unit)))")
+
+
+                    guard let dateDay = self.giveMeTheDate(weatherForCity.date).dayLabel else { return }
+                    guard let dateHour = self.giveMeTheDate(weatherForCity.date).hourLabel else { return }
+                    self.myDelegate?.rescueTheDate(day: dateDay, hour: dateHour)
+
+
+                    guard let description = weatherForCity.weather.first?.description,
+                          let weatherDescription = WeatherDescription(rawValue: description)
+                    else { return }
+                    self.descriptionSkyLabel.text = weatherDescription.rawValue
+
+                        // Recover the images by the description weather
+                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
+                                                                   sunrise: weatherForCity.sys.sunrise,
+                                                                   sunset: weatherForCity.sys.sunset,
+                                                                   hourOfCountry: weatherForCity.date)
+                    print("""
+                                  ➡️✅ Description = \(description)
+                                  ➡️☀️ \(String(describing: weatherForCity.sys.sunrise))
+                                  ➡️🌜 \(String(describing: weatherForCity.sys.sunset))
+                                  ➡️⌚️ \(String(describing: weatherForCity.date))
+                                  ➡️🖼 \(weatherImages)
+                            """)
+
+                    guard let background = UIImage(named: weatherImages[0]) else { return }
+                    guard let icone = UIImage(systemName: weatherImages[1]) else { return }
+                    guard let personna = UIImage(named: weatherImages[2]) else { return }
+                    self.myDelegate?.rescueTheImages(background: background, icone: icone, personna: personna)
+                    print("➡️⌚️ \(self.myDelegate?.rescueTheImages(background: background, icone: icone, personna: personna) as Any)")
+            }
+        }
+    }
+
         // -------------------------------------------------------
         // MARK: - modify images of ViewController
         // -------------------------------------------------------
 
-    private func giveMeTheWeatherImages(weatherImages: [String], background: UIImageView, description: UIImageView, characterImage: UIImageView) {
+    private func giveMeTheWeatherImages(weatherImages: [String], background: UIImageView, description: UIImageView, personnaImage: UIImageView) {
         background.image = UIImage(named: weatherImages[0])
         description.image = UIImage(systemName: weatherImages[1])
         if weatherImages[1] == "sun.max.fill" {
             description.tintColor = .yellow
         }
-        self.characterImage.image = UIImage(named: weatherImages[2])
+        personnaImage.image = UIImage(named: weatherImages[2])
     }
 
 

@@ -7,17 +7,8 @@
 
 import UIKit
 
-//protocol WeatherDestinationViewControllerDelegate: AnyObject {
-//    func rescueTheData(_ vc: WeatherDestinationViewController)
-//}
-
 class WeatherDestinationViewController: UIViewController {
 
-//    weak var delegate: WeatherDestinationViewControllerDelegate?
-//
-//    func rescueData() {
-//        delegate?.rescueTheData(self)
-//    }
 
         // -------------------------------------------------------
         // MARK: - properties
@@ -26,92 +17,33 @@ class WeatherDestinationViewController: UIViewController {
     @IBOutlet weak var countryNameDestinationLabel: UILabel!
     @IBOutlet weak var cityNameDestinationLabel: UILabel!
     @IBOutlet weak var temperatureOfDestinationLabel: UILabel!
-    @IBOutlet var unitTempLabels: [UILabel]!
-    @IBOutlet weak var hightTempDayLabel: UILabel!
-    @IBOutlet weak var lowTempDayLabel: UILabel!
-    @IBOutlet weak var descriptionSkyLabel: UILabel!
-    @IBOutlet weak var descriptionSkyImageView: UIImageView!
+    @IBOutlet var unitTempDestinationLabels: [UILabel]!
+    @IBOutlet weak var hightTempDayDestinationLabel: UILabel!
 
-    @IBOutlet weak var dayLabel: UILabel!
-    @IBOutlet weak var hourLabel: UILabel!
+    @IBOutlet weak var lowTempDayDestinationLabel: UILabel!
+    @IBOutlet weak var descriptionSkyDestinationLabel: UILabel!
 
-    @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var characterImage: UIImageView!
+    @IBOutlet weak var dayDestinationLabel: UILabel!
+    @IBOutlet weak var hourDestinationLabel: UILabel!
+
+    @IBOutlet weak var backgroundImageDestination: UIImageView!
+    @IBOutlet weak var personnaDestinationImage: UIImageView!
+    @IBOutlet weak var iconeSkyImageDestination: UIImageView!
+
 
     let userDefaults = UserDefaults()
 
-    var destinationCityzzzzz = ""
-
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
 
+        let destinationCity = userDefaults.string(forKey: "destinationCityName")
+        let destinationCountry = userDefaults.string(forKey: "destinationCountry")
 
-        // -------------------------------------------------------
-        // MARK: - viewDidAppear
-        // -------------------------------------------------------
+        let dataController = WeatherHomeViewController()
+        dataController.myDelegate = self
 
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
-
-
-        // -------------------------------------------------------
-        // MARK: - use API Weather, recover info
-        // -------------------------------------------------------
-
-    func giveMeTheWeather() {
-        guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
-        guard let destinationCountry = userDefaults.string(forKey: "destinationCountry") else { return }
-
-        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: "metric"), type: API.Weather.DataForCity.self) { [self] results in
-            switch results {
-                case .failure(let error):
-                    print(error.localizedDescription)
-
-                case .success(let results):
-                    let weatherForCity = results
-
-                        // >>>>>> si j'enregistre dans une propriété, là ça marche
-                    destinationCityzzzzz = destinationCity
-                    print(destinationCityzzzzz)
-
-                        // >>>>>> et dès que je veux l'afficher, ça ne marche plus
-                        // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
-//                    cityNameDestinationLabel.text = destinationCity
-//                    countryNameDestinationLabel.text = destinationCountry
-//
-                    temperatureOfDestinationLabel.text = String(Int(weatherForCity.main.temp))
-//                    hightTempDayLabel.text = String(Int(weatherForCity.main.tempMax))
-//                    lowTempDayLabel.text = String(Int(weatherForCity.main.tempMin))
-//
-//                    dayLabel.text = self.giveMeTheDate(weatherForCity.date).dayLabel
-//                    hourLabel.text = self.giveMeTheDate(weatherForCity.date).hourLabel
-//
-//                    guard let description = weatherForCity.weather.first?.description,
-//                          let weatherDescription = WeatherDescription(rawValue: description)
-//                    else { return }
-//                    descriptionSkyLabel.text = weatherDescription.rawValue
-//
-//                        // Recover the images by the description weather
-//                    let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
-//                                                                   sunrise: weatherForCity.sys.sunrise,
-//                                                                   sunset: weatherForCity.sys.sunset,
-//                                                                   hourOfCountry: weatherForCity.date)
-//                    print("""
-//                                  ✅ Description = \(description)
-//                                  ☀️ \(String(describing: weatherForCity.sys.sunrise))
-//                                  🌜 \(String(describing: weatherForCity.sys.sunset))
-//                                  ⌚️ \(String(describing: weatherForCity.date))
-//                                  🖼 \(weatherImages)
-//                            """)
-//
-//                    giveMeTheWeatherImages(weatherImages: weatherImages,
-//                                           background: backgroundImage,
-//                                           description: descriptionSkyImageView,
-//                                           characterImage: characterImage)
-            }
-        }
+        cityNameDestinationLabel.text = destinationCity
+        countryNameDestinationLabel.text = destinationCountry
     }
 
 
@@ -119,13 +51,13 @@ class WeatherDestinationViewController: UIViewController {
         // MARK: - modify images of ViewController
         // -------------------------------------------------------
 
-    private func giveMeTheWeatherImages(weatherImages: [String], background: UIImageView, description: UIImageView, characterImage: UIImageView) {
+    private func giveMeTheWeatherImages(weatherImages: [String], background: UIImageView, description: UIImageView, personnaImage: UIImageView) {
         background.image = UIImage(named: weatherImages[0])
         description.image = UIImage(systemName: weatherImages[1])
         if weatherImages[1] == "sun.max.fill" {
             description.tintColor = .yellow
         }
-        self.characterImage.image = UIImage(named: weatherImages[2])
+        personnaImage.image = UIImage(named: weatherImages[2])
     }
 
 
@@ -149,4 +81,36 @@ class WeatherDestinationViewController: UIViewController {
 
         return (dayLabel, hourLabel)
     }
+
+    private func presentAlert() {
+        let alertVC = UIAlertController(title: "Error", message: "The weather system failed", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alertVC, animated: true)
+    }
+}
+
+
+    // -------------------------------------------------------
+    // MARK: - use API Weather, recover info
+    // -------------------------------------------------------
+
+extension WeatherDestinationViewController: WeatherDestinationDelegate {
+
+    func rescueTheTemperatures(today temperature: String, hightTemperature: String, lowTemperature: String, unit: String) {
+            self.temperatureOfDestinationLabel.text = temperature
+            self.hightTempDayDestinationLabel.text = hightTemperature
+            self.lowTempDayDestinationLabel.text = lowTemperature
+    }
+
+    func rescueTheImages(background: UIImage, icone: UIImage, personna: UIImage) {
+        self.backgroundImageDestination.image = background
+        self.iconeSkyImageDestination.image = icone
+        self.personnaDestinationImage.image = personna
+    }
+
+    func rescueTheDate(day: String, hour: String) {
+        self.dayDestinationLabel.text = day
+        self.hourDestinationLabel.text = hour
+    }
+
 }
