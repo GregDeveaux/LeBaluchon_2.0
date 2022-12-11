@@ -26,6 +26,7 @@ extension API {
             let snow: Snow?
             let sys: Sys
             let date: Int
+            let timezone: Int
 
             enum CodingKeys: String, CodingKey {
                 case name
@@ -38,6 +39,7 @@ extension API {
                 case snow
                 case sys
                 case date = "dt"
+                case timezone
             }
         }
 

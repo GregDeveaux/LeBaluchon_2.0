@@ -6,6 +6,7 @@
 
 
 import XCTest
+@testable import LeBaluchon
 
 class LeBaluchonUITests: XCTestCase {
 
@@ -16,11 +17,10 @@ class LeBaluchonUITests: XCTestCase {
     override func tearDownWithError() throws {
     }
 
-    func testLaucnchApp() throws {
+    func test_LaunchApp() throws {
         let app = XCUIApplication()
         app.launch()
     }
-
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {

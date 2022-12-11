@@ -65,6 +65,10 @@ class LoginViewController: UIViewController {
 
         // Validate the user and the destination city textField if aren't nil then save datas and change the viewController
     @IBAction func validateButton(_ sender: UIButton) {
+        
+        if destinationTextField.text?.last == " " {
+            destinationTextField.text?.removeLast()
+        }
 
         var user: User?
 
@@ -80,15 +84,11 @@ class LoginViewController: UIViewController {
 
         validateEntryTextFields = true
 
-        if destinationTextField.text?.last == " " {
-            destinationTextField.text?.removeLast()
-        }
-
             // recover the info on the city after than the user wrote your destination in the textField
         API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
             user?.name = userName
 
-//            self.userDefaults.set(userName.capitalized, forKey: "userName")
+            self.userDefaults.set(userName.capitalized, forKey: "userName")
             self.userDefaults.set(destinationCityName.capitalized, forKey: "destinationCityName")
             self.userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
             self.userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")

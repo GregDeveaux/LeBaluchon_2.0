@@ -95,7 +95,7 @@ extension API {
             task = urlSession.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     completionHandler(nil)
-                    print(Error.generic(reason: "There is not datas!"))
+                    print(Error.generic(reason: "There is not flag!"))
                     return
                 }
                 

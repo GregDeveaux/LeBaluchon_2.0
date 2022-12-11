@@ -112,6 +112,20 @@ final class LeBaluchonTest: XCTestCase {
         XCTAssertEqual(imagesWeather[2], "perso1.pdf")
     }
 
+//    func test_GivenTheCitySaved_WhenICallTheCity_ThenIRescueTheDatasByUserDefault() {
+//        let cityname = "Madrid"
+//        let latitude = 40.4167754
+//        let longitude = -3.7037902
+//        let country = "Spain"
+//        let countryCode = "ES"
+//        let userDefaults = UserDefaults()
+//
+//        let city = DestinationCity(name: cityname, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude), country: country , countryCode: countryCode)
+//
+//        XCTAssertEqual(cityname, userDefaults.string(forKey: "destinationCityName"))
+//
+//    }
+
     func test_PerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

@@ -19,7 +19,6 @@
 		BC0C6B6E28F4CCD50075C614 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */; };
 		BC0C6B7028F4CD030075C614 /* TranslateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */; };
 		BC0E986F29355D9A00564119 /* APICityExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC0E986E29355D9A00564119 /* APICityExample.json */; };
-		BC15FF6A28F7377000A0F594 /* WeatherDestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */; };
 		BC1D19B629041FED00AF8838 /* APIWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1D19B529041FED00AF8838 /* APIWeather.swift */; };
 		BC1D19B82904202200AF8838 /* APIWeatherExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC1D19B72904202200AF8838 /* APIWeatherExample.json */; };
 		BC1D19BA2905A11C00AF8838 /* APITranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1D19B92905A11C00AF8838 /* APITranslation.swift */; };
@@ -96,7 +95,6 @@
 		BC0C6B6D28F4CCD50075C614 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateViewController.swift; sourceTree = "<group>"; };
 		BC0E986E29355D9A00564119 /* APICityExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICityExample.json; sourceTree = "<group>"; };
-		BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDestinationViewController.swift; sourceTree = "<group>"; };
 		BC1D19B529041FED00AF8838 /* APIWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWeather.swift; sourceTree = "<group>"; };
 		BC1D19B72904202200AF8838 /* APIWeatherExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APIWeatherExample.json; sourceTree = "<group>"; };
 		BC1D19B92905A11C00AF8838 /* APITranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITranslation.swift; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 		BCE82E10293B5542004D44F6 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				BC15FF6928F7377000A0F594 /* WeatherDestinationViewController.swift */,
 				BC0C6B6B28F4BB9E0075C614 /* WeatherHomeViewController.swift */,
 			);
 			path = Weather;
@@ -518,7 +515,6 @@
 				BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */,
 				BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */,
 				BC278B98290ED7AC0098A82C /* User.swift in Sources */,
-				BC15FF6A28F7377000A0F594 /* WeatherDestinationViewController.swift in Sources */,
 				BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */,
 				BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */,
 				BC40285628FDDA070044A19A /* APICountryFlag.swift in Sources */,

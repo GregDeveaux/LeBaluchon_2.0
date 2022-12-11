@@ -50,7 +50,7 @@ enum ImagesWeather {
 
     enum Icon: String {
         case clearSkyDay = "sun.max.fill"
-        case clearSkyNight = "moon.stars"
+        case clearSkyNight = "moon.stars.fill"
         case fewCloudsDay = "cloud.sun.fill"
         case fewCloudsNight = "cloud.moon.fill"
         case scatteredClouds = "cloud.fill"

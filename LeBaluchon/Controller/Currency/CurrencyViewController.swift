@@ -4,7 +4,6 @@
 //
 //  Created by Greg Deveaux on 10/10/2022.
 //
-
 import UIKit
 
 class CurrencyViewController: UIViewController {
@@ -12,7 +11,6 @@ class CurrencyViewController: UIViewController {
         // -------------------------------------------------------
         //MARK: - properties init
         // -------------------------------------------------------
-
     @IBOutlet var numberButton: [UIButton]!
 
     @IBOutlet weak var iconCurrencyPhone: UILabel!
@@ -48,7 +46,6 @@ class CurrencyViewController: UIViewController {
         // -------------------------------------------------------
         //MARK: - viewDidLoad
         // -------------------------------------------------------
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,7 +66,6 @@ class CurrencyViewController: UIViewController {
         // -------------------------------------------------------
         //MARK: - keyboard keys
         // -------------------------------------------------------
-
     @IBAction func tappedResetButton(_ sender: UIButton) {
         if textFieldEntryAmount.text.count >= 1 {
             textFieldEntryAmount.text.removeLast()
@@ -118,7 +114,6 @@ class CurrencyViewController: UIViewController {
         // -------------------------------------------------------
         //MARK: - found the currency of the destination city
         // -------------------------------------------------------
-
     func giveMeTheCurrencySymbolDestination(countryCode: String) {
         if #available(iOS 16, *) {
                 // for user part
@@ -146,7 +141,6 @@ class CurrencyViewController: UIViewController {
         // -------------------------------------------------------
         //MARK: - flag UIImageView
         // -------------------------------------------------------
-
     func addFlagCountries() {
         designFlag(to: flagLocalImageView)
         designFlag(to: flagDestinationImageView)
@@ -183,7 +177,6 @@ class CurrencyViewController: UIViewController {
         // -------------------------------------------------------
         //MARK: - animations
         // -------------------------------------------------------
-
         // animation button template
     private func buttonFrontBack(name button: UIButton, imageCheck: String) {
         button.setImage(UIImage(named: imageCheck), for: .normal)
