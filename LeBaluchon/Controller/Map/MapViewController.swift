@@ -15,14 +15,8 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var modifyDestinationButton: UIButton!
 
-    let userDefaults = UserDefaults.standard
-    let userName = UserDefaults.standard.string(forKey: "userName") ?? "unknow"
-    let destinationCityName = UserDefaults.standard.string(forKey: "destinationCityName") ?? "unknow"
-    let destinationCityLatitude = UserDefaults.standard.double(forKey: "destinationCityLatitude")
-    let destinationCityLongitude = UserDefaults.standard.double(forKey: "destinationCityLongitude")
-
-    var user: User!
-    var destinationCity: DestinationCity!
+    var user = User()
+    var destination = Destination()
 
     var pinUser: PinMap!
     var pinDestination: PinMap!
@@ -33,33 +27,23 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupLocationManager()
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
         setMapView()
-        print("📍🏖 latitude \(destinationCityLatitude) et longitude \(destinationCityLongitude)")
 
-        createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude))
-        print("✅ route \(createRoute(to: CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)))")
+        print("✅ MAP: destination latitude \(destination.latitude) et longitude \(destination.longitude)")
+
+        createRoute(to: CLLocationCoordinate2D(latitude: destination.latitude, longitude: destination.longitude))
+        print("✅ MAP: route \(createRoute(to: CLLocationCoordinate2D(latitude: destination.latitude, longitude: destination.longitude)))")
     }
 
     func setupUser(latitude: Double, longitude: Double) {
-        API.City.foundCountryByCoordinates(latitude: String(latitude), longitude: String(longitude)) { [self] cityInfo in
-            user = User(name: userName,
-                        coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude),
-                        cityName: cityInfo.name,
-                        country: cityInfo.country,
-                        countryCode: cityInfo.countryCode)
-//            userDefaults.set(latitude, forKey: "userLatitude")
-//            userDefaults.set(longitude, forKey: "userLongitude")
-//            userDefaults.set(cityInfo.name, forKey: "userCityName")
-//            userDefaults.set(cityInfo.country, forKey: "userCountry")
-//            userDefaults.set(cityInfo.countryCode, forKey: "userCountryCode")
-            userNameLabel.text = user.welcomeMessage
-            print("✅📲 user City Name \(cityInfo.name), in \(cityInfo.country) with country code : \(cityInfo.countryCode)")
-            print("✅ coordinates receive of \(userName) are lat:\(latitude) et long:\(longitude))")
+        API.LocalisationCity.foundCountryByCoordinates(latitude: String(latitude), longitude: String(longitude)) { result in
+            guard let cityInfo = result else { return }
+            self.user = User(city: cityInfo)
+            self.userNameLabel.text = self.user.welcomeMessage
+            print("✅ MAP CELLPHONE USER: user City Name \(self.user.city.name ?? "Nothing"), in \(self.user.city.country ?? "Nothing") with country code : \(self.user.city.countryCode ?? "Nothing")")
+            print("✅ MAP CELLPHONE USER: coordinates receive of \(self.user.name) are lat:\(self.user.city.latitude ?? 0) et long:\(self.user.city.longitude ?? 0)")
         }
     }
     
@@ -75,6 +59,8 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
 
     private func setMapView() {
+        guard let pinDestination = pinDestination else { return }
+
         mapView.delegate = self
 
             // the map will remain in its light version
@@ -94,22 +80,24 @@ extension MapViewController: MKMapViewDelegate {
 
     private func setupPinMap() {
 
-        if destinationCityLatitude != 0 && destinationCityLongitude != 0  {
-            pinDestination = PinMap(title: "you want to go to \(destinationCityName)",
-                                    coordinate: CLLocationCoordinate2D(latitude: (destinationCityLatitude),
-                                                                       longitude: (destinationCityLongitude)),
+        let destinationCity = destination.city
+
+        if destinationCity.latitude != 0 && destinationCity.longitude != 0  {
+            pinDestination = PinMap(title: "you want to go to \(destinationCity.name ?? "No Land")",
+                                    coordinate: CLLocationCoordinate2D(latitude: (destinationCity.latitude),
+                                                                       longitude: (destinationCity.longitude)),
                                     info: "destination")
-            print("✅ pin destination: \(pinDestination.title ?? "unknow")")
+            print("✅ MAP: pin destination: \(pinDestination.title ?? "unknow")")
         }
 
         if let userCoordinates = currentLocationUser?.coordinate {
-            pinUser = PinMap(title: "Hello \(userName)! it's you!",
+            pinUser = PinMap(title: "Hello \(user.name)! it's you!",
                              coordinate: CLLocationCoordinate2D(latitude: (userCoordinates.latitude),
                                                                 longitude: (userCoordinates.longitude)),
                              info: "start")
 
-            print("✅ pin user: \(pinUser?.title ?? "unknow")")
-            print("📍 latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
+            print("✅ MAP: pin user: \(pinUser?.title ?? "unknow")")
+            print("📍 MAP: user latitude \(currentLocationUser?.coordinate.latitude ?? 0) et longitude \(currentLocationUser?.coordinate.latitude ?? 0)")
         }
     }
 
@@ -130,7 +118,7 @@ extension MapViewController: MKMapViewDelegate {
         let directions = MKDirections(request: destinationRequest)
         directions.calculate { response, error in
             guard let response = response else {
-                print("  error of creation of route")
+                print("Error of creation of route")
                 return }
 
             guard let route = response.routes.first else { return }
@@ -148,6 +136,7 @@ extension MapViewController: MKMapViewDelegate {
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is PinMap else { return nil }
+        let destinationCity = destination.city
 
             // custom pinUser
         let identifier = "customPin"
@@ -161,9 +150,9 @@ extension MapViewController: MKMapViewDelegate {
         }
 
         switch annotation.title {
-            case "you want to go to \(destinationCityName)":
+            case "you want to go to \(destinationCity.name ?? "No Land")":
                 annotationView?.image = UIImage(named: "pinDestination")
-            case user?.welcomeMessage:
+            case user.welcomeMessage:
                 annotationView?.image = UIImage(named: "pinUser")
             default:
                 break
@@ -197,16 +186,17 @@ extension MapViewController: CLLocationManagerDelegate {
         setupUser(latitude: currentLocationUser?.coordinate.latitude ?? 0, longitude: currentLocationUser?.coordinate.longitude ?? 0)
 
             // create aline a line between the user and the destination
+        let destinationCity = destination.city
         let startPolyline = location.coordinate
-        let destinationPolyline = CLLocationCoordinate2D(latitude: destinationCityLatitude, longitude: destinationCityLongitude)
+        let destinationPolyline = CLLocationCoordinate2D(latitude: destinationCity.latitude, longitude: destinationCity.longitude)
         let coordinatesPolyline = [startPolyline, destinationPolyline]
         let polyline = MKPolyline(coordinates: coordinatesPolyline, count: coordinatesPolyline.count)
 
         mapView.addOverlay(polyline)
 
-        let center = CLLocationCoordinate2D(latitude: currentLocationUser?.coordinate.latitude ?? 0,
-                                            longitude: currentLocationUser?.coordinate.longitude ?? 0)
-        let span = MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100)
+        let center = CLLocationCoordinate2D(latitude: (((currentLocationUser?.coordinate.latitude ?? 0) + destinationCity.latitude) / 2),
+                                            longitude: (((currentLocationUser?.coordinate.longitude ?? 0) + destinationCity.longitude) / 2))
+        let span = MKCoordinateSpan(latitudeDelta: 90, longitudeDelta: 90)
         let region = MKCoordinateRegion(center: center, span: span)
         mapView.setRegion(region, animated: true)
 

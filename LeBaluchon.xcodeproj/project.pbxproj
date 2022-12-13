@@ -27,7 +27,7 @@
 		BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */; };
 		BC26316D28F8ADFA002E9AE6 /* UIView+GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */; };
 		BC278B94290E8B1E0098A82C /* UITextField+Designable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */; };
-		BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* DestinationCity.swift */; };
+		BC278B96290ECC790098A82C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* City.swift */; };
 		BC278B98290ED7AC0098A82C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B97290ED7AC0098A82C /* User.swift */; };
 		BC2AB6C82933F56500B6CE2D /* APITranslateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */; };
 		BC40284528FB6A760044A19A /* APICurrencyExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC40284428FB6A760044A19A /* APICurrencyExample.json */; };
@@ -57,6 +57,7 @@
 		BCF0B809293540450037214B /* APICoordinatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B808293540450037214B /* APICoordinatesTests.swift */; };
 		BCF0B80B293540620037214B /* APICityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B80A293540620037214B /* APICityTests.swift */; };
 		BCF0B80D293540BA0037214B /* APIWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B80C293540BA0037214B /* APIWeatherTests.swift */; };
+		BCF1DF982947FFE000827108 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF1DF972947FFE000827108 /* Destination.swift */; };
 		BCF48BA42926C02400F63B25 /* UITextView+TypeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */; };
 		BCFF028F29118575008CF2EA /* NexaRustSlab-BlackShadow.otf in Resources */ = {isa = PBXBuildFile; fileRef = BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */; };
 /* End PBXBuildFile section */
@@ -103,7 +104,7 @@
 		BC26316A28F88913002E9AE6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		BC26316C28F8ADFA002E9AE6 /* UIView+GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GradientView.swift"; sourceTree = "<group>"; };
 		BC278B93290E8B1E0098A82C /* UITextField+Designable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Designable.swift"; sourceTree = "<group>"; };
-		BC278B95290ECC790098A82C /* DestinationCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCity.swift; sourceTree = "<group>"; };
+		BC278B95290ECC790098A82C /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		BC278B97290ED7AC0098A82C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITranslateTests.swift; sourceTree = "<group>"; };
 		BC40284428FB6A760044A19A /* APICurrencyExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICurrencyExample.json; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 		BCF0B808293540450037214B /* APICoordinatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICoordinatesTests.swift; sourceTree = "<group>"; };
 		BCF0B80A293540620037214B /* APICityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityTests.swift; sourceTree = "<group>"; };
 		BCF0B80C293540BA0037214B /* APIWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWeatherTests.swift; sourceTree = "<group>"; };
+		BCF1DF972947FFE000827108 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		BCF48BA32926C02400F63B25 /* UITextView+TypeOn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+TypeOn.swift"; sourceTree = "<group>"; };
 		BCFF028E29118575008CF2EA /* NexaRustSlab-BlackShadow.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NexaRustSlab-BlackShadow.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,9 +259,10 @@
 		BC40284628FBF6F90044A19A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BC40285B28FDE0F20044A19A /* API */,
-				BC278B95290ECC790098A82C /* DestinationCity.swift */,
 				BC278B97290ED7AC0098A82C /* User.swift */,
+				BCF1DF972947FFE000827108 /* Destination.swift */,
+				BC278B95290ECC790098A82C /* City.swift */,
+				BC40285B28FDE0F20044A19A /* API */,
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
 				BC752158293939960015B863 /* ImagesWeather.swift */,
 				BCE3F645294151A4001F7422 /* ListOfLanguages.swift */,
@@ -538,7 +541,8 @@
 				BC40285A28FDE0D10044A19A /* APIError.swift in Sources */,
 				BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */,
 				BC0C6B3C28F4B2AA0075C614 /* SceneDelegate.swift in Sources */,
-				BC278B96290ECC790098A82C /* DestinationCity.swift in Sources */,
+				BC278B96290ECC790098A82C /* City.swift in Sources */,
+				BCF1DF982947FFE000827108 /* Destination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

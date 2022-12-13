@@ -48,7 +48,7 @@ extension API {
             }
             
             request.httpMethod = method.rawValue
-            print ("✅ \(request)")
+            print ("✅ QUERY SERVICE: \(request)")
             
             task?.cancel()
             

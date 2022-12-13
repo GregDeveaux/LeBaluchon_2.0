@@ -13,6 +13,17 @@ class LoginViewController: UIViewController {
         // MARK: - properties
         // -------------------------------------------------------
 
+    let welcomeText = "Hello, my friend! Welcome to the \"Le Baluchon\" App, to start you must write your name and your destination, thank you 😀"
+
+    var validateEntryTextFields = false
+    var user = User()
+    var destination = Destination()
+
+
+        // -------------------------------------------------------
+        // MARK: - outlets
+        // -------------------------------------------------------
+
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var destinationTextField: UITextField!
 
@@ -22,12 +33,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textNameLabel: UILabel!
     @IBOutlet weak var textDestinationLabel: UILabel!
     @IBOutlet weak var letsGoButton: UIButton!
-    
-    let welcomeText = "Hello, my friend! Welcome to the \"Le Baluchon\" App, to start you must write your name and your destination, thank you 😀"
-
-    let userDefaults = UserDefaults.standard
-
-    var validateEntryTextFields = false
 
 
         // -------------------------------------------------------
@@ -49,12 +54,9 @@ class LoginViewController: UIViewController {
         // -------------------------------------------------------
 
     func checkTheUserNameExistInBase() {
-        guard let currentUserName = userDefaults.string(forKey: "userName") else { return }
-
-        if let text = nameTextField?.text, text.isEmpty {
-            nameTextField.text = currentUserName
-            print("✅ user name exists, don't change, it's \(String(describing: nameTextField.text))")
-            nameTextField.isEnabled = false
+        if let text = nameTextField?.text, text != "" {
+            nameTextField.text = user.name
+            print("✅ LOGIN: user name exists, don't change, it's \(nameTextField.text ?? "Nothing")")
         }
     }
 
@@ -70,36 +72,36 @@ class LoginViewController: UIViewController {
             destinationTextField.text?.removeLast()
         }
 
-        var user: User?
-
         guard let userName = nameTextField.text, !userName.isEmpty else {
             presentAlert(with: "please enter an username")
             return
         }
+        user.name = userName
+
 
         guard let destinationCityName = destinationTextField.text, !destinationCityName.isEmpty else {
             presentAlert(with: "please enter a destination city")
             return
         }
+        destination.cityName = destinationCityName
 
         validateEntryTextFields = true
 
             // recover the info on the city after than the user wrote your destination in the textField
-        API.City.recoverInfoOnTheCity(named: destinationTextField.text!) { destinationInfo in
-            user?.name = userName
+        API.LocalisationCity.recoverInfoOnTheCity(named: destinationCityName) { result in
 
-            self.userDefaults.set(userName.capitalized, forKey: "userName")
-            self.userDefaults.set(destinationCityName.capitalized, forKey: "destinationCityName")
-            self.userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
-            self.userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")
-            self.userDefaults.set(destinationInfo?.country, forKey: "destinationCountry")
-            self.userDefaults.set(destinationInfo?.countryCode, forKey: "destinationCountryCode")
+            guard let destinationInfo = result else { return self.presentAlert(with: "We have nothing on the city")}
+
+            self.destination.latitude = destinationInfo.latitude
+            self.destination.longitude = destinationInfo.longitude
+            self.destination.country = destinationInfo.country
+            self.destination.countryCode = destinationInfo.countryCode
 
             print("""
-            ✅ user name is \(userName.capitalized)
-            ✅ the destination is \(destinationCityName.capitalized),
-               with as coordinates : - lat:\(destinationInfo?.coordinates.latitude ?? 0)
-                                     - long:\(destinationInfo?.coordinates.longitude ?? 0)
+            ✅ LOGIN: user name is \(self.user.name)
+            ✅ LOGIN: the destination is \(self.destination.cityName),
+                      with as coordinates : - lat:\(self.destination.latitude)
+                                            - long:\(self.destination.longitude)
             """)
 
             self.changeViewController()
