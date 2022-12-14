@@ -43,6 +43,7 @@
 		BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C14A82916B472009FDF18 /* APICityCoordinates.swift */; };
 		BC752159293939960015B863 /* ImagesWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC752158293939960015B863 /* ImagesWeather.swift */; };
 		BC75215B293979350015B863 /* APICountryFlagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC75215A293979350015B863 /* APICountryFlagTests.swift */; };
+		BC7896E429493F4700660D15 /* MapViewController+LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7896E329493F4700660D15 /* MapViewController+LocationDelegate.swift */; };
 		BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
@@ -121,6 +122,7 @@
 		BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICoordinatesExample.json; sourceTree = "<group>"; };
 		BC752158293939960015B863 /* ImagesWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesWeather.swift; sourceTree = "<group>"; };
 		BC75215A293979350015B863 /* APICountryFlagTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICountryFlagTests.swift; sourceTree = "<group>"; };
+		BC7896E329493F4700660D15 /* MapViewController+LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+LocationDelegate.swift"; sourceTree = "<group>"; };
 		BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Language.swift"; sourceTree = "<group>"; };
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6C14A62916AC73009FDF18 /* MapViewController.swift */,
+				BC7896E329493F4700660D15 /* MapViewController+LocationDelegate.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */,
 				BC26316B28F88913002E9AE6 /* UIColor+Hex.swift in Sources */,
 				BC40285628FDDA070044A19A /* APICountryFlag.swift in Sources */,
+				BC7896E429493F4700660D15 /* MapViewController+LocationDelegate.swift in Sources */,
 				BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */,
 				BC1D19BA2905A11C00AF8838 /* APITranslation.swift in Sources */,
 				BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */,

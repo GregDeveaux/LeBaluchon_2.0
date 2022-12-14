@@ -10,7 +10,37 @@ import UIKit
 class WeatherHomeViewController: UIViewController {
 
         // -------------------------------------------------------
-        // MARK: Properties
+        // MARK: properties
+        // -------------------------------------------------------
+
+    var user = User()
+    var destination = Destination()
+
+    let todayDate = Date.now
+
+    let unit = "metric"
+
+    lazy var backgroundUnderTabBar: UIView = {
+        let backgroundUnderTabBar = UIView()
+        backgroundUnderTabBar.frame = CGRect(x: 0, y: 800, width: UIScreen.main.bounds.width, height: 76)
+        backgroundUnderTabBar.backgroundColor = .greenAurora
+        return backgroundUnderTabBar
+    }()
+
+    lazy var lineTabBar: UIView = {
+        let lineTabBar = UIView()
+        lineTabBar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 1)
+        lineTabBar.backgroundColor = .white
+
+        lineTabBar.translatesAutoresizingMaskIntoConstraints = false
+        lineTabBar.bottomAnchor.constraint(equalTo: lineTabBar.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        lineTabBar.centerXAnchor.constraint(equalTo: lineTabBar.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        return lineTabBar
+    }()
+
+
+        // -------------------------------------------------------
+        // MARK: outlets
         // -------------------------------------------------------
 
     @IBOutlet var temperatureUnitLabel: [UILabel]!
@@ -47,30 +77,6 @@ class WeatherHomeViewController: UIViewController {
 
     @IBOutlet weak var destinationBackgroundImageView: UIImageView!
 
-        // -------- Others --------
-    let todayDate = Date.now
-    let userDefaults = UserDefaults.standard
-
-    let unit = "metric"
-
-    lazy var backgroundUnderTabBar: UIView = {
-        let backgroundUnderTabBar = UIView()
-        backgroundUnderTabBar.frame = CGRect(x: 0, y: 800, width: UIScreen.main.bounds.width, height: 76)
-        backgroundUnderTabBar.backgroundColor = .greenAurora
-        return backgroundUnderTabBar
-    }()
-
-    lazy var lineTabBar: UIView = {
-        let lineTabBar = UIView()
-        lineTabBar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 1)
-        lineTabBar.backgroundColor = .white
-
-        lineTabBar.translatesAutoresizingMaskIntoConstraints = false
-        lineTabBar.bottomAnchor.constraint(equalTo: lineTabBar.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        lineTabBar.centerXAnchor.constraint(equalTo: lineTabBar.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        return lineTabBar
-    }()
-
 
         // -------------------------------------------------------
         // MARK: view life
@@ -86,18 +92,15 @@ class WeatherHomeViewController: UIViewController {
         // -------------------------------------------------------
 
     func giveMeTheWeathers() {
-        guard let userCityName = userDefaults.string(forKey: "userCityName") else { return }
-        guard let userCountry = userDefaults.string(forKey: "userCountry") else { return }
-
-        API.QueryService.shared.getData(endpoint: .weather(city: userCityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
+        API.QueryService.shared.getData(endpoint: .weather(city: user.cityName, units: "metric"), type: API.Weather.DataForCity.self) { results in
             switch results {
                 case .failure(let error):
                     print(error.localizedDescription)
 
                 case .success(let results):
                     let weatherForCity = results
-                    self.userCityLabel.text = userCityName
-                    self.userCountryLabel.text = userCountry
+                    self.userCityLabel.text = self.user.cityName
+                    self.userCountryLabel.text = self.user.countryName
 
                     self.userTemperatureLabel.text = String(Int(weatherForCity.main.temp))
                     self.userHightTemperatureLabel.text = String(Int(weatherForCity.main.tempMax))
@@ -137,10 +140,7 @@ class WeatherHomeViewController: UIViewController {
 
     func giveMeTheDestinationWeather() {
 
-        guard let destinationCity = userDefaults.string(forKey: "destinationCityName") else { return }
-        guard let destinationCountry = userDefaults.string(forKey: "destinationCountry") else { return }
-
-        API.QueryService.shared.getData(endpoint: .weather(city: destinationCity, units: unit), type: API.Weather.DataForCity.self) { results in
+        API.QueryService.shared.getData(endpoint: .weather(city: destination.cityName, units: unit), type: API.Weather.DataForCity.self) { results in
             switch results {
                 case .failure(let error):
                     self.presentAlert(message: "Sorry, the destination weather failed")
@@ -149,8 +149,8 @@ class WeatherHomeViewController: UIViewController {
                 case .success(let results):
                     let weatherForCity = results
 
-                    self.destinationCityLabel.text = destinationCity
-                    self.destinationCountryLabel.text = destinationCountry
+                    self.destinationCityLabel.text = self.destination.cityName
+                    self.destinationCountryLabel.text = self.destination.countryName
                     self.destinationTemperatureLabel.text = String(Int(weatherForCity.main.temp))
                     self.destinationHightTemperatureLabel.text = String(Int(weatherForCity.main.tempMax))
                     self.destinationLowTemperatureLabel.text = String(Int(weatherForCity.main.tempMin))

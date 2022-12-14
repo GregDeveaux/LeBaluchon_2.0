@@ -9,8 +9,28 @@ import UIKit
 class CurrencyViewController: UIViewController {
 
         // -------------------------------------------------------
-        //MARK: - properties init
+        //MARK: - properties
         // -------------------------------------------------------
+
+    var user = User()
+    var destination = Destination()
+
+    var amountTapped: Double = 0.0
+
+    let localeUser = Locale.current
+    var localeDestination: Locale!
+
+    var currencyDestinationName: String = ""
+    var currencyDestinationSymbol: String = ""
+
+    var currencyUserName: String = ""
+    var currencyUserSymbol: String = ""
+
+
+        // -------------------------------------------------------
+        //MARK: - outlets
+        // -------------------------------------------------------
+
     @IBOutlet var numberButton: [UIButton]!
 
     @IBOutlet weak var iconCurrencyPhone: UILabel!
@@ -26,22 +46,6 @@ class CurrencyViewController: UIViewController {
     @IBOutlet weak var nameDestinationLabel: UILabel!
     @IBOutlet var whiteBoardView: [UIView]!
 
-    var amountTapped: Double = 0.0
-
-    let userDefaults = UserDefaults.standard
-
-    let localeUser = Locale.current
-    var localeDestination: Locale!
-
-    var countryCodeDestination: String = ""
-    var countryCodeUser: String = ""
-
-    var currencyDestinationName: String = ""
-    var currencyDestinationSymbol: String = ""
-
-    var currencyUserName: String = ""
-    var currencyUserSymbol: String = ""
-
 
         // -------------------------------------------------------
         //MARK: - viewDidLoad
@@ -56,10 +60,8 @@ class CurrencyViewController: UIViewController {
     }
 
     private func recoverDataOfUserDefaults() {
-        countryCodeDestination = userDefaults.string(forKey: "destinationCountryCode")?.uppercased() ?? "BE"
-        nameDestinationCountryLabel.text = userDefaults.string(forKey: "destinationCountry")?.uppercased() ?? "BELGIUM"
-        guard let nameDestination = userDefaults.string(forKey: "destinationCityName")?.capitalized else { return }
-        nameDestinationLabel.text = "you have chosen as destination: \(nameDestination)"
+        nameDestinationCountryLabel.text = destination.countryName
+        nameDestinationLabel.text = "you have chosen as destination: \(destination.cityName.capitalized)"
     }
 
 
@@ -153,14 +155,14 @@ class CurrencyViewController: UIViewController {
             DispatchQueue.main.async {
                 self.flagLocalImageView.image = UIImage(data: countryFlag)
 
-                API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: self.countryCodeDestination), method: .GET) { countryFlag in
+                API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: self.destination.countryCode), method: .GET) { countryFlag in
                     guard let countryFlag = countryFlag else {
                         print(API.Error.generic(reason: "not shown data"))
                         return
                     }
                     DispatchQueue.main.async { [self] in
                         flagDestinationImageView.image = UIImage(data: countryFlag)
-                        giveMeTheCurrencySymbolDestination(countryCode: countryCodeDestination)
+                        giveMeTheCurrencySymbolDestination(countryCode: destination.countryCode)
                     }
                 }
             }

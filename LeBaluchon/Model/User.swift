@@ -9,7 +9,7 @@ import Foundation
 
 
 
-struct User {
+class User {
 
         // -------------------------------------------------------
         // MARK: - private keys
@@ -20,10 +20,9 @@ struct User {
         case cityUserName
         case cityUserLatitude
         case cityUserLongitude
-        case cityUserCountry
+        case cityUserCountryName
         case cityUserCountryCode
         case cityUserLanguageCode
-        case cityUserLanguageRegion
         case cityUserCurrency
         case cityUserCurrencySymbol
     }
@@ -35,7 +34,7 @@ struct User {
 
     var name: String {
         get {
-            print("🔔🟡 User name is call: \(UserDefaults.standard.string(forKey: Keys.name.rawValue) ?? "No Name")")
+            print("🔔🟡 User name is call: \(UserDefaults.standard.string(forKey: Keys.name.rawValue) ?? "No name")")
             return UserDefaults.standard.string(forKey: Keys.name.rawValue) ?? ""
         }
         set {
@@ -53,100 +52,89 @@ struct User {
 
     var cityName: String {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserName.rawValue) ?? "No Name")")
+            print("🔔🟡 User city name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserName.rawValue) ?? "No city name")")
             return UserDefaults.standard.string(forKey: Keys.cityUserName.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(city.name, forKey: Keys.cityUserName.rawValue)
-            print("🔔🟢 User name is save \(city.name ?? "")")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserName.rawValue)
+            print("🔔🟢 User city is save \(newValue )")
         }
     }
 
     var latitude: Double {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLatitude.rawValue) ?? "No Name")")
+            print("🔔🟡 User city latitude is call: \(UserDefaults.standard.double(forKey: Keys.cityUserLatitude.rawValue) )")
             return UserDefaults.standard.double(forKey: Keys.cityUserLatitude.rawValue)
         }
         set {
-            UserDefaults.standard.set(city.latitude, forKey: Keys.cityUserLatitude.rawValue)
-            print("🔔🟢 User name is save \(city.latitude ?? 0)")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserLatitude.rawValue)
+            print("🔔🟢 User city latitude is save \(newValue )")
         }
     }
 
     var longitude: Double {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLongitude.rawValue) ?? "No Name")")
+            print("🔔🟡 User city longitude is call: \(UserDefaults.standard.double(forKey: Keys.cityUserLongitude.rawValue) )")
             return UserDefaults.standard.double(forKey: Keys.cityUserLongitude.rawValue)
         }
         set {
-            UserDefaults.standard.set(city.longitude, forKey: Keys.cityUserLongitude.rawValue)
-            print("🔔🟢 User name is save \(city.longitude ?? 0)")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserLongitude.rawValue)
+            print("🔔🟢 User city longitude is save \(newValue )")
         }
     }
 
-    var country: String {
+    var countryName: String {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCountry.rawValue) ?? "No Name")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserCountry.rawValue) ?? "No Land"
+            print("🔔🟡 User city country is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCountryName.rawValue) ?? "No Land")")
+            return UserDefaults.standard.string(forKey: Keys.cityUserCountryName.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(city.country, forKey: Keys.cityUserCountry.rawValue.capitalized)
-            print("🔔🟢 User name is save \(city.country ?? "")")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserCountryName.rawValue)
+            print("🔔🟢 User city country is save \(newValue )")
         }
     }
 
     var countryCode: String {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No Name")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No Code"
+            print("🔔🟡 User city countryCode is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No Code")")
+            return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(city.countryCode, forKey: Keys.cityUserLanguageCode.rawValue)
-            print("🔔🟢 User name is save \(city.countryCode ?? "")")
-        }
-    }
-
-    var languageCode: String? {
-        get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No Name")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No L Code"
-        }
-        set {
-            UserDefaults.standard.set(city.languageCode, forKey: Keys.cityUserLanguageCode.rawValue)
-            print("🔔🟢 User name is save \(city.languageCode ?? "")")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserLanguageCode.rawValue)
+            print("🔔🟢 User city countryCode is save \(newValue )")
         }
     }
 
     var languageRegion: String? {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageRegion.rawValue) ?? "No Name")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserLanguageRegion.rawValue) ?? "No L Region"
+            print("🔔🟡 User city language region is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No L Region")")
+            return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(city.languageRegion, forKey: Keys.cityUserLanguageRegion.rawValue)
-            print("🔔🟢 User name is save \(city.languageRegion ?? "")")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserLanguageCode.rawValue)
+            print("🔔🟢 User city language region is save \(newValue ?? "")")
         }
     }
 
     var currency: String? {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? "No Name")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? "No Currency"
+            print("🔔🟡 User city currency is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? "No Currency")")
+            return UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(city.currency, forKey: Keys.cityUserCurrency.rawValue.uppercased())
-            print("🔔🟢 User name is save \(city.currency ?? "")")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserCurrency.rawValue.uppercased())
+            print("🔔🟢 User city currency is save \(newValue ?? "")")
         }
     }
 
     var currencySymbol: String? {
         get {
-            print("🔔🟡 City user name is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCurrencySymbol.rawValue) ?? "No Name")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserCurrencySymbol.rawValue) ?? "No Symbol"
+            print("🔔🟡 User city currencySymbol is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCurrencySymbol.rawValue) ?? "No Symbol")")
+            return UserDefaults.standard.string(forKey: Keys.cityUserCurrencySymbol.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(city.currencySymbol, forKey: Keys.cityUserCurrencySymbol.rawValue)
-            print("🔔🟢 User name is save \(city.currencySymbol ?? "")")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserCurrencySymbol.rawValue)
+            print("🔔🟢 User city currencySymbol is save \(newValue ?? "")")
         }
     }
 

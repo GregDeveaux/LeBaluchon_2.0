@@ -42,10 +42,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        checkTheUserNameExistInBase()
+
         nameTextField.delegate = self
         destinationTextField.delegate = self
-
-        checkTheUserNameExistInBase()
     }
 
 
@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
         // -------------------------------------------------------
 
     func checkTheUserNameExistInBase() {
-        if let text = nameTextField?.text, text != "" {
+        if let text = nameTextField?.text, text.isEmpty {
             nameTextField.text = user.name
             print("✅ LOGIN: user name exists, don't change, it's \(nameTextField.text ?? "Nothing")")
         }
@@ -94,12 +94,12 @@ class LoginViewController: UIViewController {
 
             self.destination.latitude = destinationInfo.latitude
             self.destination.longitude = destinationInfo.longitude
-            self.destination.country = destinationInfo.country
+            self.destination.countryName = destinationInfo.country
             self.destination.countryCode = destinationInfo.countryCode
 
             print("""
-            ✅ LOGIN: user name is \(self.user.name)
-            ✅ LOGIN: the destination is \(self.destination.cityName),
+            ✅ LOGIN: user name is \(self.user.name), you live in \(self.user.countryName)
+            ✅ LOGIN: the destination is \(self.destination.cityName), \(self.destination.countryName)
                       with as coordinates : - lat:\(self.destination.latitude)
                                             - long:\(self.destination.longitude)
             """)

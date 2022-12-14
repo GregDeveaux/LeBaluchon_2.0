@@ -102,7 +102,9 @@ extension API {
                         let city = result
                         completion(createInfoOfCity(city))
 
-                        print("✅ API COUNTRY: the found city is \(city.address.city ?? "Nothing")")
+                        print("✅ API COUNTRY: the found city is \(city.address.city ?? "Town ?")")
+                        print("✅ API COUNTRY: the found town is \(city.address.town ?? "Village ?")")
+                        print("✅ API COUNTRY: the found village is \(city.address.village ?? "City ?")")
                 }
             }
         }
