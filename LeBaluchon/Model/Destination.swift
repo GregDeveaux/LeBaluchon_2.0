@@ -36,14 +36,14 @@ class Destination {
             return UserDefaults.standard.string(forKey: Keys.cityDestinationName.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityDestinationName.rawValue)
-            print("🔔🟢 Destination city name is save \(newValue)")
+            UserDefaults.standard.set(newValue.capitalized, forKey: Keys.cityDestinationName.rawValue)
+            print("🔔🟢 Destination city name is save \(newValue.capitalized)")
         }
     }
 
     var latitude: Double {
         get {
-            print("🔔🟡 Destination city latitude is call: \(UserDefaults.standard.string(forKey: Keys.cityDestinationLatitude.rawValue) ?? "No latitude")")
+            print("🔔🟡 Destination city latitude is call: \(UserDefaults.standard.double(forKey: Keys.cityDestinationLatitude.rawValue))")
             return UserDefaults.standard.double(forKey: Keys.cityDestinationLatitude.rawValue)
         }
         set {
@@ -54,7 +54,7 @@ class Destination {
 
     var longitude: Double {
         get {
-            print("🔔🟡 Destination city longitude is call: \(UserDefaults.standard.string(forKey: Keys.cityDestinationLongitude.rawValue) ?? "No longitude")")
+            print("🔔🟡 Destination city longitude is call: \(UserDefaults.standard.double(forKey: Keys.cityDestinationLongitude.rawValue))")
             return UserDefaults.standard.double(forKey: Keys.cityDestinationLongitude.rawValue)
         }
         set {
@@ -69,8 +69,8 @@ class Destination {
             return UserDefaults.standard.string(forKey: Keys.cityDestinationCountryName.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityDestinationCountryName.rawValue)
-            print("🔔🟢 Destination city country is save \(newValue)")
+            UserDefaults.standard.set(newValue.capitalized, forKey: Keys.cityDestinationCountryName.rawValue)
+            print("🔔🟢 Destination city country is save \(newValue.capitalized)")
         }
     }
 
@@ -80,41 +80,41 @@ class Destination {
             return UserDefaults.standard.string(forKey: Keys.cityDestinationCountryCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityDestinationCountryCode.rawValue)
-            print("🔔🟢 Destination city countryCode is save \(newValue)")
+            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityDestinationCountryCode.rawValue)
+            print("🔔🟢 Destination city countryCode is save \(newValue.uppercased())")
         }
     }
 
-    var languageRegion: String? {
+    var languageCode: String {
         get {
             print("🔔🟡 Destination city language region is call: \(UserDefaults.standard.string(forKey: Keys.cityDestinationLanguageCode.rawValue) ?? "No languageRegion")")
             return UserDefaults.standard.string(forKey: Keys.cityDestinationLanguageCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityDestinationLanguageCode.rawValue)
-            print("🔔🟢 Destination city language region is save \(newValue ?? "")")
+            UserDefaults.standard.set(newValue.lowercased(), forKey: Keys.cityDestinationLanguageCode.rawValue)
+            print("🔔🟢 Destination city language region is save \(newValue.lowercased())")
         }
     }
 
-    var currency: String? {
+    var currencyCode: String {
         get {
             print("🔔🟡 Destination city currency is call: \(UserDefaults.standard.string(forKey: Keys.cityDestinationCurrency.rawValue) ?? "No Currency")")
             return UserDefaults.standard.string(forKey: Keys.cityDestinationCurrency.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityDestinationCurrency.rawValue.uppercased())
-            print("🔔🟢 Destination city currency is save \(newValue ?? "")")
+            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityDestinationCurrency.rawValue.uppercased())
+            print("🔔🟢 Destination city currency is save \(newValue.uppercased())")
         }
     }
 
-    var currencySymbol: String? {
+    var currencySymbol: String {
         get {
             print("🔔🟡 Destination city currency symbol is call: \(UserDefaults.standard.string(forKey: Keys.cityDestinationCurrencySymbol.rawValue) ?? "No CurrencySymbol")")
             return UserDefaults.standard.string(forKey: Keys.cityDestinationCurrencySymbol.rawValue) ?? ""
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.cityDestinationCurrencySymbol.rawValue)
-            print("🔔🟢 Destination city currency symbol is save \(newValue ?? "")")
+            print("🔔🟢 Destination city currency symbol is save \(newValue)")
         }
     }
 }

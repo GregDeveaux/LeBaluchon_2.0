@@ -56,8 +56,8 @@ class User {
             return UserDefaults.standard.string(forKey: Keys.cityUserName.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityUserName.rawValue)
-            print("🔔🟢 User city is save \(newValue )")
+            UserDefaults.standard.set(newValue.capitalized, forKey: Keys.cityUserName.rawValue)
+            print("🔔🟢 User city is save \(newValue.capitalized)")
         }
     }
 
@@ -68,7 +68,7 @@ class User {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.cityUserLatitude.rawValue)
-            print("🔔🟢 User city latitude is save \(newValue )")
+            print("🔔🟢 User city latitude is save \(newValue)")
         }
     }
 
@@ -79,7 +79,7 @@ class User {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.cityUserLongitude.rawValue)
-            print("🔔🟢 User city longitude is save \(newValue )")
+            print("🔔🟢 User city longitude is save \(newValue)")
         }
     }
 
@@ -89,8 +89,8 @@ class User {
             return UserDefaults.standard.string(forKey: Keys.cityUserCountryName.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityUserCountryName.rawValue)
-            print("🔔🟢 User city country is save \(newValue )")
+            UserDefaults.standard.set(newValue.capitalized, forKey: Keys.cityUserCountryName.rawValue)
+            print("🔔🟢 User city country is save \(newValue.capitalized)")
         }
     }
 
@@ -100,41 +100,41 @@ class User {
             return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityUserLanguageCode.rawValue)
-            print("🔔🟢 User city countryCode is save \(newValue )")
+            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityUserLanguageCode.rawValue)
+            print("🔔🟢 User city countryCode is save \(newValue.uppercased())")
         }
     }
 
-    var languageRegion: String? {
+    var languageCode: String {
         get {
             print("🔔🟡 User city language region is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No L Region")")
             return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityUserLanguageCode.rawValue)
-            print("🔔🟢 User city language region is save \(newValue ?? "")")
+            UserDefaults.standard.set(newValue.lowercased(), forKey: Keys.cityUserLanguageCode.rawValue)
+            print("🔔🟢 User city language region is save \(newValue.lowercased())")
         }
     }
 
-    var currency: String? {
+    var currencyCode: String {
         get {
             print("🔔🟡 User city currency is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? "No Currency")")
             return UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.cityUserCurrency.rawValue.uppercased())
-            print("🔔🟢 User city currency is save \(newValue ?? "")")
+            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityUserCurrency.rawValue.uppercased())
+            print("🔔🟢 User city currency is save \(newValue.uppercased())")
         }
     }
 
-    var currencySymbol: String? {
+    var currencySymbol: String {
         get {
             print("🔔🟡 User city currencySymbol is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCurrencySymbol.rawValue) ?? "No Symbol")")
             return UserDefaults.standard.string(forKey: Keys.cityUserCurrencySymbol.rawValue) ?? ""
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.cityUserCurrencySymbol.rawValue)
-            print("🔔🟢 User city currencySymbol is save \(newValue ?? "")")
+            print("🔔🟢 User city currencySymbol is save \(newValue)")
         }
     }
 

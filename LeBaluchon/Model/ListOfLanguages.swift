@@ -98,59 +98,59 @@ enum Language: String, CaseIterable {
     var image: String {
         switch self {
             case .french:
-                return "piece.png"
+                return "sunWithFlagFrench.png"
             case .english:
                 return "sunWithFlagEnglish.png"
             case .italian:
-                return "AppIcon.png"
+                return "sunWithFlagItalien.png"
             case .spanish:
-                return "ES"
+                return "sunWithFlagSpanish.png"
             case .portuguese:
-                return "PT"
+                return "sunWithFlagPortuguese.png"
             case .bulgarian:
-                return "BG"
+                return "sunWithFlagBulgarian.png"
             case .chinese:
-                return "ZH"
+                return "sunWithFlagChinese.png"
             case .czech:
-                return "CS"
+                return "sunWithFlagCzech.png"
             case .danish:
-                return "DA"
+                return "sunWithFlagDanish.png"
             case .dutch:
-                return "NL"
+                return "sunWithFlagDutch.png"
             case .german:
-                return "DE"
+                return "sunWithFlagGerman.png"
             case .greek:
-                return "EL"
+                return "sunWithFlagGreek.png"
             case .estonian:
-                return "ET"
+                return "sunWithFlagEstonian.png"
             case .finnish:
-                return "FI"
+                return "sunWithFlagFinnish.png"
             case .hungarian:
-                return "HU"
+                return "sunWithFlagHungarian.png"
             case .indonesian:
-                return "ID"
+                return "sunWithFlagIndonesian.png"
             case .japanese:
-                return "JA"
+                return "sunWithFlagJapanese.png"
             case .lithuanian:
-                return "LT"
+                return "sunWithFlagLithuanian.png"
             case .latvian:
-                return "LV"
+                return "sunWithFlagLatvian.png"
             case .polish:
-                return "PL"
+                return "sunWithFlagPolish.png"
             case .romanian:
-                return "RO"
+                return "sunWithFlagRomanian.png"
             case .russian:
-                return "RU"
+                return "sunWithFlagRussian.png"
             case .slovak:
-                return "SK"
+                return "sunWithFlagSlovak.png"
             case .slovenian:
-                return "SL"
+                return "sunWithFlagSlovenian.png"
             case .swedish:
-                return "SV"
+                return "sunWithFlagSwedish.png"
             case .turkish:
-                return "TR"
+                return "sunWithFlagTurkish.png"
             case .ukrainian:
-                return "UK"
+                return "sunWithFlagUkrainian.png"
         }
     }
 }

@@ -63,7 +63,7 @@ final class APICityTests: XCTestCase {
         }
             //Then
         API.QueryService.shared.getData(endpoint: .city(latitude: latitude, longitude: longitude),
-                                        type: API.City.Country.self) { result in
+                                        type: API.LocalisationCity.Country.self) { result in
             switch result {
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
@@ -84,7 +84,7 @@ final class APICityTests: XCTestCase {
         baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
 
         API.QueryService.shared.getData(endpoint: .city(latitude: latitude, longitude: longitude),
-                                        type: API.City.Country.self) { result in
+                                        type: API.LocalisationCity.Country.self) { result in
             switch result {
             case .failure(let error):
                 XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not a response!")
@@ -103,7 +103,7 @@ final class APICityTests: XCTestCase {
         baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseOK)
 
         API.QueryService.shared.getData(endpoint: .city(latitude: latitude, longitude: longitude),
-                                        type: API.City.Country.self) { result in
+                                        type: API.LocalisationCity.Country.self) { result in
             XCTAssertNotNil(result)
 
             switch result {
@@ -126,20 +126,20 @@ final class APICityTests: XCTestCase {
         let userDefaults = UserDefaults()
         let city = "Dijon"
 
-        API.City.recoverInfoOnTheCity(named: city) { destinationInfo in
+        API.LocalisationCity.recoverInfoOnTheCity(named: city) { destinationInfo in
             XCTAssertNotNil(destinationInfo)
 
             DispatchQueue.main.async {
                 userDefaults.set(city, forKey: "destinationCityName")
-                userDefaults.set(destinationInfo?.coordinates.latitude, forKey: "destinationCityLatitude")
-                userDefaults.set(destinationInfo?.coordinates.longitude, forKey: "destinationCityLongitude")
+                userDefaults.set(destinationInfo?.latitude, forKey: "destinationCityLatitude")
+                userDefaults.set(destinationInfo?.longitude, forKey: "destinationCityLongitude")
                 userDefaults.set(destinationInfo?.country, forKey: "destinationCountry")
                 userDefaults.set(destinationInfo?.countryCode, forKey: "destinationCountryCode")
 
                 XCTAssertNotNil(destinationInfo)
                 XCTAssertEqual(destinationInfo?.name, userDefaults.string(forKey: "destinationCityName"))
-                XCTAssertEqual(destinationInfo?.coordinates.latitude, userDefaults.double(forKey: "destinationCityLatitude"))
-                XCTAssertEqual(destinationInfo?.coordinates.longitude, userDefaults.double(forKey: "destinationCityLongitude"))
+                XCTAssertEqual(destinationInfo?.latitude, userDefaults.double(forKey: "destinationCityLatitude"))
+                XCTAssertEqual(destinationInfo?.longitude, userDefaults.double(forKey: "destinationCityLongitude"))
                 XCTAssertEqual(destinationInfo?.country, userDefaults.string(forKey: "destinationCountry"))
                 XCTAssertEqual(destinationInfo?.countryCode, userDefaults.string(forKey: "destinationCountryCode"))
             }

@@ -13,7 +13,7 @@ final class APICoordinatesTests: XCTestCase {
     var urlSession: URLSession!
     var expectation: XCTestExpectation!
 
-    var coordinatesAPI: API.City.Coordinates!
+    var coordinatesAPI: API.LocalisationCity.Coordinates!
     let apiURL = URL(string: "https://nominatim.openstreetmap.org/search?q=Dijon&format=json")
 
     override func setUpWithError() throws {
@@ -60,7 +60,7 @@ final class APICoordinatesTests: XCTestCase {
         }
             //Then
         API.QueryService.shared.getData(endpoint: .coordinates(city: city),
-                                        type: [API.City.Coordinates].self) { result in
+                                        type: [API.LocalisationCity.Coordinates].self) { result in
             switch result {
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
@@ -80,7 +80,7 @@ final class APICoordinatesTests: XCTestCase {
         baseQueryCurrency(data: MockResponseData.currencyCorrectData, response: MockResponseData.responseFailed)
 
         API.QueryService.shared.getData(endpoint: .coordinates(city: "Miami"),
-                                        type: [API.City.Coordinates].self) { result in
+                                        type: [API.LocalisationCity.Coordinates].self) { result in
             switch result {
                 case .failure(let error):
                     XCTAssertEqual(error.localizedDescription, "🛑 Generic error: there is not a response!")
@@ -99,7 +99,7 @@ final class APICoordinatesTests: XCTestCase {
         baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseOK)
 
         API.QueryService.shared.getData(endpoint: .coordinates(city: "Tokyo"),
-                                        type: [API.City.Coordinates].self) { result in
+                                        type: [API.LocalisationCity.Coordinates].self) { result in
             XCTAssertNotNil(result)
 
             switch result {

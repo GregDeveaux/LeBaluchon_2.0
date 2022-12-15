@@ -12,6 +12,33 @@ import Vision
 class TranslateViewController: UIViewController {
 
         // -------------------------------------------------------
+        // MARK: properties
+        // -------------------------------------------------------
+
+    var user = User()
+    var destination = Destination()
+
+        // create a new image view for the translation by camera
+    var editingImage: UIImageView!
+
+        // init source and target language
+    var sourceLanguage = ""
+    var targetLanguage = ""
+    var titleFirstLanguage = ""
+    var titleSecondLanguage = ""
+
+        // create a properties for speech voice
+    let audioEngine: AVAudioEngine? = AVAudioEngine()
+    let speechRecognizer:SFSpeechRecognizer? = SFSpeechRecognizer()
+    let requestAudio = SFSpeechAudioBufferRecognitionRequest()
+    var recognitionTask: SFSpeechRecognitionTask?
+
+        // recover language record in the iPhone
+    let localeUser = Locale.current
+    var localeDestination: Locale!
+
+
+        // -------------------------------------------------------
         //MARK: - properties init
         // -------------------------------------------------------
 
@@ -36,26 +63,6 @@ class TranslateViewController: UIViewController {
         // Block camera
     @IBOutlet weak var cameraImageView: UIImageView!
 
-        // create a new image view for the translation by camera
-    var editingImage: UIImageView!
-
-        // init source and target language
-    var sourceLanguage = ""
-    var targetLanguage = ""
-    var titleFirstLanguage = ""
-    var titleSecondLanguage = ""
-
-        // create a properties for speech voice
-    let audioEngine: AVAudioEngine? = AVAudioEngine()
-    let speechRecognizer:SFSpeechRecognizer? = SFSpeechRecognizer()
-    let requestAudio = SFSpeechAudioBufferRecognitionRequest()
-    var recognitionTask: SFSpeechRecognitionTask?
-
-        // recover language record in the iPhone
-    let userDefaults = UserDefaults.standard
-    let localeUser = Locale.current
-    var localeDestination: Locale!
-
 
         // -------------------------------------------------------
         // MARK: - viewDidLoad
@@ -75,8 +82,7 @@ class TranslateViewController: UIViewController {
 
     func setupInitFirstLanguages() {
 
-        let countryCode = userDefaults.string(forKey: "destinationCountryCode")
-        localeDestination = Locale(identifier: countryCode ?? "BE")
+        localeDestination = Locale(identifier: destination.countryCode)
 
             // language user
         titleFirstLanguage = foundMyLanguageCode(with: localeUser)
@@ -92,8 +98,8 @@ class TranslateViewController: UIViewController {
         guard let targetCode = Language(rawValue: titleSecondLanguage) else { return }
         targetLanguage = targetCode.code
 
-        print("✅✅ you button first language -> \(firstLanguageButton.currentTitle ?? "Nothing")")
-        print("✅✅ you button second language -> \(secondLanguageButton.currentTitle ?? "Nothing")")
+        print("✅ TRANSLATE INIT: you button first language -> \(firstLanguageButton.currentTitle ?? "Nothing")")
+        print("✅ TRANSLATE INIT: you button second language -> \(secondLanguageButton.currentTitle ?? "Nothing")")
 
         setupButtonsLanguage()
     }
@@ -108,7 +114,7 @@ class TranslateViewController: UIViewController {
             // recover language code
         var currentCodeLanguage = ""
         if #available(iOS 16, *) {
-            currentCodeLanguage = locale.language.minimalIdentifier
+            currentCodeLanguage = locale.language.maximalIdentifier
             print("✅✅✅✅✅✅ you language code -> \(currentCodeLanguage)")
         } else {
             if let localeLanguageCode = locale.languageCode {
@@ -122,8 +128,6 @@ class TranslateViewController: UIViewController {
 
         return currentLanguage
     }
-
-
 
 
         // -------------------------------------------------------
@@ -166,127 +170,12 @@ class TranslateViewController: UIViewController {
         swap(&baseTextView.text, &translateTextView.text)
     }
 
-
-
-
+    
         // -------------------------------------------------------
         // MARK: - translation by the voice
         // -------------------------------------------------------
 
     @IBAction func tappedMicroForStartWithTheVoice(_ sender: UIButton) {
         recordAndRecognizeSpeech()
-    }
-
-    func recordAndRecognizeSpeech() {
-        guard let inputNode = audioEngine?.inputNode else { return }
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            self.requestAudio.append(buffer)
-        }
-
-        audioEngine?.prepare()
-        do {
-            try audioEngine?.start()
-        } catch {
-            return print(error)
-        }
-
-        guard let myRecognizer = SFSpeechRecognizer() else { return }
-
-        if !myRecognizer.isAvailable {
-            return
-        }
-
-        recognitionTask = speechRecognizer?.recognitionTask(with: requestAudio, resultHandler: { result, error in
-            guard let result = result, error == nil else {
-                self.presentAlert()
-                print("There is not result for the voice!")
-                return
-            }
-
-            let bestString = result.bestTranscription.formattedString
-            self.baseTextView.text = bestString
-            print("✅ The speech recorded!")
-        })
-    }
-
-
-        // -------------------------------------------------------
-        // MARK: - translation by the image
-        // -------------------------------------------------------
-
-    func recognizeText(image: UIImage?) {
-        guard let cgImage = image?.cgImage else { return }
-
-        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-
-        let request = VNRecognizeTextRequest { request, error in
-            guard let results = request.results as? [VNRecognizedTextObservation], error == nil else { return }
-
-            let text = results.compactMap({ $0.topCandidates(1).first?.string }).joined(separator: ", ")
-
-            DispatchQueue.main.async {
-                self.baseTextView.text = text
-            }
-        }
-
-        do {
-            try handler.perform([request])
-        }
-        catch {
-            print(error)
-        }
-    }
-}
-
-
-    // -------------------------------------------------------
-    // MARK: - translation by the keyboard
-    // -------------------------------------------------------
-    // (used also for voice and image)
-
-extension TranslateViewController: UITextViewDelegate {
-
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return true
-    }
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        baseTextView.text = ""
-        baseTextView.usesStandardTextScaling = true
-        baseTextView.enablesReturnKeyAutomatically = true
-    }
-
-    func textViewDidChangeSelection(_ textView: UITextView) {
-
-        guard let sentence = baseTextView.text else { return }
-
-        API.QueryService.shared.getData(endpoint: .translation(sourceLang: sourceLanguage, text: sentence, targetLang: targetLanguage),
-                                        method: .POST,
-                                        type: API.Translation.Recover.self) { result in
-            switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-
-                case .success(let result):
-                    DispatchQueue.main.async {
-                        if let translatedSentence = result.translations.first?.text {
-                            self.translateTextView.text = translatedSentence
-                        print("🈯️ le texte traduit est \(translatedSentence)")
-                    }
-                }
-            }
-        }
-        print("✅ le texte nouveau texte :\(baseTextView.text!)")
-    }
-
-    private func presentAlert() {
-        let alertVC = UIAlertController(title: "Error", message: "The result of translation failed", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel))
-        present(alertVC, animated: true)
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
     }
 }

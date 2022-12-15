@@ -21,7 +21,7 @@ extension TranslateViewController {
             // Create different pieces of menu
         for language in Language.allCases {
             let language = UIAction(title: language.rawValue, state: .off) { _ in
-                self.recognizeButtonLanguageTapped(languageButton, codeLanguage:  language.code)
+                self.recognizeButtonLanguageTapped(languageButton, codeLanguage: language.code)
             }
             actions.append(language)
         }
@@ -37,7 +37,6 @@ extension TranslateViewController {
             removeIndex = actions.firstIndex(where: {titleFirstLanguage == $0.title}) ?? removeIndex
         }
         actions.remove(at: removeIndex)
-
 
             // Create Menu...
         let menu = UIMenu(identifier: .text, options: .singleSelection, children: actions)

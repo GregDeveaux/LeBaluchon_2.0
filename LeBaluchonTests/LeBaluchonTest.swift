@@ -24,20 +24,59 @@ final class LeBaluchonTest: XCTestCase {
     }
 
     func test_User() throws {
-        let user = User(name:"Robert", coordinates: CoordinatesInfo(latitude: 49.5532646, longitude: 2.9392577), cityName: "", country: "", countryCode: "")
+        let user = User()
+        user.name = "Robert"
+        user.cityName = "Ville"
+        user.latitude = 49.5532646
+        user.longitude = 2.9392577
+        user.countryName = "France"
+        user.countryCode = "fR"
+        user.languageCode = "fr"
+        user.currencyCode = "euR"
+        user.currencySymbol = "€"
+
+        XCTAssertNotNil(user)
+
         XCTAssertEqual(user.name, "Robert")
-        XCTAssertEqual(user.coordinates.latitude, 49.5532646)
-        XCTAssertEqual(user.coordinates.longitude, 2.9392577)
+        XCTAssertEqual(user.cityName, "Ville")
+        XCTAssertEqual(user.latitude, 49.5532646)
+        XCTAssertEqual(user.longitude, 2.9392577)
+        XCTAssertEqual(user.countryName, "France")
+        XCTAssertEqual(user.countryCode, "FR")
+        XCTAssertEqual(user.languageCode, "fr")
+        XCTAssertEqual(user.currencyCode, "EUR")
+        XCTAssertEqual(user.currencySymbol, "€")
         XCTAssertEqual(user.welcomeMessage, "Robert, what's up!")
     }
 
-    func test_City() throws {
-        let city = City(name: "Dijon", coordinates: CoordinatesInfo(latitude: 47.3215806, longitude: 5.0414701), country: "France", countryCode: "fr")
-        XCTAssertEqual(city.name, "Dijon")
-        XCTAssertEqual(city.country, "France")
-        XCTAssertEqual(city.countryCode, "fr")
-        XCTAssertEqual(city.coordinates.latitude, 47.3215806)
-        XCTAssertEqual(city.coordinates.longitude, 5.0414701)
+    func test_Destination() throws {
+        let destination = Destination()
+        destination.cityName = "Miami"
+        destination.latitude = 25.7616798
+        destination.longitude = -80.1917902
+        destination.countryName = "États-Unis D'amérique"
+        destination.countryCode = "Us"
+        destination.languageCode = "en"
+        destination.currencyCode = "USD"
+        destination.currencySymbol = "$"
+
+        XCTAssertNotNil(destination)
+
+        XCTAssertEqual(destination.cityName, "Miami")
+        XCTAssertEqual(destination.countryName, "États-Unis D'amérique")
+        XCTAssertEqual(destination.countryCode, "US")
+        XCTAssertEqual(destination.latitude, 25.7616798)
+        XCTAssertEqual(destination.longitude, -80.1917902)
+        XCTAssertEqual(destination.languageCode, "en")
+        XCTAssertEqual(destination.currencyCode, "USD")
+        XCTAssertEqual(destination.currencySymbol, "$")
+    }
+
+    func test_Destination_Error() throws {
+        let city = City()
+        city.name = "Miami"
+
+        XCTAssertEqual(city.name, "Miami")
     }
 
     func test_PinMap() throws {
@@ -55,7 +94,7 @@ final class LeBaluchonTest: XCTestCase {
     }
 
     func test_GetcheckTheUserNameExistInBase_WhenAUserNameExistsInBase_ThenTheUserNameDontChang() {
-        loginViewController.userDefaults.set("Bob", forKey: "userName")
+        loginViewController.user.name = "Bob"
         
         loginViewController.checkTheUserNameExistInBase()
 
@@ -65,20 +104,15 @@ final class LeBaluchonTest: XCTestCase {
         XCTAssertFalse(loginViewController.nameTextField.isEnabled)
     }
 
-    func test_GetDestinationCitySavedByUserDefaults_WhenIWantToRecoverMyDestination_ThenIFoundTheGoodDestinationName() {
-        loginViewController.userDefaults.set("Miami", forKey: "destinationCity")
 
-        XCTAssertEqual("Miami", loginViewController.userDefaults.string(forKey: "destinationCity"))
+    func test_GivenIWriteAUserNameAndADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsActived() {
+        loginViewController.nameTextField?.text = "Bob"
+        loginViewController.destinationTextField?.text = "BikiniBottom"
+
+        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
+
+        XCTAssertTrue(loginViewController.validateEntryTextFields)
     }
-
-//    func test_GivenIWriteAUserNameAndADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsActived() {
-//        loginViewController.nameTextField?.text = "Bob"
-//        loginViewController.destinationTextField?.text = "BikiniBottom"
-//
-//        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-//
-//        XCTAssertTrue(loginViewController.validateEntryTextFields)
-//    }
 
     func test_GivenIWriteOnlyADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
         loginViewController.destinationTextField?.text = "BikiniBottom"
@@ -112,19 +146,91 @@ final class LeBaluchonTest: XCTestCase {
         XCTAssertEqual(imagesWeather[2], "perso1.pdf")
     }
 
-//    func test_GivenTheCitySaved_WhenICallTheCity_ThenIRescueTheDatasByUserDefault() {
-//        let cityname = "Madrid"
-//        let latitude = 40.4167754
-//        let longitude = -3.7037902
-//        let country = "Spain"
-//        let countryCode = "ES"
-//        let userDefaults = UserDefaults()
-//
-//        let city = DestinationCity(name: cityname, coordinates: CoordinatesInfo(latitude: latitude, longitude: longitude), country: country , countryCode: countryCode)
-//
-//        XCTAssertEqual(cityname, userDefaults.string(forKey: "destinationCityName"))
-//
-//    }
+    func test_GivenTheCodeLanguage_WhenICallTheLanguageByEnum_ThenIcanRescueTheCodeForAPi() {
+        let language = "French"
+        let frenchLanguage = Language(rawValue: language)
+
+        XCTAssertEqual(frenchLanguage?.code, "FR")
+        XCTAssertEqual(frenchLanguage?.image, "sunWithFlagFrench.png")
+    }
+
+    func test_LanguageNumber() {
+        var arrayOfLanguage = [Language]()
+        for language in Language.allCases {
+            arrayOfLanguage.append(language)
+        }
+
+        XCTAssertNotNil(arrayOfLanguage)
+        XCTAssertTrue(arrayOfLanguage.count == 27)
+        XCTAssertEqual(Language.french.code, "FR")
+        XCTAssertEqual(Language.english.code, "EN")
+        XCTAssertEqual(Language.bulgarian.code, "BG")
+        XCTAssertEqual(Language.czech.code, "CS")
+        XCTAssertEqual(Language.chinese.code, "ZH")
+        XCTAssertEqual(Language.dutch.code, "NL")
+        XCTAssertEqual(Language.danish.code, "DA")
+        XCTAssertEqual(Language.estonian.code, "ET")
+        XCTAssertEqual(Language.finnish.code, "FI")
+        XCTAssertEqual(Language.german.code, "DE")
+        XCTAssertEqual(Language.greek.code, "EL")
+        XCTAssertEqual(Language.hungarian.code, "HU")
+        XCTAssertEqual(Language.italian.code, "IT")
+        XCTAssertEqual(Language.indonesian.code, "ID")
+        XCTAssertEqual(Language.japanese.code, "JA")
+        XCTAssertEqual(Language.latvian.code, "LV")
+        XCTAssertEqual(Language.lithuanian.code, "LT")
+        XCTAssertEqual(Language.polish.code, "PL")
+        XCTAssertEqual(Language.portuguese.code, "PT")
+        XCTAssertEqual(Language.russian.code, "RU")
+        XCTAssertEqual(Language.romanian.code, "RO")
+        XCTAssertEqual(Language.slovak.code, "SK")
+        XCTAssertEqual(Language.spanish.code, "ES")
+        XCTAssertEqual(Language.swedish.code, "SV")
+        XCTAssertEqual(Language.slovenian.code, "SL")
+        XCTAssertEqual(Language.turkish.code, "TR")
+        XCTAssertEqual(Language.ukrainian.code, "UK")
+
+        XCTAssertEqual(Language.french.image, "sunWithFlagFrench.png")
+        XCTAssertEqual(Language.english.image, "sunWithFlagEnglish.png")
+        XCTAssertEqual(Language.bulgarian.image, "sunWithFlagBulgarian.png")
+        XCTAssertEqual(Language.czech.image, "sunWithFlagCzech.png")
+        XCTAssertEqual(Language.chinese.image, "sunWithFlagChinese.png")
+        XCTAssertEqual(Language.dutch.image, "sunWithFlagDutch.png")
+        XCTAssertEqual(Language.danish.image, "sunWithFlagDanish.png")
+        XCTAssertEqual(Language.estonian.image, "sunWithFlagEstonian.png")
+        XCTAssertEqual(Language.finnish.image, "sunWithFlagFinnish.png")
+        XCTAssertEqual(Language.german.image, "sunWithFlagGerman.png")
+        XCTAssertEqual(Language.greek.image, "sunWithFlagGreek.png")
+        XCTAssertEqual(Language.hungarian.image, "sunWithFlagHungarian.png")
+        XCTAssertEqual(Language.italian.image, "sunWithFlagItalien.png")
+        XCTAssertEqual(Language.indonesian.image, "sunWithFlagIndonesian.png")
+        XCTAssertEqual(Language.japanese.image, "sunWithFlagJapanese.png")
+        XCTAssertEqual(Language.latvian.image, "sunWithFlagLatvian.png")
+        XCTAssertEqual(Language.lithuanian.image, "sunWithFlagLithuanian.png")
+        XCTAssertEqual(Language.polish.image, "sunWithFlagPolish.png")
+        XCTAssertEqual(Language.portuguese.image, "sunWithFlagPortuguese.png")
+        XCTAssertEqual(Language.russian.image, "sunWithFlagRussian.png")
+        XCTAssertEqual(Language.romanian.image, "sunWithFlagRomanian.png")
+        XCTAssertEqual(Language.slovak.image, "sunWithFlagSlovak.png")
+        XCTAssertEqual(Language.spanish.image, "sunWithFlagSpanish.png")
+        XCTAssertEqual(Language.swedish.image, "sunWithFlagSwedish.png")
+        XCTAssertEqual(Language.slovenian.image, "sunWithFlagSlovenian.png")
+        XCTAssertEqual(Language.turkish.image, "sunWithFlagTurkish.png")
+        XCTAssertEqual(Language.ukrainian.image, "sunWithFlagUkrainian.png")
+    }
+
+    func test_ImagesWeather() {
+        let description = "light snow"
+
+        guard let weatherDescription = WeatherDescription(rawValue: description) else { return }
+        let weatherImages = ImagesWeather.weatherImage(for: weatherDescription,
+                                                       sunrise: 1671088520,
+                                                       sunset: 1671118589,
+                                                       hourOfCountry: 3600)
+
+        XCTAssertEqual(weatherImages[0], "snowByNight.png")
+        XCTAssertEqual(weatherImages[1], "cloud.snow.fill")
+    }
 
     func test_PerformanceExample() throws {
         // This is an example of a performance test case.

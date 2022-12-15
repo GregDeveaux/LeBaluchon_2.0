@@ -47,6 +47,9 @@
 		BC86DD6629284EA600032780 /* TranslateViewController+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */; };
 		BCA8E7B828F5FBD200570959 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8E7B728F5FBD200570959 /* LoginViewController.swift */; };
 		BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2345B2917DC1500B06D0B /* PinMap.swift */; };
+		BCD28A02294A62D900091262 /* TranslateByKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD28A01294A62D900091262 /* TranslateByKeyboard.swift */; };
+		BCD28A04294A63A800091262 /* TranslateByVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD28A03294A63A800091262 /* TranslateByVoice.swift */; };
+		BCD28A06294A720300091262 /* TranslateByImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD28A05294A720300091262 /* TranslateByImage.swift */; };
 		BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */; };
 		BCD5D6A129400F9B0050F07C /* UIView+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD5D6A029400F9B0050F07C /* UIView+Design.swift */; };
 		BCE061FE29355C450029A72F /* APICoordinatesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC6C14AC2916B61A009FDF18 /* APICoordinatesExample.json */; };
@@ -127,6 +130,9 @@
 		BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LocationUser.gpx; sourceTree = "<group>"; };
 		BCA8E7B728F5FBD200570959 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BCB2345B2917DC1500B06D0B /* PinMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMap.swift; sourceTree = "<group>"; };
+		BCD28A01294A62D900091262 /* TranslateByKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateByKeyboard.swift; sourceTree = "<group>"; };
+		BCD28A03294A63A800091262 /* TranslateByVoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateByVoice.swift; sourceTree = "<group>"; };
+		BCD28A05294A720300091262 /* TranslateByImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateByImage.swift; sourceTree = "<group>"; };
 		BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+PickerView.swift"; sourceTree = "<group>"; };
 		BCD5D6A029400F9B0050F07C /* UIView+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Design.swift"; sourceTree = "<group>"; };
 		BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Design.swift"; sourceTree = "<group>"; };
@@ -322,6 +328,9 @@
 			isa = PBXGroup;
 			children = (
 				BC0C6B6F28F4CD030075C614 /* TranslateViewController.swift */,
+				BCD28A01294A62D900091262 /* TranslateByKeyboard.swift */,
+				BCD28A03294A63A800091262 /* TranslateByVoice.swift */,
+				BCD28A05294A720300091262 /* TranslateByImage.swift */,
 				BCD3773C292922680079E105 /* TranslateViewController+PickerView.swift */,
 				BC86DD6529284EA600032780 /* TranslateViewController+Language.swift */,
 				BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */,
@@ -527,6 +536,7 @@
 				BC7896E429493F4700660D15 /* MapViewController+LocationDelegate.swift in Sources */,
 				BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */,
 				BC1D19BA2905A11C00AF8838 /* APITranslation.swift in Sources */,
+				BCD28A06294A720300091262 /* TranslateByImage.swift in Sources */,
 				BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */,
 				BCEB537B294490BA00284307 /* ViewController+Extension.swift in Sources */,
 				BC40285228FDC49F0044A19A /* API.swift in Sources */,
@@ -537,6 +547,7 @@
 				BC0C6B7028F4CD030075C614 /* TranslateViewController.swift in Sources */,
 				BC40284828FBFAB40044A19A /* APICurrency.swift in Sources */,
 				BCE3F646294151A4001F7422 /* ListOfLanguages.swift in Sources */,
+				BCD28A02294A62D900091262 /* TranslateByKeyboard.swift in Sources */,
 				BC0C6B6E28F4CCD50075C614 /* CurrencyViewController.swift in Sources */,
 				BC1D19B629041FED00AF8838 /* APIWeather.swift in Sources */,
 				BC6C14A92916B472009FDF18 /* APICityCoordinates.swift in Sources */,
@@ -544,6 +555,7 @@
 				BCD3773D292922680079E105 /* TranslateViewController+PickerView.swift in Sources */,
 				BC40285A28FDE0D10044A19A /* APIError.swift in Sources */,
 				BC40285D28FDE1270044A19A /* APIEndPoint.swift in Sources */,
+				BCD28A04294A63A800091262 /* TranslateByVoice.swift in Sources */,
 				BC0C6B3C28F4B2AA0075C614 /* SceneDelegate.swift in Sources */,
 				BC278B96290ECC790098A82C /* City.swift in Sources */,
 				BCF1DF982947FFE000827108 /* Destination.swift in Sources */,
