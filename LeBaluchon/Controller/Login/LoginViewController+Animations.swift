@@ -12,25 +12,24 @@
 //
 //    override func viewWillAppear(_ animated: Bool) {
 //        animateTheLoginPage()
-//        createViewContainer()
+//        createAnimationIntro()
 //            // bubble explanation before to enter in the app.
 //        bubbleTextView.typeOn(sentence: welcomeText)
 //    }
-//    
+//
 //
 //    func animateTheLoginPage() {
 //        nameTextField.isHidden = true
 //        destinationTextField.isHidden = true
 //        textNameLabel.isHidden = true
 //        textDestinationLabel.isHidden = true
-//        LetsGoButton.isHidden = true
+//        letsGoButton.isHidden = true
 //        bubbleTextView.isHidden = true
 //        SunImage.isHidden = true
 //
 ////        SunImage.layoutIfNeeded()
 ////        SunImage.translatesAutoresizingMaskIntoConstraints = false
-////        SunImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
-////        SunImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
+//
 ////        SunImage.centerXAnchor.constraint(equalTo: SunImage.superview!.centerXAnchor).isActive = true
 ////        SunImage.centerYAnchor.constraint(equalTo: SunImage.superview!.centerYAnchor, constant: 180).isActive = true
 //
@@ -42,36 +41,36 @@
 //    }
 //
 //    func createImageView(image: String, width: CGFloat, height: CGFloat) -> UIImageView {
-//        let imageView = UIImageView(image: UIImage(named: image))
-//        imageView.frame.size.width = width
-//        imageView.frame.size.height = height
-//        imageView.center = self.view.center
-//
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//
+//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+//        imageView.image = UIImage(named: image)
+//        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = false
 //        return imageView
 //    }
 //
-//    func createViewContainer() {
-//        let container = UIView()
-//        container.backgroundColor = .yellow
-//        container.frame.size.width = 380
-//        container.frame.size.height = 600
+//    func createAnimationIntro() {
 //
-//        container.translatesAutoresizingMaskIntoConstraints = false
-//        container.center = view.center
+//        let sunPersonna = createImageView(image: "perso1", width: 320, height: 350)
+//        let bubble = createImageView(image: "bubbleToTalk", width: 200, height: 200)
 //
-//        view.addSubview(container)
+//        sunPersonna.center = view.center
 //
-//        let sunPersonna = createImageView(image: "perso1.pdf", width: 351, height: 373)
-//        let bubble = createImageView(image: "bubbleToTalk.pdf", width: 200, height: 166)
+//        let bubbleText = UITextView()
+//        bubbleText.text = welcomeText
 //
-//        container.addSubview(sunPersonna)
-//        container.addSubview(bubble)
 //
-//        let animator = UIViewPropertyAnimator(duration: 5, dampingRatio: 1) {
-//            container.transform = CGAffineTransform(rotationAngle: CGFloat.pi).scaledBy(x: 0.001, y: 0.001)
-//            sunPersonna.transform = CGAffineTransform(translationX: 0, y: 200)
+////        view.addSubview(sunPersonna)
+////        view.addSubview(bubble)
+//        view.addSubview(bubbleText)
+//
+//        sunPersonna.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+//
+////        sunPersonna.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+////        sunPersonna.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//////        sunPersonna.bottomAnchor.constraint(equalTo: SafeAreaInsets.bottom)
+//
+//        let animator = UIViewPropertyAnimator(duration: 50, dampingRatio: 1) {
+//            bubble.transform = CGAffineTransform(translationX: 0, y: -20)
+//            sunPersonna.transform = CGAffineTransform(translationX: 0, y: 400)
 //        }
 //        animator.startAnimation()
 //    }

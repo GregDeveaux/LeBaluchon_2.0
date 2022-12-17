@@ -19,5 +19,21 @@ extension UIViewController {
         present(alertVC, animated: true)
     }
 
+    func loader() -> UIAlertController {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        indicator.hidesWhenStopped = true
+        alert.view?.addSubview(indicator)
+        self.present(alert, animated: true)
+
+        return alert
+    }
+
+    func stopLoader(loader: UIAlertController) {
+        DispatchQueue.main.async {
+            loader.dismiss(animated: true)
+        }
+    }
 
 }

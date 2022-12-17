@@ -30,6 +30,7 @@
 		BC278B96290ECC790098A82C /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B95290ECC790098A82C /* City.swift */; };
 		BC278B98290ED7AC0098A82C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC278B97290ED7AC0098A82C /* User.swift */; };
 		BC2AB6C82933F56500B6CE2D /* APITranslateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */; };
+		BC3FA45B294DE31F008DE637 /* ISO3166-2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3FA45A294DE31F008DE637 /* ISO3166-2.swift */; };
 		BC40284528FB6A760044A19A /* APICurrencyExample.json in Resources */ = {isa = PBXBuildFile; fileRef = BC40284428FB6A760044A19A /* APICurrencyExample.json */; };
 		BC40284828FBFAB40044A19A /* APICurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC40284728FBFAB40044A19A /* APICurrency.swift */; };
 		BC40284A28FBFBB20044A19A /* MockResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC40284928FBFBB20044A19A /* MockResponseData.swift */; };
@@ -56,7 +57,7 @@
 		BCE1E1A829429E5500BEF405 /* TranslateViewController+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */; };
 		BCE3F646294151A4001F7422 /* ListOfLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE3F645294151A4001F7422 /* ListOfLanguages.swift */; };
 		BCE57C1D2936C5D9004FF8A2 /* LoginViewController+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */; };
-		BCEB537B294490BA00284307 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB537A294490BA00284307 /* ViewController+Extension.swift */; };
+		BCEB537B294490BA00284307 /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB537A294490BA00284307 /* ViewController+Extensions.swift */; };
 		BCF0B807293531180037214B /* LeBaluchonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B806293531180037214B /* LeBaluchonTest.swift */; };
 		BCF0B809293540450037214B /* APICoordinatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B808293540450037214B /* APICoordinatesTests.swift */; };
 		BCF0B80B293540620037214B /* APICityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0B80A293540620037214B /* APICityTests.swift */; };
@@ -111,6 +112,7 @@
 		BC278B95290ECC790098A82C /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		BC278B97290ED7AC0098A82C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BC2AB6C72933F56500B6CE2D /* APITranslateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITranslateTests.swift; sourceTree = "<group>"; };
+		BC3FA45A294DE31F008DE637 /* ISO3166-2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO3166-2.swift"; sourceTree = "<group>"; };
 		BC40284428FB6A760044A19A /* APICurrencyExample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = APICurrencyExample.json; sourceTree = "<group>"; };
 		BC40284728FBFAB40044A19A /* APICurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICurrency.swift; sourceTree = "<group>"; };
 		BC40284928FBFBB20044A19A /* MockResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResponseData.swift; sourceTree = "<group>"; };
@@ -138,7 +140,7 @@
 		BCE1E1A729429E5500BEF405 /* TranslateViewController+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranslateViewController+Design.swift"; sourceTree = "<group>"; };
 		BCE3F645294151A4001F7422 /* ListOfLanguages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfLanguages.swift; sourceTree = "<group>"; };
 		BCE57C1C2936C5D9004FF8A2 /* LoginViewController+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Animations.swift"; sourceTree = "<group>"; };
-		BCEB537A294490BA00284307 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
+		BCEB537A294490BA00284307 /* ViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extensions.swift"; sourceTree = "<group>"; };
 		BCF0B806293531180037214B /* LeBaluchonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeBaluchonTest.swift; sourceTree = "<group>"; };
 		BCF0B808293540450037214B /* APICoordinatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICoordinatesTests.swift; sourceTree = "<group>"; };
 		BCF0B80A293540620037214B /* APICityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICityTests.swift; sourceTree = "<group>"; };
@@ -251,7 +253,7 @@
 				BCE82E10293B5542004D44F6 /* Weather */,
 				BCE82E11293B556B004D44F6 /* Translate */,
 				BCE82E13293B557E004D44F6 /* Currency */,
-				BCEB537A294490BA00284307 /* ViewController+Extension.swift */,
+				BCEB537A294490BA00284307 /* ViewController+Extensions.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -274,6 +276,7 @@
 				BCB2345B2917DC1500B06D0B /* PinMap.swift */,
 				BC752158293939960015B863 /* ImagesWeather.swift */,
 				BCE3F645294151A4001F7422 /* ListOfLanguages.swift */,
+				BC3FA45A294DE31F008DE637 /* ISO3166-2.swift */,
 				BCA1A7A0291E6E9400C81969 /* LocationUser.gpx */,
 			);
 			path = Model;
@@ -538,13 +541,14 @@
 				BC1D19BA2905A11C00AF8838 /* APITranslation.swift in Sources */,
 				BCD28A06294A720300091262 /* TranslateByImage.swift in Sources */,
 				BC6C14A72916AC73009FDF18 /* MapViewController.swift in Sources */,
-				BCEB537B294490BA00284307 /* ViewController+Extension.swift in Sources */,
+				BCEB537B294490BA00284307 /* ViewController+Extensions.swift in Sources */,
 				BC40285228FDC49F0044A19A /* API.swift in Sources */,
 				BCF48BA42926C02400F63B25 /* UITextView+TypeOn.swift in Sources */,
 				BC40285828FDDA740044A19A /* APIQueryService.swift in Sources */,
 				BC1D19C62905B9B500AF8838 /* APIKeys.swift in Sources */,
 				BCB2345C2917DC1500B06D0B /* PinMap.swift in Sources */,
 				BC0C6B7028F4CD030075C614 /* TranslateViewController.swift in Sources */,
+				BC3FA45B294DE31F008DE637 /* ISO3166-2.swift in Sources */,
 				BC40284828FBFAB40044A19A /* APICurrency.swift in Sources */,
 				BCE3F646294151A4001F7422 /* ListOfLanguages.swift in Sources */,
 				BCD28A02294A62D900091262 /* TranslateByKeyboard.swift in Sources */,
