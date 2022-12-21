@@ -38,6 +38,17 @@ class WeatherHomeViewController: UIViewController {
         return lineTabBar
     }()
 
+    var loadingActivityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .white
+        indicator.autoresizingMask = [
+            .flexibleLeftMargin, . flexibleRightMargin,
+            .flexibleTopMargin, .flexibleBottomMargin]
+        indicator.startAnimating()
+        return indicator
+    }()
+
 
         // -------------------------------------------------------
         // MARK: outlets
@@ -84,6 +95,7 @@ class WeatherHomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(loadingActivityIndicator)
         giveMeTheWeathers()
     }
 
@@ -139,8 +151,8 @@ class WeatherHomeViewController: UIViewController {
 
 
     func giveMeTheDestinationWeather() {
+         API.QueryService.shared.getData(endpoint: .weather(city: destination.cityName, units: unit), type: API.Weather.DataForCity.self) { results in
 
-        API.QueryService.shared.getData(endpoint: .weather(city: destination.cityName, units: unit), type: API.Weather.DataForCity.self) { results in
             switch results {
                 case .failure(let error):
                     self.presentAlert(message: "Sorry, the destination weather failed")

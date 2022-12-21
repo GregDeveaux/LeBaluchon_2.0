@@ -42,7 +42,7 @@ extension TranslateViewController {
 
             let bestString = result.bestTranscription.formattedString
             self.baseTextView.text = bestString
-            print("✅ The speech recorded!")
+            print("✅ TRANSLATE VOICE: The speech recorded!")
         })
     }
 

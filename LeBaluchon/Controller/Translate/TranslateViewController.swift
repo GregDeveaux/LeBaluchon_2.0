@@ -93,8 +93,6 @@ class TranslateViewController: UIViewController {
             // language destination
         titleSecondLanguage = foundMyLanguageCode(with: localeDestination)
         secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
-        print("✅✅✅ you 2de -> \(String(describing: localeDestination)) ✅✅✅")
-        print("✅✅✅ you 2de -> \(titleSecondLanguage) ✅✅✅")
         guard let targetCode = Language(rawValue: titleSecondLanguage) else { return }
         targetLanguage = targetCode.code
 
@@ -115,16 +113,16 @@ class TranslateViewController: UIViewController {
         var currentCodeLanguage = ""
         if #available(iOS 16, *) {
             currentCodeLanguage = locale.language.maximalIdentifier
-            print("✅✅✅✅✅✅ you language code -> \(currentCodeLanguage)")
+            print("✅ TRANSLATE: the found language code -> \(currentCodeLanguage)")
         } else {
             if let localeLanguageCode = locale.languageCode {
                 currentCodeLanguage = localeLanguageCode
             }
         }
-        let currentLocale = Locale(identifier: "en_US")
+        let currentLocale = Locale(identifier: "en_FR")
             // here, we mix localeDestination/localeUser with locale English version to recover language in English version
         let currentLanguage = currentLocale.localizedString(forLanguageCode: currentCodeLanguage) ?? ""
-        print("✅✅✅✅✅✅ you language -> \(currentLanguage)")
+        print("✅ TRANSLATE: the found language -> \(currentLanguage)")
 
         return currentLanguage
     }

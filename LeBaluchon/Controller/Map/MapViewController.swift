@@ -105,7 +105,6 @@ extension MapViewController: MKMapViewDelegate {
         guard let pinDestination = pinDestination else { return }
         guard let pinUser = pinUser else { return }
         mapView.addAnnotations([pinUser, pinDestination])
-//        mapView.addAnnotation(pinDestination)
     }
 
     private func setupPinMap() {

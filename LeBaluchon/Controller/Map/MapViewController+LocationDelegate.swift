@@ -32,16 +32,15 @@ extension MapViewController: CLLocationManagerDelegate {
             // Save the coordinates of user
         setupUser(latitude: currentLocationUser?.coordinate.latitude ?? 0, longitude: currentLocationUser?.coordinate.longitude ?? 0)
 
-            // create aline a line between the user and the destination
-
+            // create a line between the user and the destination
         let startPolyline = location.coordinate
         let destinationPolyline = CLLocationCoordinate2D(latitude: destination.latitude, longitude: destination.longitude)
         let coordinatesPolyline = [startPolyline, destinationPolyline]
         linePolyline = MKPolyline(coordinates: coordinatesPolyline, count: coordinatesPolyline.count)
-        
         mapView.addOverlay(linePolyline)
-        
-
+            // stop geolocalization of user
+        locationManager.stopUpdatingLocation()
+            // adjustment of the map by at start and at destination
         let center = CLLocationCoordinate2D(latitude: (((currentLocationUser?.coordinate.latitude ?? 0) + destination.latitude) / 2),
                                             longitude: (((currentLocationUser?.coordinate.longitude ?? 0) + destination.longitude) / 2))
         let span = MKCoordinateSpan(latitudeDelta: 80, longitudeDelta: 80)
@@ -76,8 +75,8 @@ extension MapViewController: CLLocationManagerDelegate {
 
             guard let route = response.routes.first else { return }
             self.mapView.addOverlay(route.polyline)
-            self.mapView.removeOverlay(self.linePolyline)
             self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            self.mapView.removeOverlay(self.linePolyline)
         }
     }
 

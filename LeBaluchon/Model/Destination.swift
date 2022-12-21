@@ -102,7 +102,7 @@ class Destination {
             return UserDefaults.standard.string(forKey: Keys.cityDestinationCurrency.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityDestinationCurrency.rawValue.uppercased())
+            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityDestinationCurrency.rawValue)
             print("🔔🟢 Destination city currency is save \(newValue.uppercased())")
         }
     }

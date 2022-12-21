@@ -39,12 +39,12 @@ extension TranslateViewController: UITextViewDelegate {
                     DispatchQueue.main.async {
                         if let translatedSentence = result.translations.first?.text {
                             self.translateTextView.text = translatedSentence
-                        print("🈯️ TRANSLATE: le texte traduit est \(translatedSentence)")
+                        print("🈯️ TRANSLATE KEYBOARD: le texte traduit est \(translatedSentence)")
                     }
                 }
             }
         }
-        print("✅ TRANSLATE: le texte a traduire est :\(baseTextView.text!)")
+        print("✅ TRANSLATE KEYBOARD: le texte a traduire est :\(baseTextView.text!)")
     }
 
     private func presentAlert() {

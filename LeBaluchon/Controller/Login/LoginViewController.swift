@@ -13,8 +13,6 @@ class LoginViewController: UIViewController {
         // MARK: - properties
         // -------------------------------------------------------
 
-    let welcomeText = "Hello, my friend! Welcome to the \"Le Baluchon\" App, to start you must write your name and your destination, thank you 😀"
-
     var validateEntryTextFields = false
     var user = User()
     var destination = Destination()

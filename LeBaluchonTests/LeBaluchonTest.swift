@@ -30,7 +30,7 @@ final class LeBaluchonTest: XCTestCase {
         user.latitude = 49.5532646
         user.longitude = 2.9392577
         user.countryName = "France"
-        user.countryCode = "fR"
+        user.countryCode = "FR"
         user.languageCode = "fr"
         user.currencyCode = "euR"
         user.currencySymbol = "€"
@@ -102,34 +102,6 @@ final class LeBaluchonTest: XCTestCase {
 
         XCTAssertEqual(text, "Bob")
         XCTAssertFalse(loginViewController.nameTextField.isEnabled)
-    }
-
-
-    func test_GivenIWriteAUserNameAndADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsActived() {
-        loginViewController.nameTextField?.text = "Bob"
-        loginViewController.destinationTextField?.text = "BikiniBottom"
-
-        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-
-        XCTAssertTrue(loginViewController.validateEntryTextFields)
-    }
-
-    func test_GivenIWriteOnlyADestinationCityOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
-        loginViewController.destinationTextField?.text = "BikiniBottom"
-        let message = "please enter an username"
-
-        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-
-        XCTAssertFalse(loginViewController.validateEntryTextFields)
-    }
-
-    func test_GivenIWriteOnlyAUsernameOK_WhenIPushTheButtonLetsGo_ThenTheLetsGoButtonIsNotActived() {
-        loginViewController.nameTextField?.text = "Patrick"
-        let message = "please enter an username"
-
-        loginViewController.letsGoButton?.sendActions(for: .touchUpInside)
-
-        XCTAssertFalse(loginViewController.validateEntryTextFields)
     }
 
     func test_GivenIGiveTheDescriptionWeather_WhenIUseFunction_ThenIRecoverAArrayOfImages() {

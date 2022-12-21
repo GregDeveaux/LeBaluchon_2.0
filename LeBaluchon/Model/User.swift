@@ -96,12 +96,12 @@ class User {
 
     var countryCode: String {
         get {
-            print("🔔🟡 User city countryCode is call: \(UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? "No Code")")
-            return UserDefaults.standard.string(forKey: Keys.cityUserLanguageCode.rawValue) ?? ""
+            print("🔔🟡 User city countryCode is call: \(UserDefaults.standard.string(forKey: Keys.cityUserCountryCode.rawValue) ?? "No Code")")
+            return UserDefaults.standard.string(forKey: Keys.cityUserCountryCode.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityUserLanguageCode.rawValue)
-            print("🔔🟢 User city countryCode is save \(newValue.uppercased())")
+            UserDefaults.standard.set(newValue, forKey: Keys.cityUserCountryCode.rawValue)
+            print("🔔🟢 User city countryCode is save \(newValue)")
         }
     }
 
@@ -122,7 +122,7 @@ class User {
             return UserDefaults.standard.string(forKey: Keys.cityUserCurrency.rawValue) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityUserCurrency.rawValue.uppercased())
+            UserDefaults.standard.set(newValue.uppercased(), forKey: Keys.cityUserCurrency.rawValue)
             print("🔔🟢 User city currency is save \(newValue.uppercased())")
         }
     }

@@ -72,8 +72,8 @@ func chooseNewImage() {
                     self.cameraImageView.image = chosenImage
                     self.recognizeText(image: self.cameraImageView.image)
 
-                    print("✅ your image -> \(String(describing: self.cameraImageView.image))")
-                    print("✅ your text -> \(String(describing: self.recognizeText(image: self.cameraImageView.image)))")
+                    print("✅ TRANSLATE PICKERVIEW: your image -> \(String(describing: self.cameraImageView.image))")
+                    print("✅ TRANSLATE PICKERVIEW: your text -> \(String(describing: self.recognizeText(image: self.cameraImageView.image)))")
                 }
             }
         }
@@ -109,7 +109,7 @@ extension TranslateViewController: UIImagePickerControllerDelegate {
         }
 
         cameraImageView.image = chosenImage
-        print("✅ your image -> \(String(describing: cameraImageView.image))")
+        print("✅ TRANSLATE PICKERVIEW: your image -> \(String(describing: cameraImageView.image))")
 
         dismiss(animated: true)
     }

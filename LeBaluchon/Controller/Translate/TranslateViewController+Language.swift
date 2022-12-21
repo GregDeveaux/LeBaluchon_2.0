@@ -46,7 +46,7 @@ extension TranslateViewController {
         languageButton.showsMenuAsPrimaryAction = true
         languageButton.changesSelectionAsPrimaryAction = true
 
-        print("✅ the title of button language -> 🎟 \(languageButton.currentTitle ?? "nothing")")
+        print("✅ TRANSLATE LANGUAGE: the title of button language -> 🎟 \(languageButton.currentTitle ?? "nothing")")
     }
 
     private func recognizeButtonLanguageTapped(_ languageButton: UIButton, codeLanguage: String) {

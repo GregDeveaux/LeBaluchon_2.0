@@ -85,10 +85,10 @@ extension API {
                      method: Method,
                      completionHandler: @escaping (Data?) -> Void) {
             
-            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
+            var request = URLRequest(url: endpoint.url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
             
             request.httpMethod = method.rawValue
-            print ("✅ \(request)")
+            print ("✅ GETFLAG: \(request)")
             
             task?.cancel()
             

@@ -66,10 +66,6 @@ class APICountryFlagTests: XCTestCase {
         baseQueryCurrency(data: MockResponseData.contryFlagImage, response: MockResponseData.responseOK)
 
         API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: self.countryCode), method: .GET) { countryFlag in
-            guard let countryFlag = countryFlag else {
-                print(API.Error.generic(reason: "not shown data"))
-                return
-            }
             DispatchQueue.main.async {
                 XCTAssertNotNil(countryFlag)
                 XCTAssertEqual((self.countryCode + ".png").data(using: .utf8)!, countryFlag)
@@ -78,8 +74,23 @@ class APICountryFlagTests: XCTestCase {
             self.expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10.0)
-
     }
+
+    func test_GivenResponseError_WhenIAskAFlag_ThenPrintError() {
+
+        baseQueryCurrency(data: MockResponseData.mockDataFailed, response: MockResponseData.responseFailed)
+
+        API.QueryService.shared.getFlag(endpoint: .flag(codeIsoCountry: self.countryCode), method: .GET) { countryFlag in
+
+            DispatchQueue.main.async {
+                XCTAssertNil(countryFlag)
+            }
+
+            self.expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10.0)
+    }
+
 
 
         // -------------------------------------------------------

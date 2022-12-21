@@ -60,8 +60,8 @@ class CurrencyViewController: UIViewController {
     }
 
     private func recoverDataOfUserDefaults() {
-        nameDestinationCountryLabel.text = destination.countryName
-        nameDestinationLabel.text = "you have chosen as destination: \(destination.cityName.capitalized)"
+        nameDestinationCountryLabel.text = destination.countryName.uppercased()
+        nameDestinationLabel.text = "You have chosen as destination: \(destination.cityName.capitalized)"
     }
 
 
@@ -103,7 +103,7 @@ class CurrencyViewController: UIViewController {
                         let calculateExchangeRate = result
                         DispatchQueue.main.async {
                             self.textFieldResult.text = String(calculateExchangeRate.result)
-                            print("💰result: \(String(describing: calculateExchangeRate.result))")
+                            print("CURRENCY: 💰result: \(String(describing: calculateExchangeRate.result))")
                         }
                 }
             }
@@ -137,12 +137,19 @@ class CurrencyViewController: UIViewController {
         nameLocalCountryLabel.text = self.localeUser.localizedString(forRegionCode: regionCode ?? "Nothing")?.uppercased()
         iconCurrencyPhone.text = self.localeUser.currencySymbol
         iconCurrencyDestination.text = currencyDestinationSymbol
+
+        print("✅ CURRENCY: user currency code is \(currencyUserName)")
+        print("✅ CURRENCY: destination currency code is \(currencyDestinationName)")
+        print("✅ CURRENCY: user symbol is \(String(describing: self.localeUser.currencySymbol))")
+        print("✅ CURRENCY: destination symbol is \(currencyDestinationSymbol)")
+
     }
 
 
         // -------------------------------------------------------
         //MARK: - flag UIImageView
         // -------------------------------------------------------
+
     func addFlagCountries() {
         designFlag(to: flagLocalImageView)
         designFlag(to: flagDestinationImageView)
