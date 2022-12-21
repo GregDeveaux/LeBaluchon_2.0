@@ -36,6 +36,34 @@ class TranslateViewController: UIViewController {
         // recover language record in the iPhone
     let localeUser = Locale.current
     var localeDestination: Locale!
+    let countryCodeByLanguage = ["french" : ["FR", "LU", "MO"],
+                                 "english" : ["GB", "US", "AU", "BZ", "CB", "IE", "JM", "NZ", "PH", "ZA", "TT", "ZW"],
+                                 "italian" : ["IT"],
+                                 "spanish" : ["ES", "AR", "BO", "CL", "CO", "CR", "DO", "EC", "SV", "GT", "HN", "MX", "NI", "PA", "PY", "PE", "PR", "UY", "VE"],
+                                 "portuguese" : ["PT", "BR"],
+                                 "bulgarian" : ["BG"],
+                                 "chinese" : ["CN", "HK", "MO", "SG", "TW"],
+                                 "czech" : ["CZ"],
+                                 "danish" : ["DK"],
+                                 "dutch" : ["NL", "BE"],
+                                 "german" : ["DE", "AT", "LI", "CH"],
+                                 "greek" : ["GR"],
+                                 "estonian" : ["EE"],
+                                 "finnish" : ["FI"],
+                                 "hungarian" : ["HU"],
+                                 "indonesian" : ["ID"],
+                                 "japanese" : ["JP"],
+                                 "lithuanian" : ["LT"],
+                                 "latvian" : ["LV"],
+                                 "polish" : ["PL"],
+                                 "romanian" : ["RO"],
+                                 "russian" : ["RU"],
+                                 "slovak" : ["SK"],
+                                 "slovenian" : ["SL"],
+                                 "swedish" : ["SE"],
+                                 "turkish" : ["TR"],
+                                 "ukrainian" : ["UA"]
+    ]
 
 
         // -------------------------------------------------------
@@ -82,16 +110,14 @@ class TranslateViewController: UIViewController {
 
     func setupInitFirstLanguages() {
 
-        localeDestination = Locale(identifier: destination.countryCode)
-
             // language user
-        titleFirstLanguage = foundMyLanguageCode(with: localeUser)
+        titleFirstLanguage = foundMyLanguageCode(with: user.countryCode.uppercased())
         firstLanguageButton.setTitle(titleFirstLanguage, for: .normal)
         guard let sourceCode = Language(rawValue: titleFirstLanguage) else { return }
         sourceLanguage = sourceCode.code
 
             // language destination
-        titleSecondLanguage = foundMyLanguageCode(with: localeDestination)
+        titleSecondLanguage = foundMyLanguageCode(with: destination.countryCode.uppercased())
         secondLanguageButton.setTitle(titleSecondLanguage, for: .normal)
         guard let targetCode = Language(rawValue: titleSecondLanguage) else { return }
         targetLanguage = targetCode.code
@@ -108,21 +134,17 @@ class TranslateViewController: UIViewController {
         setupActionsMenu(of: secondLanguageButton)
     }
 
-    private func foundMyLanguageCode(with locale: Locale) -> String {
+    private func foundMyLanguageCode(with countryCode: String) -> String {
             // recover language code
-        var currentCodeLanguage = ""
-        if #available(iOS 16, *) {
-            currentCodeLanguage = locale.language.maximalIdentifier
-            print("✅ TRANSLATE: the found language code -> \(currentCodeLanguage)")
+        var currentLanguage = ""
+        let languageIndex = countryCodeByLanguage.firstIndex(where: { $0.value.contains(where: {$0 == countryCode})})
+        if let index = languageIndex {
+            currentLanguage = countryCodeByLanguage[index].key.capitalized
+            print("✅ TRANSLATE: the found language -> \(countryCodeByLanguage[index].key.capitalized)")
         } else {
-            if let localeLanguageCode = locale.languageCode {
-                currentCodeLanguage = localeLanguageCode
-            }
+            currentLanguage = "English"
+            print("✅ TRANSLATE: No language found!")
         }
-        let currentLocale = Locale(identifier: "en_FR")
-            // here, we mix localeDestination/localeUser with locale English version to recover language in English version
-        let currentLanguage = currentLocale.localizedString(forLanguageCode: currentCodeLanguage) ?? ""
-        print("✅ TRANSLATE: the found language -> \(currentLanguage)")
 
         return currentLanguage
     }
